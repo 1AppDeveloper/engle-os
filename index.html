@@ -2,79 +2,83 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engle OS v6</title>
+<title>Engle OS vWeb2</title>
 <style>
-body{font-family:sans-serif;background:#f5f5f5;margin:0}
+body{font-family:sans-serif;margin:0;background:#eef1f4}
 header{background:black;color:white;padding:15px;border-bottom:4px solid red}
-.container{padding:15px}
-input,select{padding:10px;margin:5px 0;width:100%;border-radius:8px;border:1px solid #ccc}
-button{padding:10px;border:none;border-radius:8px;background:red;color:white;font-weight:bold;margin-top:5px}
-.item{background:white;padding:10px;border-radius:10px;margin-top:10px}
+.container{display:flex;flex-wrap:wrap}
+.left,.right{flex:1;padding:10px}
+.item{background:white;padding:10px;margin-top:10px;border-radius:10px}
+button{padding:10px;background:red;color:white;border:none;border-radius:8px}
 </style>
 </head>
 <body>
+
+<div id="login">
+<h2>Login</h2>
+<input type="password" id="pw" placeholder="Password">
+<button onclick="login()">Enter</button>
+</div>
+
+<div id="app" style="display:none">
 <header>
-<h2>Estimator - Engle Construction / iRoofOhio</h2>
+<h2>Engle OS Estimator</h2>
 </header>
+
 <div class="container">
-<select id="area">
-<option>Whole House</option>
-<option>Living Room</option>
-<option>Kitchen</option>
-<option>Master Bedroom</option>
-<option>Bathroom 1</option>
-</select>
-<input id="search" placeholder="Search (paint, sink, knob...)">
+<div class="left">
+<h3>Add Items</h3>
+<input id="search" placeholder="Search...">
 <div id="results"></div>
+</div>
+
+<div class="right">
 <h3>Estimate</h3>
 <div id="estimate"></div>
 </div>
+</div>
+</div>
+
 <script>
-const items = [
-{name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)", unit:"SF", price:2.35},
-{name:"Paint Walls Only (2 Coats)", unit:"SF", price:2.10},
-{name:"Paint Ceiling", unit:"SF", price:1.80},
-{name:"Replace Sink", unit:"EA", price:525},
-{name:"Install Faucet", unit:"EA", price:265},
-{name:"Cabinet Knob Replacement", unit:"EA", price:14},
-{name:"Toilet Paper Holder", unit:"EA", price:50}
+const password="Deerpoop";
+
+const items=[
+{name:"Paint Walls",price:3.25},
+{name:"Replace Sink",price:625},
+{name:"Install Faucet",price:325},
+{name:"Cabinet Knob",price:18}
 ];
 
-let estimate = [];
+let estimate=[];
 
-document.getElementById("search").addEventListener("input", function(){
-let q = this.value.toLowerCase();
-let results = items.filter(i=>i.name.toLowerCase().includes(q));
+function login(){
+if(document.getElementById("pw").value===password){
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.display="block";
+}else{alert("Wrong password")}
+}
 
-document.getElementById("results").innerHTML = results.map(i=>`
-<div class="item">
-<b>${i.name}</b><br>
-$${i.price} per ${i.unit}<br>
-<button onclick="addItem('${i.name}', ${i.price})">Add</button>
-</div>
-`).join("");
+document.getElementById("search").addEventListener("input",function(){
+let q=this.value.toLowerCase();
+let results=items.filter(i=>i.name.toLowerCase().includes(q));
+document.getElementById("results").innerHTML=results.map(i=>
+`<div class="item">
+${i.name} - $${i.price}
+<br><button onclick="addItem('${i.name}',${i.price})">Add</button>
+</div>`).join("");
 });
 
-function addItem(name, price){
-let qty = prompt("Enter quantity:");
-if(!qty) return;
-
-estimate.push({name, price, qty});
-
-renderEstimate();
+function addItem(name,price){
+estimate.push({name,price});
+render();
 }
 
-function renderEstimate(){
-let total = 0;
-
-document.getElementById("estimate").innerHTML = estimate.map(i=>{
-let t = i.price * i.qty;
-total += t;
-return `<div class="item">${i.name} x ${i.qty} = $${t.toFixed(2)}</div>`;
-}).join("");
-
-document.getElementById("estimate").innerHTML += `<h3>Total: $${total.toFixed(2)}</h3>`;
+function render(){
+document.getElementById("estimate").innerHTML=estimate.map(i=>
+`<div class="item">${i.name} - $${i.price}</div>`
+).join("");
 }
 </script>
+
 </body>
 </html>
