@@ -2,124 +2,79 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engle OS</title>
-
+<title>Engle OS v6</title>
 <style>
-body{margin:0;font-family:sans-serif;background:#f4f4f4}
+body{font-family:sans-serif;background:#f5f5f5;margin:0}
 header{background:black;color:white;padding:15px;border-bottom:4px solid red}
-.container{display:flex;flex-wrap:wrap}
-.left,.right{padding:15px}
-.left{flex:1;min-width:300px}
-.right{flex:1;min-width:300px;background:white}
-
-input,select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #ccc}
-button{padding:10px;border:none;border-radius:8px;background:red;color:white;font-weight:bold;margin-top:8px}
-
+.container{padding:15px}
+input,select{padding:10px;margin:5px 0;width:100%;border-radius:8px;border:1px solid #ccc}
+button{padding:10px;border:none;border-radius:8px;background:red;color:white;font-weight:bold;margin-top:5px}
 .item{background:white;padding:10px;border-radius:10px;margin-top:10px}
-.highlight{background:#ffe6e6}
 </style>
 </head>
-
 <body>
-
-<div id="login">
-<header><h2>Engle OS Login</h2></header>
-<div style="padding:20px">
-<input type="password" id="pw" placeholder="Enter Password">
-<button onclick="login()">Enter</button>
-</div>
-</div>
-
-<div id="app" style="display:none">
-<header><h2>Estimator - Engle Construction / iRoofOhio</h2></header>
-
+<header>
+<h2>Estimator - Engle Construction / iRoofOhio</h2>
+</header>
 <div class="container">
-
-<div class="left">
 <select id="area">
 <option>Whole House</option>
 <option>Living Room</option>
 <option>Kitchen</option>
 <option>Master Bedroom</option>
-<option>Bedroom 1</option>
 <option>Bathroom 1</option>
 </select>
-
 <input id="search" placeholder="Search (paint, sink, knob...)">
 <div id="results"></div>
-</div>
-
-<div class="right">
 <h3>Estimate</h3>
 <div id="estimate"></div>
-<h3 id="total">Total: $0</h3>
 </div>
-
-</div>
-</div>
-
 <script>
+const items = [
+{name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)", unit:"SF", price:2.35},
+{name:"Paint Walls Only (2 Coats)", unit:"SF", price:2.10},
+{name:"Paint Ceiling", unit:"SF", price:1.80},
+{name:"Replace Sink", unit:"EA", price:525},
+{name:"Install Faucet", unit:"EA", price:265},
+{name:"Cabinet Knob Replacement", unit:"EA", price:14},
+{name:"Toilet Paper Holder", unit:"EA", price:50}
+];
 
-function login(){
-if(document.getElementById("pw").value==="Deerpoop"){
-document.getElementById("login").style.display="none"
-document.getElementById("app").style.display="block"
-}else{
-alert("Wrong password")
-}
-}
+let estimate = [];
 
-const items=[
-{name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)",unit:"SF",price:2.35},
-{name:"Paint Walls Only",unit:"SF",price:2.1},
-{name:"Paint Ceiling",unit:"SF",price:1.8},
-{name:"Replace Sink",unit:"EA",price:525},
-{name:"Install Faucet",unit:"EA",price:265},
-{name:"Cabinet Knob",unit:"EA",price:14},
-{name:"Toilet Paper Holder",unit:"EA",price:50}
-]
+document.getElementById("search").addEventListener("input", function(){
+let q = this.value.toLowerCase();
+let results = items.filter(i=>i.name.toLowerCase().includes(q));
 
-let estimate=[]
-
-document.getElementById("search").addEventListener("input",function(){
-let q=this.value.toLowerCase()
-if(!q){document.getElementById("results").innerHTML="";return}
-
-let results=items.filter(i=>i.name.toLowerCase().includes(q))
-
-document.getElementById("results").innerHTML=results.map(i=>`
+document.getElementById("results").innerHTML = results.map(i=>`
 <div class="item">
 <b>${i.name}</b><br>
-$${i.price}/${i.unit}<br>
-<button onclick="addItem('${i.name}',${i.price})">Add</button>
+$${i.price} per ${i.unit}<br>
+<button onclick="addItem('${i.name}', ${i.price})">Add</button>
 </div>
-`).join("")
-})
+`).join("");
+});
 
-function addItem(name,price){
-let qty=prompt("Enter quantity")
-if(!qty)return
+function addItem(name, price){
+let qty = prompt("Enter quantity:");
+if(!qty) return;
 
-let area=document.getElementById("area").value
+estimate.push({name, price, qty});
 
-estimate.push({name,price,qty,area})
-
-render()
+renderEstimate();
 }
 
-function render(){
-let total=0
+function renderEstimate(){
+let total = 0;
 
-document.getElementById("estimate").innerHTML=estimate.map(i=>{
-let t=i.price*i.qty
-total+=t
-return `<div class="item highlight">${i.area} - ${i.name} x ${i.qty} = $${t.toFixed(2)}</div>`
-}).join("")
+document.getElementById("estimate").innerHTML = estimate.map(i=>{
+let t = i.price * i.qty;
+total += t;
+return `<div class="item">${i.name} x ${i.qty} = $${t.toFixed(2)}</div>`;
+}).join("");
 
-document.getElementById("total").innerText="Total: $"+total.toFixed(2)
+document.getElementById("estimate").innerHTML += `<h3>Total: $${total.toFixed(2)}</h3>`;
 }
-
 </script>
-
 </body>
 </html>
