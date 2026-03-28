@@ -1,84 +1,384 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Engle OS vWeb2</title>
 <style>
-body{font-family:sans-serif;margin:0;background:#eef1f4}
-header{background:black;color:white;padding:15px;border-bottom:4px solid red}
-.container{display:flex;flex-wrap:wrap}
-.left,.right{flex:1;padding:10px}
-.item{background:white;padding:10px;margin-top:10px;border-radius:10px}
-button{padding:10px;background:red;color:white;border:none;border-radius:8px}
+:root{
+  --red:#c3141b; --black:#111; --bg:#eef1f4; --card:#fff; --border:#d9dde4; --muted:#6f7680;
+}
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:#111}
+header{background:linear-gradient(180deg,#1a1a1a,#0f0f0f);color:#fff;padding:14px 16px;border-bottom:4px solid var(--red)}
+header h1{margin:0;font-size:22px}
+header .sub{font-size:12px;opacity:.85}
+.wrap{max-width:1400px;margin:0 auto;padding:14px 14px 80px}
+.grid{display:grid;grid-template-columns:220px 1fr;gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
+.nav button.active{background:var(--red);color:#fff}
+.hidden{display:none!important}
+.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
+textarea{min-height:84px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.right{margin-left:auto}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f3f4f6;font-size:12px;font-weight:700}
+.current-area{background:#fff6f6;border:1px solid #f0cccc;border-radius:14px;padding:10px 12px;margin:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer}
+.chip.active{background:#111;color:#fff}
+.item{border:1px solid var(--border);border-radius:14px;padding:10px;background:#fff;margin-top:8px}
+.itemhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.muted{color:var(--muted);font-size:12px}
+.area-block{border:1px solid var(--border);border-radius:16px;padding:12px;background:#fff;margin-bottom:10px}
+.area-block.highlight{animation:flashArea 1.6s ease-in-out 2;border-color:var(--red);box-shadow:0 0 0 3px rgba(195,20,27,.12)}
+@keyframes flashArea{0%,100%{background:#fff}25%,75%{background:#fff3f4}50%{background:#ffe7ea}}
+.line{display:grid;grid-template-columns:1.2fr .45fr .55fr .55fr auto;gap:8px;align-items:end;border:1px solid var(--border);padding:10px;border-radius:12px;margin-top:8px}
+.totals{background:#fff;border:1px solid var(--border);border-radius:18px;padding:12px;margin-top:12px}
+.totalrow{display:flex;justify-content:space-between;padding:6px 0}
+.final{font-size:24px;font-weight:900;color:var(--red);border-top:2px solid var(--border);padding-top:10px;margin-top:6px}
+.modalwrap{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.modalwrap.show{display:flex}
+.modal{background:#fff;border:1px solid var(--border);border-radius:18px;max-width:560px;width:100%;padding:16px}
+.toast{position:fixed;top:84px;right:14px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(-8px);transition:.2s;z-index:110}
+.toast.show{opacity:1;transform:translateY(0)}
+.primary{padding:10px 14px;border:none;border-radius:10px;background:var(--red);color:#fff;cursor:pointer;font-weight:700}
+.secondary{padding:10px 14px;border:none;border-radius:10px;background:#e7eaef;color:#111;cursor:pointer;font-weight:700}
+.login{max-width:420px;margin:40px auto}
+.bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
+.bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
+.bottomnav button.active{color:#ffb8bc}
+@media (max-width:960px){
+  .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
+  .nav{display:none}
+  .bottomnav{display:grid}
+  .line{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
+<div class="toast" id="toast"></div>
 
-<div id="login">
-<h2>Login</h2>
-<input type="password" id="pw" placeholder="Password">
-<button onclick="login()">Enter</button>
+<div id="loginView" class="wrap login">
+  <div class="card">
+    <h2 style="margin-top:0">Engle OS Login</h2>
+    <div class="muted">Private test build</div>
+    <div style="margin-top:12px">
+      <label>Password</label>
+      <input type="password" id="pw" placeholder="Enter password">
+      <button class="primary" style="margin-top:10px;width:100%" id="loginBtn">Enter</button>
+    </div>
+  </div>
 </div>
 
-<div id="app" style="display:none">
+<div id="appView" class="hidden">
 <header>
-<h2>Engle OS Estimator</h2>
+  <h1>Estimator for Engle Construction - iRoofOhio</h1>
+  <div class="sub">vWeb 2 • restored richer UI • iPad-friendly live build</div>
 </header>
 
-<div class="container">
-<div class="left">
-<h3>Add Items</h3>
-<input id="search" placeholder="Search...">
-<div id="results"></div>
+<div class="wrap">
+  <div class="grid">
+    <aside class="nav card">
+      <button class="active">Estimator</button>
+      <button>Dashboard</button>
+      <button>CRM</button>
+      <button>Projects</button>
+      <button>Price Book</button>
+    </aside>
+
+    <main class="card">
+      <div class="row">
+        <h2 style="margin:0">Estimator</h2>
+        <span class="pill">$450 minimum job</span>
+      </div>
+
+      <div class="est-grid">
+        <section class="card">
+          <h3>Job Header</h3>
+          <div class="grid2">
+            <div><label>Customer</label><input placeholder="Customer name"></div>
+            <div><label>Address</label><input placeholder="Property address"></div>
+            <div><label>Estimate #</label><input value="EST-1001"></div>
+            <div><label>Sales Rep</label><input placeholder="Sales rep"></div>
+          </div>
+
+          <div class="current-area"><strong>Current Area:</strong> <span id="currentArea">Whole House</span></div>
+
+          <div class="grid2">
+            <div><label>Area</label><select id="area"></select></div>
+            <div><label>Search Line Items</label><input id="search" placeholder="Type paint, sink, knob, roof..."></div>
+          </div>
+
+          <div class="chips" id="chips" style="margin-top:10px"></div>
+          <div id="results" style="margin-top:10px"><div class="muted">Start typing to search line items.</div></div>
+
+          <div class="totals">
+            <div class="grid3">
+              <div><label>Pricing Mode</label>
+                <select id="priceMode">
+                  <option value="retail">Retail</option>
+                  <option value="volume">Volume</option>
+                </select>
+              </div>
+              <div><label>Tax</label><input id="taxOn" type="checkbox" style="width:auto"></div>
+              <div><label>Travel</label><input id="travelOn" type="checkbox" style="width:auto"></div>
+            </div>
+            <div class="grid3" style="margin-top:8px">
+              <div><label>Tax %</label><input id="taxRate" type="number" value="7.5" step="0.01"></div>
+              <div><label>Travel</label><select id="travelTier"></select></div>
+              <div><label>Discount $</label><input id="discount" type="number" value="0" step="0.01"></div>
+            </div>
+            <div class="totalrow"><span>Subtotal</span><strong id="subTop">$0.00</strong></div>
+            <div class="totalrow"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
+            <div class="totalrow"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
+            <div class="totalrow"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
+            <div class="totalrow final"><span>Total</span><span id="totalTop">$0.00</span></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Estimate Builder</h3>
+          <div id="estimate"></div>
+          <div class="totals">
+            <div class="totalrow"><span>Subtotal</span><strong id="subBot">$0.00</strong></div>
+            <div class="totalrow"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
+            <div class="totalrow"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
+            <div class="totalrow"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
+            <div class="totalrow final"><span>Total</span><span id="totalBot">$0.00</span></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
 </div>
 
-<div class="right">
-<h3>Estimate</h3>
-<div id="estimate"></div>
+<nav class="bottomnav">
+  <button class="active">Estimate</button>
+  <button>Dash</button>
+  <button>CRM</button>
+  <button>Projects</button>
+  <button>More</button>
+</nav>
 </div>
-</div>
+
+<div class="modalwrap" id="modalWrap">
+  <div class="modal">
+    <div class="row">
+      <h3 style="margin:0">Add Line Item</h3>
+      <button class="secondary right" id="closeModal">Close</button>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div><label>Item</label><input id="mName" readonly></div>
+      <div><label>Area</label><select id="mArea"></select></div>
+      <div><label>Unit</label><input id="mUnit" readonly></div>
+      <div><label>Quantity</label><input id="mQty" type="number" step="0.01" value="1"></div>
+    </div>
+    <div style="margin-top:10px"><label>Optional Note</label><textarea id="mNote" placeholder="Optional note"></textarea></div>
+    <div class="row" style="margin-top:12px">
+      <span class="pill">Price <strong id="mPrice" style="margin-left:6px"></strong></span>
+      <span class="pill">Line Total <strong id="mTotal" style="margin-left:6px"></strong></span>
+      <button class="primary right" id="confirmAdd">Confirm Add</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const password="Deerpoop";
-
-const items=[
-{name:"Paint Walls",price:3.25},
-{name:"Replace Sink",price:625},
-{name:"Install Faucet",price:325},
-{name:"Cabinet Knob",price:18}
+const PASSWORD = "Deerpoop";
+const items = [
+  {name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)",unit:"SF",trade:"Painting",retail:3.25,volume:2.35},
+  {name:"Paint Walls (2 Coats)",unit:"SF",trade:"Painting",retail:2.75,volume:2.10},
+  {name:"Paint Ceiling",unit:"SF",trade:"Painting",retail:2.25,volume:1.80},
+  {name:"Paint Trim (2 Coats)",unit:"LF",trade:"Painting",retail:3.25,volume:2.60},
+  {name:"Paint Interior Doors (2 Coats)",unit:"EA",trade:"Painting",retail:145,volume:115},
+  {name:"Replace Sink",unit:"EA",trade:"Plumbing",retail:625,volume:525},
+  {name:"Install Faucet",unit:"EA",trade:"Plumbing",retail:325,volume:265},
+  {name:"Cabinet Knob Replacement",unit:"EA",trade:"Carpentry",retail:18,volume:14},
+  {name:"Toilet Paper Holder Replacement",unit:"EA",trade:"Bath Accessories",retail:65,volume:50},
+  {name:"Install Dishwasher (Customer Supplied)",unit:"EA",trade:"Appliances",retail:325,volume:250},
+  {name:"Install LVP Flooring",unit:"SF",trade:"Flooring",retail:6.50,volume:5.65},
+  {name:"Roof Replacement (Architectural)",unit:"SQ",trade:"Roofing",retail:495,volume:425}
 ];
+const areas = ["Whole House","Front Exterior","Back Exterior","Living Room","Dining Room","Kitchen","Master Bedroom","Bedroom 1","Bedroom 2","Bathroom 1","Hallway 1","Basement","Attic"];
+const travelTiers = [["0–15 miles",0],["16–30 miles",45],["31–50 miles",75],["51–75 miles",125],["76–100 miles",175],["101–150 miles",250],["151–200 miles",325],["201–300 miles",450],["301–500 miles",700]];
+const trades = ["All"].concat([...new Set(items.map(i=>i.trade).sort())]);
 
-let estimate=[];
+let activeTrade = "All";
+let estimate = {};
+let selectedItem = null;
+let lastArea = null;
+
+const $ = id => document.getElementById(id);
+const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n||0));
+
+function toast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window._toast);
+  window._toast = setTimeout(()=>t.classList.remove("show"), 1800);
+}
+function activePrice(item){ return $("priceMode").value === "volume" ? item.volume : item.retail; }
 
 function login(){
-if(document.getElementById("pw").value===password){
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
-}else{alert("Wrong password")}
+  if($("pw").value === PASSWORD){
+    $("loginView").classList.add("hidden");
+    $("appView").classList.remove("hidden");
+  } else alert("Wrong password");
 }
 
-document.getElementById("search").addEventListener("input",function(){
-let q=this.value.toLowerCase();
-let results=items.filter(i=>i.name.toLowerCase().includes(q));
-document.getElementById("results").innerHTML=results.map(i=>
-`<div class="item">
-${i.name} - $${i.price}
-<br><button onclick="addItem('${i.name}',${i.price})">Add</button>
-</div>`).join("");
-});
+function init(){
+  $("loginBtn").addEventListener("click", login);
+  $("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
 
-function addItem(name,price){
-estimate.push({name,price});
-render();
-}
+  $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
+  $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
+  $("travelTier").innerHTML = travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
 
-function render(){
-document.getElementById("estimate").innerHTML=estimate.map(i=>
-`<div class="item">${i.name} - $${i.price}</div>`
-).join("");
+  $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
+  $("search").addEventListener("input", renderResults);
+  $("priceMode").addEventListener("change", ()=>{repriceEstimate(); renderResults(); renderEstimate();});
+  ["taxOn","travelOn","taxRate","travelTier","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
+
+  $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
+  $("chips").addEventListener("click", e=>{
+    const btn = e.target.closest("[data-trade]");
+    if(!btn) return;
+    activeTrade = btn.dataset.trade;
+    $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade===activeTrade));
+    renderResults();
+  });
+
+  $("results").addEventListener("click", e=>{
+    const btn = e.target.closest("[data-add]");
+    if(!btn) return;
+    openModal(btn.dataset.add);
+  });
+
+  $("closeModal").addEventListener("click", closeModal);
+  $("confirmAdd").addEventListener("click", confirmAdd);
+  $("mQty").addEventListener("focus", ()=> $("mQty").select());
+  $("mQty").addEventListener("input", updateModalTotal);
+
+  renderResults();
+  renderEstimate();
 }
+function renderResults(){
+  const q = $("search").value.trim().toLowerCase();
+  if(!q){ $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>'; return; }
+  const rows = items.filter(i => (activeTrade==="All" || i.trade===activeTrade) && i.name.toLowerCase().includes(q));
+  $("results").innerHTML = rows.map(i=>`
+    <div class="item">
+      <div class="itemhead">
+        <div><strong>${i.name}</strong><div class="muted">${i.trade} • Unit: ${i.unit}</div></div>
+        <div><strong>${money(activePrice(i))}</strong></div>
+      </div>
+      <button class="primary" data-add="${i.name.replace(/"/g,'&quot;')}">+ Add</button>
+    </div>
+  `).join("") || '<div class="muted">No matching line items.</div>';
+}
+function openModal(name){
+  selectedItem = items.find(i=>i.name===name);
+  if(!selectedItem) return;
+  $("mName").value = selectedItem.name;
+  $("mArea").value = $("area").value;
+  $("mUnit").value = selectedItem.unit;
+  $("mQty").value = 1;
+  $("mNote").value = "";
+  $("mPrice").textContent = money(activePrice(selectedItem));
+  updateModalTotal();
+  $("modalWrap").classList.add("show");
+  setTimeout(()=>{$("mQty").focus(); $("mQty").select();}, 60);
+}
+function closeModal(){ $("modalWrap").classList.remove("show"); selectedItem = null; }
+function updateModalTotal(){
+  if(!selectedItem) return;
+  $("mPrice").textContent = money(activePrice(selectedItem));
+  $("mTotal").textContent = money(Number($("mQty").value||0) * activePrice(selectedItem));
+}
+function confirmAdd(){
+  if(!selectedItem) return;
+  const area = $("mArea").value;
+  const qty = Number($("mQty").value || 0);
+  if(!qty) return;
+  const note = $("mNote").value.trim();
+  if(!estimate[area]) estimate[area] = [];
+  estimate[area].push({
+    name:selectedItem.name, unit:selectedItem.unit, retail:selectedItem.retail, volume:selectedItem.volume,
+    price:activePrice(selectedItem), qty:qty, note:note, total:activePrice(selectedItem)*qty
+  });
+  lastArea = area;
+  $("area").value = area;
+  $("currentArea").textContent = area;
+  closeModal();
+  renderEstimate();
+  toast(`Added to ${area}`);
+}
+function repriceEstimate(){
+  Object.values(estimate).flat().forEach(i=>{
+    i.price = $("priceMode").value === "volume" ? i.volume : i.retail;
+    i.total = i.qty * i.price;
+  });
+}
+function renderEstimate(){
+  const keys = Object.keys(estimate).sort((a,b)=>a.localeCompare(b));
+  $("estimate").innerHTML = keys.map(area=>`
+    <div class="area-block ${area===lastArea?'highlight':''}" data-area="${area}">
+      <div class="itemhead"><h3 style="margin:0">${area}</h3><span class="pill">${estimate[area].length} items</span></div>
+      ${estimate[area].slice().sort((x,y)=>x.name.localeCompare(y.name)).map(item=>`
+        <div class="line">
+          <div><label>Item</label><div><strong>${item.name}</strong><div class="muted">${item.unit}${item.note ? ' • '+item.note : ''}</div></div></div>
+          <div><label>Qty</label><input value="${item.qty}" data-area="${area}" data-name="${item.name.replace(/"/g,'&quot;')}" class="qty"></div>
+          <div><label>Price</label><div style="padding:11px 0">${money(item.price)}</div></div>
+          <div><label>Total</label><div style="padding:11px 0">${money(item.total)}</div></div>
+          <div><button class="secondary remove" data-area="${area}" data-name="${item.name.replace(/"/g,'&quot;')}">Remove</button></div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("") || '<div class="muted">No items in estimate yet.</div>';
+
+  document.querySelectorAll(".qty").forEach(inp=>inp.addEventListener("change", ()=>{
+    const item = estimate[inp.dataset.area].find(i=>i.name===inp.dataset.name);
+    if(!item) return;
+    item.qty = Number(inp.value||0);
+    item.total = item.qty * item.price;
+    renderEstimate();
+  }));
+  document.querySelectorAll(".remove").forEach(btn=>btn.addEventListener("click", ()=>{
+    estimate[btn.dataset.area] = estimate[btn.dataset.area].filter(i=>i.name!==btn.dataset.name);
+    if(!estimate[btn.dataset.area].length) delete estimate[btn.dataset.area];
+    renderEstimate();
+  }));
+  if(lastArea){
+    const block = document.querySelector(`[data-area="${CSS.escape(lastArea)}"]`);
+    if(block) block.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+  renderTotals();
+}
+function calcTotals(){
+  const subtotal = Object.values(estimate).flat().reduce((s,i)=>s + Number(i.total||0), 0);
+  const discount = Number($("discount").value||0);
+  const afterDiscount = Math.max(0, subtotal - discount);
+  const minimumAdj = afterDiscount < 450 ? 450 - afterDiscount : 0;
+  const travel = $("travelOn").checked ? Number(travelTiers[Number($("travelTier").value||0)][1]) : 0;
+  const taxBase = afterDiscount + minimumAdj + travel;
+  const tax = $("taxOn").checked ? taxBase * (Number($("taxRate").value||0)/100) : 0;
+  return {subtotal, minimumAdj, travel, tax, total: taxBase + tax};
+}
+function renderTotals(){
+  const t = calcTotals();
+  $("subTop").textContent = money(t.subtotal); $("subBot").textContent = money(t.subtotal);
+  $("minTop").textContent = money(t.minimumAdj); $("minBot").textContent = money(t.minimumAdj);
+  $("travelTop").textContent = money(t.travel); $("travelBot").textContent = money(t.travel);
+  $("taxTop").textContent = money(t.tax); $("taxBot").textContent = money(t.tax);
+  $("totalTop").textContent = money(t.total); $("totalBot").textContent = money(t.total);
+}
+init();
 </script>
-
 </body>
 </html>
