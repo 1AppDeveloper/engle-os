@@ -19,8 +19,20 @@ header .sub{font-size:12px;opacity:.85}
 .nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
 .nav button.active{background:var(--red);color:#fff}
 .hidden{display:none!important}
-.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px;align-items:start}
-.panel-scroll{height:calc(100vh - 190px);overflow:auto;padding-right:4px}
+.est-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:12px;
+  align-items:stretch;
+  min-height:calc(100vh - 190px);
+}
+.panel-scroll{
+  height:calc(100vh - 220px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:4px;
+  min-height:0;
+}
 label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
 textarea{min-height:84px;resize:vertical}
@@ -54,10 +66,9 @@ textarea{min-height:84px;resize:vertical}
 .bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
 .bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
 .bottomnav button.active{color:#ffb8bc}
-@media (max-width:960px){
+@media (max-width:768px){
   .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
-  .bottomnav{display:grid}
   .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
 }
@@ -316,22 +327,42 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
+
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
   if(!qty) return;
+
   const note = $("mNote").value.trim();
+
   if(!estimate[area]) estimate[area] = [];
+
   estimate[area].push({
-    name:selectedItem.name, unit:selectedItem.unit, retail:selectedItem.retail, volume:selectedItem.volume,
-    price:activePrice(selectedItem), qty:qty, note:note, total:activePrice(selectedItem)*qty
+    name:selectedItem.name,
+    unit:selectedItem.unit,
+    retail:selectedItem.retail,
+    volume:selectedItem.volume,
+    price:activePrice(selectedItem),
+    qty:qty,
+    note:note,
+    total:activePrice(selectedItem) * qty
   });
+
   lastArea = area;
+
   $("area").value = area;
   $("currentArea").textContent = area;
+
   closeModal();
-  clearSearchAfterAdd();
+
+  $("search").value = "";
+  $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
+
   renderEstimate();
   toast(`Added to ${area}`);
+
+  setTimeout(() => {
+    $("search").focus();
+  }, 50);
 }
 
 function repriceEstimate(){
