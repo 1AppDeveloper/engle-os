@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2</title>
+<title>Engle OS vWeb2.1</title>
 <style>
 :root{
   --red:#c3141b; --black:#111; --bg:#eef1f4; --card:#fff; --border:#d9dde4; --muted:#6f7680;
@@ -19,7 +19,8 @@ header .sub{font-size:12px;opacity:.85}
 .nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
 .nav button.active{background:var(--red);color:#fff}
 .hidden{display:none!important}
-.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px}
+.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px;align-items:start}
+.panel-scroll{height:calc(100vh - 190px);overflow:auto;padding-right:4px}
 label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
 textarea{min-height:84px;resize:vertical}
@@ -57,6 +58,7 @@ textarea{min-height:84px;resize:vertical}
   .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
   .bottomnav{display:grid}
+  .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
 }
 </style>
@@ -79,7 +81,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2 • restored richer UI • iPad-friendly live build</div>
+  <div class="sub">vWeb 2.1 • cleared search after add • separate panel scrolling</div>
 </header>
 
 <div class="wrap">
@@ -99,7 +101,7 @@ textarea{min-height:84px;resize:vertical}
       </div>
 
       <div class="est-grid">
-        <section class="card">
+        <section class="card panel-scroll">
           <h3>Job Header</h3>
           <div class="grid2">
             <div><label>Customer</label><input placeholder="Customer name"></div>
@@ -142,7 +144,7 @@ textarea{min-height:84px;resize:vertical}
           </div>
         </section>
 
-        <section class="card">
+        <section class="card panel-scroll">
           <h3>Estimate Builder</h3>
           <div id="estimate"></div>
           <div class="totals">
@@ -268,6 +270,13 @@ function init(){
   renderResults();
   renderEstimate();
 }
+
+function clearSearchAfterAdd(){
+  $("search").value = "";
+  $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
+  setTimeout(()=>$("search").focus(), 80);
+}
+
 function renderResults(){
   const q = $("search").value.trim().toLowerCase();
   if(!q){ $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>'; return; }
@@ -282,6 +291,7 @@ function renderResults(){
     </div>
   `).join("") || '<div class="muted">No matching line items.</div>';
 }
+
 function openModal(name){
   selectedItem = items.find(i=>i.name===name);
   if(!selectedItem) return;
@@ -295,12 +305,15 @@ function openModal(name){
   $("modalWrap").classList.add("show");
   setTimeout(()=>{$("mQty").focus(); $("mQty").select();}, 60);
 }
+
 function closeModal(){ $("modalWrap").classList.remove("show"); selectedItem = null; }
+
 function updateModalTotal(){
   if(!selectedItem) return;
   $("mPrice").textContent = money(activePrice(selectedItem));
   $("mTotal").textContent = money(Number($("mQty").value||0) * activePrice(selectedItem));
 }
+
 function confirmAdd(){
   if(!selectedItem) return;
   const area = $("mArea").value;
@@ -316,15 +329,18 @@ function confirmAdd(){
   $("area").value = area;
   $("currentArea").textContent = area;
   closeModal();
+  clearSearchAfterAdd();
   renderEstimate();
   toast(`Added to ${area}`);
 }
+
 function repriceEstimate(){
   Object.values(estimate).flat().forEach(i=>{
     i.price = $("priceMode").value === "volume" ? i.volume : i.retail;
     i.total = i.qty * i.price;
   });
 }
+
 function renderEstimate(){
   const keys = Object.keys(estimate).sort((a,b)=>a.localeCompare(b));
   $("estimate").innerHTML = keys.map(area=>`
@@ -349,17 +365,21 @@ function renderEstimate(){
     item.total = item.qty * item.price;
     renderEstimate();
   }));
+
   document.querySelectorAll(".remove").forEach(btn=>btn.addEventListener("click", ()=>{
     estimate[btn.dataset.area] = estimate[btn.dataset.area].filter(i=>i.name!==btn.dataset.name);
     if(!estimate[btn.dataset.area].length) delete estimate[btn.dataset.area];
     renderEstimate();
   }));
+
   if(lastArea){
     const block = document.querySelector(`[data-area="${CSS.escape(lastArea)}"]`);
     if(block) block.scrollIntoView({behavior:"smooth", block:"start"});
   }
+
   renderTotals();
 }
+
 function calcTotals(){
   const subtotal = Object.values(estimate).flat().reduce((s,i)=>s + Number(i.total||0), 0);
   const discount = Number($("discount").value||0);
@@ -370,6 +390,7 @@ function calcTotals(){
   const tax = $("taxOn").checked ? taxBase * (Number($("taxRate").value||0)/100) : 0;
   return {subtotal, minimumAdj, travel, tax, total: taxBase + tax};
 }
+
 function renderTotals(){
   const t = calcTotals();
   $("subTop").textContent = money(t.subtotal); $("subBot").textContent = money(t.subtotal);
@@ -378,6 +399,7 @@ function renderTotals(){
   $("taxTop").textContent = money(t.tax); $("taxBot").textContent = money(t.tax);
   $("totalTop").textContent = money(t.total); $("totalBot").textContent = money(t.total);
 }
+
 init();
 </script>
 </body>
