@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.1</title>
+<title>Engle OS vWeb2.2</title>
 <style>
 :root{
   --red:#c3141b; --black:#111; --bg:#eef1f4; --card:#fff; --border:#d9dde4; --muted:#6f7680;
@@ -19,6 +19,7 @@ header .sub{font-size:12px;opacity:.85}
 .nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
 .nav button.active{background:var(--red);color:#fff}
 .hidden{display:none!important}
+
 .est-grid{
   display:grid;
   grid-template-columns:1.02fr .98fr;
@@ -26,6 +27,7 @@ header .sub{font-size:12px;opacity:.85}
   align-items:stretch;
   min-height:calc(100vh - 190px);
 }
+
 .panel-scroll{
   height:calc(100vh - 220px);
   overflow-y:auto;
@@ -33,6 +35,7 @@ header .sub{font-size:12px;opacity:.85}
   padding-right:4px;
   min-height:0;
 }
+
 label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
 textarea{min-height:84px;resize:vertical}
@@ -66,11 +69,13 @@ textarea{min-height:84px;resize:vertical}
 .bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
 .bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
 .bottomnav button.active{color:#ffb8bc}
+
 @media (max-width:768px){
   .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
   .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
+  .bottomnav{display:grid}
 }
 </style>
 </head>
@@ -92,7 +97,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.1 • cleared search after add • separate panel scrolling</div>
+  <div class="sub">vWeb 2.2 • cleared search after add • independent panel scrolling</div>
 </header>
 
 <div class="wrap">
@@ -327,15 +332,11 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
-
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
   if(!qty) return;
-
   const note = $("mNote").value.trim();
-
   if(!estimate[area]) estimate[area] = [];
-
   estimate[area].push({
     name:selectedItem.name,
     unit:selectedItem.unit,
@@ -348,7 +349,6 @@ function confirmAdd(){
   });
 
   lastArea = area;
-
   $("area").value = area;
   $("currentArea").textContent = area;
 
