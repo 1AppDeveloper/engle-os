@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3 Core</title>
+<title>Engle OS vWeb2.3.1</title>
 <style>
 :root{
   --red:#c3141b;
@@ -51,7 +51,6 @@ input,select,textarea{
 textarea{min-height:84px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .right{margin-left:auto}
 .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f3f4f6;font-size:12px;font-weight:700}
@@ -80,10 +79,7 @@ textarea{min-height:84px;resize:vertical}
 .bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
 .bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
 .bottomnav button.active{color:#ffb8bc}
-.required-wrap{position:relative}
-.locked{opacity:.6}
 .divider{height:1px;background:var(--border);margin:12px 0}
-.input-blank::placeholder{color:#a5acb5}
 .note-badge{
   margin-top:6px;
   display:inline-block;
@@ -92,15 +88,23 @@ textarea{min-height:84px;resize:vertical}
   border-radius:8px;
   padding:6px 8px;
   font-size:14px;
-  font-weight:700;
+  font-weight:800;
   line-height:1.35;
 }
-.hivis-flash{
-  animation:hivisFlash 1s ease-in-out 3;
-}
+.hivis-flash{animation:hivisFlash 1s ease-in-out 3}
 @keyframes hivisFlash{
   0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0);background:#fff}
   35%,65%{box-shadow:0 0 0 4px rgba(151,184,0,.35);background:var(--hiVis)}
+}
+.field-locked{
+  opacity:.55;
+  pointer-events:none;
+}
+.field-locked input,
+.field-locked select,
+.field-locked textarea,
+.field-locked button{
+  background:#f2f3f5 !important;
 }
 .check-row{
   display:flex;
@@ -111,7 +115,7 @@ textarea{min-height:84px;resize:vertical}
 }
 .check-row input[type="checkbox"]{
   width:auto;
-  transform:scale(1.2);
+  transform:scale(1.15);
 }
 .check-label{
   font-size:13px;
@@ -146,7 +150,7 @@ textarea{min-height:84px;resize:vertical}
   margin-top:6px;
 }
 @media (max-width:768px){
-  .grid,.est-grid,.grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
   .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
@@ -172,7 +176,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3 Core • required estimate header flow • guided high-vis prompts</div>
+  <div class="sub">vWeb 2.3.1 • locked required workflow • tax popup • pricing extras unlock after first item</div>
 </header>
 
 <div class="wrap">
@@ -192,63 +196,58 @@ textarea{min-height:84px;resize:vertical}
       </div>
 
       <div class="est-grid">
-        <section class="card panel-scroll" id="leftPanel">
+        <section class="card panel-scroll">
           <h3>Job Header</h3>
 
           <div class="grid2">
-            <div class="required-wrap">
+            <div id="jobNameWrap">
               <label>Customer / Job Name</label>
               <input id="jobName" placeholder="Required before creating estimate">
-              <div class="error-text" id="jobNameError"></div>
             </div>
 
-            <div class="required-wrap">
+            <div id="salesRepWrap" class="field-locked">
               <label>Sales Rep</label>
               <input id="salesRep" placeholder="Required">
-              <div class="error-text" id="salesRepError"></div>
             </div>
 
-            <div class="required-wrap">
+            <div id="jobAddressWrap" class="field-locked">
               <label>Job Address</label>
               <input id="jobAddress" placeholder="Required">
-              <div class="error-text" id="jobAddressError"></div>
             </div>
 
-            <div class="required-wrap">
+            <div>
               <label>Estimate #</label>
-              <input value="EST-1001">
+              <input id="estimateNo" value="EST-1001" readonly>
             </div>
 
-            <div class="required-wrap">
+            <div id="billingAddressWrap" class="field-locked">
               <label>Billing Address</label>
               <input id="billingAddress" placeholder="Required unless same as job address">
-              <div class="error-text" id="billingAddressError"></div>
             </div>
 
-            <div class="required-wrap">
+            <div id="billingSameWrap" class="field-locked">
               <label>&nbsp;</label>
-              <div class="check-row" id="billingSameWrap">
+              <div class="check-row">
                 <input type="checkbox" id="billingSame">
                 <span class="check-label">Check if billing address is the same as the job address</span>
               </div>
-              <div class="error-text" id="billingSameError"></div>
             </div>
           </div>
 
           <div class="current-area"><strong>Current Area:</strong> <span id="currentArea">Whole House</span></div>
 
           <div class="grid2">
-            <div>
+            <div id="areaWrap" class="field-locked">
               <label>Area</label>
               <select id="area"></select>
             </div>
-            <div>
+            <div id="searchWrap" class="field-locked">
               <label>Search Line Items</label>
               <input id="search" placeholder="Type paint, sink, knob, roof...">
             </div>
           </div>
 
-          <div class="chips" id="chips" style="margin-top:10px"></div>
+          <div class="chips field-locked" id="chips" style="margin-top:10px"></div>
           <div id="results" style="margin-top:10px"><div class="muted">Start typing to search line items.</div></div>
 
           <div class="totals">
@@ -265,18 +264,18 @@ textarea{min-height:84px;resize:vertical}
             <div class="divider"></div>
 
             <div class="grid3">
-              <div class="pricing-option">
+              <div class="pricing-option field-locked" id="taxBoxWrap">
                 <div class="top-check">
                   <input id="taxOn" type="checkbox">
                   <span>Tax</span>
                 </div>
                 <div class="field-wrap">
                   <label>Tax %</label>
-                  <input id="taxRate" class="input-blank" type="number" placeholder="" step="0.01">
+                  <input id="taxRate" type="text" readonly placeholder="">
                 </div>
               </div>
 
-              <div class="pricing-option">
+              <div class="pricing-option field-locked" id="travelBoxWrap">
                 <div class="top-check">
                   <input id="travelOn" type="checkbox">
                   <span>Travel</span>
@@ -289,14 +288,14 @@ textarea{min-height:84px;resize:vertical}
                 </div>
               </div>
 
-              <div class="pricing-option">
+              <div class="pricing-option field-locked" id="discountBoxWrap">
                 <div class="top-check">
                   <input id="discountOn" type="checkbox">
                   <span>Discount</span>
                 </div>
                 <div class="field-wrap">
                   <label>Discount $</label>
-                  <input id="discount" class="input-blank" type="number" placeholder="" step="0.01">
+                  <input id="discount" type="number" placeholder="" step="0.01">
                 </div>
               </div>
             </div>
@@ -310,7 +309,7 @@ textarea{min-height:84px;resize:vertical}
           </div>
         </section>
 
-        <section class="card panel-scroll" id="rightPanel">
+        <section class="card panel-scroll">
           <h3>Estimate Builder</h3>
           <div id="estimate"></div>
           <div class="totals">
@@ -357,6 +356,28 @@ textarea{min-height:84px;resize:vertical}
   </div>
 </div>
 
+<div class="modalwrap" id="taxModalWrap">
+  <div class="modal">
+    <div class="row">
+      <h3 style="margin:0">Select Tax Rate</h3>
+      <button class="secondary right" id="closeTaxModal">Close</button>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+        <label>Tax rate list</label>
+        <select id="taxRateSelect"></select>
+      </div>
+      <div>
+        <label>Or enter manually</label>
+        <input id="taxRateManual" type="number" step="0.1" placeholder="Example: 7.5">
+      </div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="primary right" id="applyTaxRate">Apply Tax Rate</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const PASSWORD = "Deerpoop";
 const items = [
@@ -385,13 +406,6 @@ let lastArea = null;
 const $ = id => document.getElementById(id);
 const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n||0));
 
-const requiredFlow = [
-  "jobName",
-  "jobAddress",
-  "billingChoice",
-  "salesRep"
-];
-
 function toast(msg){
   const t = $("toast");
   t.textContent = msg;
@@ -399,14 +413,15 @@ function toast(msg){
   clearTimeout(window._toast);
   window._toast = setTimeout(()=>t.classList.remove("show"), 1800);
 }
-function activePrice(item){ return $("priceMode").value === "volume" ? item.volume : item.retail; }
 
-function login(){
-  if($("pw").value === PASSWORD){
-    $("loginView").classList.add("hidden");
-    $("appView").classList.remove("hidden");
-    setTimeout(()=>guideCurrentRequired(), 150);
-  } else alert("Wrong password");
+function activePrice(item){
+  return $("priceMode").value === "volume" ? item.volume : item.retail;
+}
+
+function setLocked(id, locked){
+  const el = $(id);
+  if(!el) return;
+  el.classList.toggle("field-locked", locked);
 }
 
 function flashEl(el){
@@ -416,171 +431,157 @@ function flashEl(el){
   el.classList.add("hivis-flash");
 }
 
-function currentRequiredStep(){
+function headerStep(){
   if(!$("jobName").value.trim()) return "jobName";
-  if(!$("jobAddress").value.trim()) return "jobAddress";
-  if(!$("billingSame").checked && !$("billingAddress").value.trim()) return "billingChoice";
   if(!$("salesRep").value.trim()) return "salesRep";
+  if(!$("jobAddress").value.trim()) return "jobAddress";
+  if(!$("billingSame").checked && !$("billingAddress").value.trim()) return "billing";
   return null;
 }
 
-function focusRequiredStep(step){
-  if(step === "jobName"){
-    flashEl($("jobName"));
-    $("jobName").focus();
-    return;
+function refreshLocks(){
+  const step = headerStep();
+
+  setLocked("salesRepWrap", !!(!$("jobName").value.trim()));
+  setLocked("jobAddressWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim()));
+  setLocked("billingSameWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim()));
+  setLocked("billingAddressWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim()));
+
+  const headerDone = !step;
+  setLocked("areaWrap", !headerDone);
+  setLocked("searchWrap", !headerDone);
+  $("chips").classList.toggle("field-locked", !headerDone);
+
+  const hasItems = Object.values(estimate).flat().length > 0;
+  setLocked("taxBoxWrap", !hasItems);
+  setLocked("travelBoxWrap", !hasItems);
+  setLocked("discountBoxWrap", !hasItems);
+
+  $("taxOn").disabled = !hasItems;
+  $("travelOn").disabled = !hasItems;
+  $("discountOn").disabled = !hasItems;
+
+  if(!hasItems){
+    $("taxOn").checked = false;
+    $("travelOn").checked = false;
+    $("discountOn").checked = false;
+    $("taxRate").value = "";
+    $("travelTier").value = "";
+    $("discount").value = "";
   }
-  if(step === "jobAddress"){
-    flashEl($("jobAddress"));
-    $("jobAddress").focus();
-    return;
+
+  if($("billingSame").checked){
+    $("billingAddress").value = "Same as Job Address";
+    $("billingAddress").readOnly = true;
+  } else {
+    if($("billingAddress").value === "Same as Job Address") $("billingAddress").value = "";
+    $("billingAddress").readOnly = false;
   }
-  if(step === "billingChoice"){
+}
+
+function guideCurrentStep(){
+  const step = headerStep();
+  if(step === "jobName"){ flashEl($("jobName")); $("jobName").focus(); }
+  else if(step === "salesRep"){ flashEl($("salesRep")); $("salesRep").focus(); }
+  else if(step === "jobAddress"){ flashEl($("jobAddress")); $("jobAddress").focus(); }
+  else if(step === "billing"){
     flashEl($("billingSameWrap"));
     if(!$("billingSame").checked){
       flashEl($("billingAddress"));
       $("billingAddress").focus();
     }
-    return;
-  }
-  if(step === "salesRep"){
-    flashEl($("salesRep"));
-    $("salesRep").focus();
   }
 }
 
-function guideCurrentRequired(){
-  const step = currentRequiredStep();
-  if(step) focusRequiredStep(step);
-}
-
-function enforceHeaderBeforeAction(e){
-  const step = currentRequiredStep();
-  if(!step) return true;
-
-  const allowedIds = ["jobName","jobAddress","billingAddress","billingSame","salesRep","pw","loginBtn"];
-  const t = e.target;
-  if(allowedIds.includes(t.id)) return true;
-
-  focusRequiredStep(step);
-  e.preventDefault();
-  e.stopPropagation();
-  return false;
-}
-
-function validatePricingField(checkId, inputId){
-  const checked = $(checkId).checked;
-  const input = $(inputId);
-
-  if(!checked){
-    input.value = "";
-    return true;
-  }
-
-  if(input.tagName === "SELECT"){
-    if(!input.value){
-      flashEl(input);
-      input.focus();
-      return false;
-    }
-    return true;
-  }
-
-  if(!input.value.trim()){
-    flashEl(input);
-    input.focus();
+function canUseMainEstimator(){
+  const step = headerStep();
+  if(step){
+    guideCurrentStep();
     return false;
   }
   return true;
 }
 
+function login(){
+  if($("pw").value === PASSWORD){
+    $("loginView").classList.add("hidden");
+    $("appView").classList.remove("hidden");
+    refreshLocks();
+    setTimeout(guideCurrentStep, 150);
+  } else {
+    alert("Wrong password");
+  }
+}
+
+function openTaxModal(){
+  $("taxModalWrap").classList.add("show");
+  $("taxRateManual").value = "";
+  $("taxRateSelect").focus();
+}
+
+function closeTaxModal(){
+  $("taxModalWrap").classList.remove("show");
+}
+
+function applyTaxRate(){
+  let val = $("taxRateManual").value.trim();
+  if(!val) val = $("taxRateSelect").value;
+  if(!val){
+    flashEl($("taxRateSelect"));
+    return;
+  }
+  $("taxRate").value = val;
+  closeTaxModal();
+  renderTotals();
+}
+
 function init(){
   $("loginBtn").addEventListener("click", login);
-  $("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+  $("pw").addEventListener("keydown", e=>{ if(e.key === "Enter") login(); });
 
   $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("travelTier").innerHTML = `<option value="">Select travel tier</option>` + travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
 
-  $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
-  $("search").addEventListener("input", renderResults);
-  $("priceMode").addEventListener("change", ()=>{repriceEstimate(); renderResults(); renderEstimate();});
+  let taxOpts = `<option value="">Select tax rate</option>`;
+  for(let x=2.5; x<=20.0001; x+=0.1){
+    taxOpts += `<option value="${x.toFixed(1)}">${x.toFixed(1)}%</option>`;
+  }
+  $("taxRateSelect").innerHTML = taxOpts;
 
-  $("jobName").addEventListener("blur", ()=>{ if(!$("jobName").value.trim()) flashEl($("jobName")); else focusRequiredStep(currentRequiredStep()); });
-  $("jobAddress").addEventListener("blur", ()=>{ if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); else focusRequiredStep(currentRequiredStep()); });
-  $("salesRep").addEventListener("blur", ()=>{ if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
+  $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
+
+  $("jobName").addEventListener("input", ()=>{ refreshLocks(); if($("jobName").value.trim()) setTimeout(guideCurrentStep,80); });
+  $("salesRep").addEventListener("input", ()=>{ refreshLocks(); if($("salesRep").value.trim()) setTimeout(guideCurrentStep,80); });
+  $("jobAddress").addEventListener("input", ()=>{ refreshLocks(); if($("jobAddress").value.trim()) setTimeout(guideCurrentStep,80); });
 
   $("billingSame").addEventListener("change", ()=>{
+    refreshLocks();
     if($("billingSame").checked){
-      $("billingAddress").value = "Same as Job Address";
-      $("billingAddress").readOnly = true;
-      focusRequiredStep(currentRequiredStep());
+      setTimeout(guideCurrentStep,80);
     } else {
-      $("billingAddress").value = "";
-      $("billingAddress").readOnly = false;
       flashEl($("billingSameWrap"));
       flashEl($("billingAddress"));
       $("billingAddress").focus();
     }
   });
 
-  $("billingAddress").addEventListener("blur", ()=>{
-    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
-      flashEl($("billingSameWrap"));
-      flashEl($("billingAddress"));
-    } else {
-      focusRequiredStep(currentRequiredStep());
+  $("billingAddress").addEventListener("input", ()=>{ refreshLocks(); if($("billingAddress").value.trim()) setTimeout(guideCurrentStep,80); });
+
+  $("area").addEventListener("focus", e=>{ if(!canUseMainEstimator()) e.target.blur(); });
+  $("search").addEventListener("focus", e=>{ if(!canUseMainEstimator()) e.target.blur(); });
+  $("priceMode").addEventListener("change", ()=>{ repriceEstimate(); renderResults(); renderEstimate(); });
+
+  $("search").addEventListener("input", ()=>{
+    if(!canUseMainEstimator()){
+      $("search").value = "";
+      return;
     }
+    renderResults();
   });
 
-  $("taxOn").addEventListener("change", ()=>{
-    if($("taxOn").checked){
-      flashEl($("taxRate"));
-      $("taxRate").focus();
-    } else {
-      $("taxRate").value = "";
-      renderTotals();
-    }
-  });
-
-  $("travelOn").addEventListener("change", ()=>{
-    if($("travelOn").checked){
-      flashEl($("travelTier"));
-      $("travelTier").focus();
-    } else {
-      $("travelTier").value = "";
-      renderTotals();
-    }
-  });
-
-  $("discountOn").addEventListener("change", ()=>{
-    if($("discountOn").checked){
-      flashEl($("discount"));
-      $("discount").focus();
-    } else {
-      $("discount").value = "";
-      renderTotals();
-    }
-  });
-
-  $("taxRate").addEventListener("blur", ()=>{
-    validatePricingField("taxOn","taxRate");
-    renderTotals();
-  });
-  $("travelTier").addEventListener("blur", ()=>{
-    validatePricingField("travelOn","travelTier");
-    renderTotals();
-  });
-  $("discount").addEventListener("blur", ()=>{
-    validatePricingField("discountOn","discount");
-    renderTotals();
-  });
-
-  ["taxOn","travelOn","taxRate","travelTier","discountOn","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
-
-  $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
   $("chips").addEventListener("click", e=>{
-    if(!enforceHeaderBeforeAction(e)) return;
+    if(!canUseMainEstimator()) return;
     const btn = e.target.closest("[data-trade]");
     if(!btn) return;
     activeTrade = btn.dataset.trade;
@@ -589,7 +590,7 @@ function init(){
   });
 
   $("results").addEventListener("click", e=>{
-    if(!enforceHeaderBeforeAction(e)) return;
+    if(!canUseMainEstimator()) return;
     const btn = e.target.closest("[data-add]");
     if(!btn) return;
     openModal(btn.dataset.add);
@@ -600,21 +601,59 @@ function init(){
   $("mQty").addEventListener("focus", ()=> $("mQty").select());
   $("mQty").addEventListener("input", updateModalTotal);
 
-  ["area","search","priceMode"].forEach(id=>{
-    $(id).addEventListener("focus", e=>enforceHeaderBeforeAction(e), true);
-    $(id).addEventListener("mousedown", e=>enforceHeaderBeforeAction(e), true);
-    $(id).addEventListener("touchstart", e=>enforceHeaderBeforeAction(e), true);
+  $("taxOn").addEventListener("change", ()=>{
+    if(!$("taxOn").checked){
+      $("taxRate").value = "";
+      renderTotals();
+      return;
+    }
+    openTaxModal();
   });
 
-  document.addEventListener("mousedown", (e)=>{
-    const step = currentRequiredStep();
-    if(!step) return;
-    const t = e.target;
-    const allowed = ["jobName","jobAddress","billingAddress","billingSame","salesRep","pw","loginBtn"];
-    if(allowed.includes(t.id) || t.closest("#loginView")) return;
-    focusRequiredStep(step);
-  }, true);
+  $("travelOn").addEventListener("change", ()=>{
+    if(!$("travelOn").checked){
+      $("travelTier").value = "";
+      renderTotals();
+      return;
+    }
+    flashEl($("travelTier"));
+    $("travelTier").focus();
+  });
 
+  $("discountOn").addEventListener("change", ()=>{
+    if(!$("discountOn").checked){
+      $("discount").value = "";
+      renderTotals();
+      return;
+    }
+    flashEl($("discount"));
+    $("discount").focus();
+  });
+
+  $("travelTier").addEventListener("blur", ()=>{
+    if($("travelOn").checked && !$("travelTier").value){
+      flashEl($("travelTier"));
+    }
+    renderTotals();
+  });
+
+  $("discount").addEventListener("blur", ()=>{
+    if($("discountOn").checked && !$("discount").value.trim()){
+      flashEl($("discount"));
+    }
+    renderTotals();
+  });
+
+  $("closeTaxModal").addEventListener("click", ()=>{
+    if(!$("taxRate").value) $("taxOn").checked = false;
+    closeTaxModal();
+    renderTotals();
+  });
+  $("applyTaxRate").addEventListener("click", applyTaxRate);
+
+  ["travelTier","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
+
+  refreshLocks();
   renderResults();
   renderEstimate();
 }
@@ -651,7 +690,10 @@ function openModal(name){
   setTimeout(()=>{$("mQty").focus(); $("mQty").select();}, 60);
 }
 
-function closeModal(){ $("modalWrap").classList.remove("show"); selectedItem = null; }
+function closeModal(){
+  $("modalWrap").classList.remove("show");
+  selectedItem = null;
+}
 
 function updateModalTotal(){
   if(!selectedItem) return;
@@ -661,15 +703,7 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
-
-  if(currentRequiredStep()){
-    closeModal();
-    guideCurrentRequired();
-    return;
-  }
-  if(!validatePricingField("taxOn","taxRate")) return;
-  if(!validatePricingField("travelOn","travelTier")) return;
-  if(!validatePricingField("discountOn","discount")) return;
+  if(!canUseMainEstimator()) return;
 
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
@@ -697,12 +731,11 @@ function confirmAdd(){
   $("search").value = "";
   $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
 
+  refreshLocks();
   renderEstimate();
   toast(`Added to ${area}`);
 
-  setTimeout(() => {
-    $("search").focus();
-  }, 50);
+  setTimeout(()=>{$("search").focus();}, 50);
 }
 
 function repriceEstimate(){
@@ -747,6 +780,7 @@ function renderEstimate(){
   document.querySelectorAll(".remove").forEach(btn=>btn.addEventListener("click", ()=>{
     estimate[btn.dataset.area] = estimate[btn.dataset.area].filter(i=>i.name!==btn.dataset.name);
     if(!estimate[btn.dataset.area].length) delete estimate[btn.dataset.area];
+    refreshLocks();
     renderEstimate();
   }));
 
@@ -764,9 +798,8 @@ function calcTotals(){
   const afterDiscount = Math.max(0, subtotal - discount);
   const minimumAdj = afterDiscount < 450 ? 450 - afterDiscount : 0;
   const travel = $("travelOn").checked && $("travelTier").value !== "" ? Number(travelTiers[Number($("travelTier").value)][1]) : 0;
-  const taxBase = afterDiscount + minimumAdj + travel;
-  const tax = $("taxOn").checked && $("taxRate").value !== "" ? taxBase * (Number($("taxRate").value||0)/100) : 0;
-  return {subtotal, discount, minimumAdj, travel, tax, total: taxBase + tax};
+  const tax = $("taxOn").checked && $("taxRate").value !== "" ? (afterDiscount + minimumAdj + travel) * (Number($("taxRate").value)/100) : 0;
+  return {subtotal, discount, minimumAdj, travel, tax, total: afterDiscount + minimumAdj + travel + tax};
 }
 
 function renderTotals(){
