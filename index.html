@@ -3,10 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.2</title>
+<title>Engle OS vWeb2.3 Core</title>
 <style>
 :root{
-  --red:#c3141b; --black:#111; --bg:#eef1f4; --card:#fff; --border:#d9dde4; --muted:#6f7680;
+  --red:#c3141b;
+  --black:#111;
+  --bg:#eef1f4;
+  --card:#fff;
+  --border:#d9dde4;
+  --muted:#6f7680;
+  --hiVis:#d8ff4d;
+  --hiVisBorder:#97b800;
 }
 *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{margin:0;background:var(--bg);color:#111}
@@ -19,7 +26,6 @@ header .sub{font-size:12px;opacity:.85}
 .nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
 .nav button.active{background:var(--red);color:#fff}
 .hidden{display:none!important}
-
 .est-grid{
   display:grid;
   grid-template-columns:1.02fr .98fr;
@@ -27,7 +33,6 @@ header .sub{font-size:12px;opacity:.85}
   align-items:stretch;
   min-height:calc(100vh - 190px);
 }
-
 .panel-scroll{
   height:calc(100vh - 220px);
   overflow-y:auto;
@@ -35,12 +40,18 @@ header .sub{font-size:12px;opacity:.85}
   padding-right:4px;
   min-height:0;
 }
-
 label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
+input,select,textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+}
 textarea{min-height:84px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .right{margin-left:auto}
 .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f3f4f6;font-size:12px;font-weight:700}
@@ -69,9 +80,73 @@ textarea{min-height:84px;resize:vertical}
 .bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
 .bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
 .bottomnav button.active{color:#ffb8bc}
-
+.required-wrap{position:relative}
+.locked{opacity:.6}
+.divider{height:1px;background:var(--border);margin:12px 0}
+.input-blank::placeholder{color:#a5acb5}
+.note-badge{
+  margin-top:6px;
+  display:inline-block;
+  background:#fff7c2;
+  border:1px solid #d7c85a;
+  border-radius:8px;
+  padding:6px 8px;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.35;
+}
+.hivis-flash{
+  animation:hivisFlash 1s ease-in-out 3;
+}
+@keyframes hivisFlash{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0);background:#fff}
+  35%,65%{box-shadow:0 0 0 4px rgba(151,184,0,.35);background:var(--hiVis)}
+}
+.check-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  padding-top:22px;
+}
+.check-row input[type="checkbox"]{
+  width:auto;
+  transform:scale(1.2);
+}
+.check-label{
+  font-size:13px;
+  font-weight:700;
+}
+.pricing-option{
+  position:relative;
+}
+.pricing-option .top-check{
+  position:absolute;
+  top:-2px;
+  left:0;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.pricing-option .top-check input{
+  width:auto;
+  transform:scale(1.1);
+}
+.pricing-option .top-check span{
+  font-size:12px;
+  font-weight:700;
+}
+.pricing-option .field-wrap{
+  margin-top:24px;
+}
+.error-text{
+  color:#9c1c21;
+  font-size:12px;
+  font-weight:700;
+  margin-top:6px;
+}
 @media (max-width:768px){
-  .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
+  .grid,.est-grid,.grid2,.grid3,.grid4{grid-template-columns:1fr}
   .nav{display:none}
   .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
@@ -97,7 +172,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.2 • cleared search after add • independent panel scrolling</div>
+  <div class="sub">vWeb 2.3 Core • required estimate header flow • guided high-vis prompts</div>
 </header>
 
 <div class="wrap">
@@ -117,20 +192,60 @@ textarea{min-height:84px;resize:vertical}
       </div>
 
       <div class="est-grid">
-        <section class="card panel-scroll">
+        <section class="card panel-scroll" id="leftPanel">
           <h3>Job Header</h3>
+
           <div class="grid2">
-            <div><label>Customer</label><input placeholder="Customer name"></div>
-            <div><label>Address</label><input placeholder="Property address"></div>
-            <div><label>Estimate #</label><input value="EST-1001"></div>
-            <div><label>Sales Rep</label><input placeholder="Sales rep"></div>
+            <div class="required-wrap">
+              <label>Customer / Job Name</label>
+              <input id="jobName" placeholder="Required before creating estimate">
+              <div class="error-text" id="jobNameError"></div>
+            </div>
+
+            <div class="required-wrap">
+              <label>Sales Rep</label>
+              <input id="salesRep" placeholder="Required">
+              <div class="error-text" id="salesRepError"></div>
+            </div>
+
+            <div class="required-wrap">
+              <label>Job Address</label>
+              <input id="jobAddress" placeholder="Required">
+              <div class="error-text" id="jobAddressError"></div>
+            </div>
+
+            <div class="required-wrap">
+              <label>Estimate #</label>
+              <input value="EST-1001">
+            </div>
+
+            <div class="required-wrap">
+              <label>Billing Address</label>
+              <input id="billingAddress" placeholder="Required unless same as job address">
+              <div class="error-text" id="billingAddressError"></div>
+            </div>
+
+            <div class="required-wrap">
+              <label>&nbsp;</label>
+              <div class="check-row" id="billingSameWrap">
+                <input type="checkbox" id="billingSame">
+                <span class="check-label">Check if billing address is the same as the job address</span>
+              </div>
+              <div class="error-text" id="billingSameError"></div>
+            </div>
           </div>
 
           <div class="current-area"><strong>Current Area:</strong> <span id="currentArea">Whole House</span></div>
 
           <div class="grid2">
-            <div><label>Area</label><select id="area"></select></div>
-            <div><label>Search Line Items</label><input id="search" placeholder="Type paint, sink, knob, roof..."></div>
+            <div>
+              <label>Area</label>
+              <select id="area"></select>
+            </div>
+            <div>
+              <label>Search Line Items</label>
+              <input id="search" placeholder="Type paint, sink, knob, roof...">
+            </div>
           </div>
 
           <div class="chips" id="chips" style="margin-top:10px"></div>
@@ -138,21 +253,56 @@ textarea{min-height:84px;resize:vertical}
 
           <div class="totals">
             <div class="grid3">
-              <div><label>Pricing Mode</label>
+              <div>
+                <label>Pricing Mode</label>
                 <select id="priceMode">
                   <option value="retail">Retail</option>
                   <option value="volume">Volume</option>
                 </select>
               </div>
-              <div><label>Tax</label><input id="taxOn" type="checkbox" style="width:auto"></div>
-              <div><label>Travel</label><input id="travelOn" type="checkbox" style="width:auto"></div>
             </div>
-            <div class="grid3" style="margin-top:8px">
-              <div><label>Tax %</label><input id="taxRate" type="number" value="7.5" step="0.01"></div>
-              <div><label>Travel</label><select id="travelTier"></select></div>
-              <div><label>Discount $</label><input id="discount" type="number" value="0" step="0.01"></div>
+
+            <div class="divider"></div>
+
+            <div class="grid3">
+              <div class="pricing-option">
+                <div class="top-check">
+                  <input id="taxOn" type="checkbox">
+                  <span>Tax</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Tax %</label>
+                  <input id="taxRate" class="input-blank" type="number" placeholder="" step="0.01">
+                </div>
+              </div>
+
+              <div class="pricing-option">
+                <div class="top-check">
+                  <input id="travelOn" type="checkbox">
+                  <span>Travel</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Travel</label>
+                  <select id="travelTier">
+                    <option value="">Select travel tier</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pricing-option">
+                <div class="top-check">
+                  <input id="discountOn" type="checkbox">
+                  <span>Discount</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Discount $</label>
+                  <input id="discount" class="input-blank" type="number" placeholder="" step="0.01">
+                </div>
+              </div>
             </div>
+
             <div class="totalrow"><span>Subtotal</span><strong id="subTop">$0.00</strong></div>
+            <div class="totalrow" id="discountRowTop" style="display:none"><span>Discount</span><strong id="discountTop">$0.00</strong></div>
             <div class="totalrow"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
             <div class="totalrow"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
             <div class="totalrow"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
@@ -160,11 +310,12 @@ textarea{min-height:84px;resize:vertical}
           </div>
         </section>
 
-        <section class="card panel-scroll">
+        <section class="card panel-scroll" id="rightPanel">
           <h3>Estimate Builder</h3>
           <div id="estimate"></div>
           <div class="totals">
             <div class="totalrow"><span>Subtotal</span><strong id="subBot">$0.00</strong></div>
+            <div class="totalrow" id="discountRowBot" style="display:none"><span>Discount</span><strong id="discountBot">$0.00</strong></div>
             <div class="totalrow"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
             <div class="totalrow"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
             <div class="totalrow"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
@@ -234,6 +385,13 @@ let lastArea = null;
 const $ = id => document.getElementById(id);
 const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n||0));
 
+const requiredFlow = [
+  "jobName",
+  "jobAddress",
+  "billingChoice",
+  "salesRep"
+];
+
 function toast(msg){
   const t = $("toast");
   t.textContent = msg;
@@ -247,7 +405,93 @@ function login(){
   if($("pw").value === PASSWORD){
     $("loginView").classList.add("hidden");
     $("appView").classList.remove("hidden");
+    setTimeout(()=>guideCurrentRequired(), 150);
   } else alert("Wrong password");
+}
+
+function flashEl(el){
+  if(!el) return;
+  el.classList.remove("hivis-flash");
+  void el.offsetWidth;
+  el.classList.add("hivis-flash");
+}
+
+function currentRequiredStep(){
+  if(!$("jobName").value.trim()) return "jobName";
+  if(!$("jobAddress").value.trim()) return "jobAddress";
+  if(!$("billingSame").checked && !$("billingAddress").value.trim()) return "billingChoice";
+  if(!$("salesRep").value.trim()) return "salesRep";
+  return null;
+}
+
+function focusRequiredStep(step){
+  if(step === "jobName"){
+    flashEl($("jobName"));
+    $("jobName").focus();
+    return;
+  }
+  if(step === "jobAddress"){
+    flashEl($("jobAddress"));
+    $("jobAddress").focus();
+    return;
+  }
+  if(step === "billingChoice"){
+    flashEl($("billingSameWrap"));
+    if(!$("billingSame").checked){
+      flashEl($("billingAddress"));
+      $("billingAddress").focus();
+    }
+    return;
+  }
+  if(step === "salesRep"){
+    flashEl($("salesRep"));
+    $("salesRep").focus();
+  }
+}
+
+function guideCurrentRequired(){
+  const step = currentRequiredStep();
+  if(step) focusRequiredStep(step);
+}
+
+function enforceHeaderBeforeAction(e){
+  const step = currentRequiredStep();
+  if(!step) return true;
+
+  const allowedIds = ["jobName","jobAddress","billingAddress","billingSame","salesRep","pw","loginBtn"];
+  const t = e.target;
+  if(allowedIds.includes(t.id)) return true;
+
+  focusRequiredStep(step);
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+}
+
+function validatePricingField(checkId, inputId){
+  const checked = $(checkId).checked;
+  const input = $(inputId);
+
+  if(!checked){
+    input.value = "";
+    return true;
+  }
+
+  if(input.tagName === "SELECT"){
+    if(!input.value){
+      flashEl(input);
+      input.focus();
+      return false;
+    }
+    return true;
+  }
+
+  if(!input.value.trim()){
+    flashEl(input);
+    input.focus();
+    return false;
+  }
+  return true;
 }
 
 function init(){
@@ -256,15 +500,87 @@ function init(){
 
   $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
-  $("travelTier").innerHTML = travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
+  $("travelTier").innerHTML = `<option value="">Select travel tier</option>` + travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
 
   $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
   $("search").addEventListener("input", renderResults);
   $("priceMode").addEventListener("change", ()=>{repriceEstimate(); renderResults(); renderEstimate();});
-  ["taxOn","travelOn","taxRate","travelTier","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
+
+  $("jobName").addEventListener("blur", ()=>{ if(!$("jobName").value.trim()) flashEl($("jobName")); else focusRequiredStep(currentRequiredStep()); });
+  $("jobAddress").addEventListener("blur", ()=>{ if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); else focusRequiredStep(currentRequiredStep()); });
+  $("salesRep").addEventListener("blur", ()=>{ if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
+
+  $("billingSame").addEventListener("change", ()=>{
+    if($("billingSame").checked){
+      $("billingAddress").value = "Same as Job Address";
+      $("billingAddress").readOnly = true;
+      focusRequiredStep(currentRequiredStep());
+    } else {
+      $("billingAddress").value = "";
+      $("billingAddress").readOnly = false;
+      flashEl($("billingSameWrap"));
+      flashEl($("billingAddress"));
+      $("billingAddress").focus();
+    }
+  });
+
+  $("billingAddress").addEventListener("blur", ()=>{
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+      flashEl($("billingSameWrap"));
+      flashEl($("billingAddress"));
+    } else {
+      focusRequiredStep(currentRequiredStep());
+    }
+  });
+
+  $("taxOn").addEventListener("change", ()=>{
+    if($("taxOn").checked){
+      flashEl($("taxRate"));
+      $("taxRate").focus();
+    } else {
+      $("taxRate").value = "";
+      renderTotals();
+    }
+  });
+
+  $("travelOn").addEventListener("change", ()=>{
+    if($("travelOn").checked){
+      flashEl($("travelTier"));
+      $("travelTier").focus();
+    } else {
+      $("travelTier").value = "";
+      renderTotals();
+    }
+  });
+
+  $("discountOn").addEventListener("change", ()=>{
+    if($("discountOn").checked){
+      flashEl($("discount"));
+      $("discount").focus();
+    } else {
+      $("discount").value = "";
+      renderTotals();
+    }
+  });
+
+  $("taxRate").addEventListener("blur", ()=>{
+    validatePricingField("taxOn","taxRate");
+    renderTotals();
+  });
+  $("travelTier").addEventListener("blur", ()=>{
+    validatePricingField("travelOn","travelTier");
+    renderTotals();
+  });
+  $("discount").addEventListener("blur", ()=>{
+    validatePricingField("discountOn","discount");
+    renderTotals();
+  });
+
+  ["taxOn","travelOn","taxRate","travelTier","discountOn","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
 
   $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
   $("chips").addEventListener("click", e=>{
+    if(!enforceHeaderBeforeAction(e)) return;
     const btn = e.target.closest("[data-trade]");
     if(!btn) return;
     activeTrade = btn.dataset.trade;
@@ -273,6 +589,7 @@ function init(){
   });
 
   $("results").addEventListener("click", e=>{
+    if(!enforceHeaderBeforeAction(e)) return;
     const btn = e.target.closest("[data-add]");
     if(!btn) return;
     openModal(btn.dataset.add);
@@ -283,19 +600,31 @@ function init(){
   $("mQty").addEventListener("focus", ()=> $("mQty").select());
   $("mQty").addEventListener("input", updateModalTotal);
 
+  ["area","search","priceMode"].forEach(id=>{
+    $(id).addEventListener("focus", e=>enforceHeaderBeforeAction(e), true);
+    $(id).addEventListener("mousedown", e=>enforceHeaderBeforeAction(e), true);
+    $(id).addEventListener("touchstart", e=>enforceHeaderBeforeAction(e), true);
+  });
+
+  document.addEventListener("mousedown", (e)=>{
+    const step = currentRequiredStep();
+    if(!step) return;
+    const t = e.target;
+    const allowed = ["jobName","jobAddress","billingAddress","billingSame","salesRep","pw","loginBtn"];
+    if(allowed.includes(t.id) || t.closest("#loginView")) return;
+    focusRequiredStep(step);
+  }, true);
+
   renderResults();
   renderEstimate();
 }
 
-function clearSearchAfterAdd(){
-  $("search").value = "";
-  $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
-  setTimeout(()=>$("search").focus(), 80);
-}
-
 function renderResults(){
   const q = $("search").value.trim().toLowerCase();
-  if(!q){ $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>'; return; }
+  if(!q){
+    $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
+    return;
+  }
   const rows = items.filter(i => (activeTrade==="All" || i.trade===activeTrade) && i.name.toLowerCase().includes(q));
   $("results").innerHTML = rows.map(i=>`
     <div class="item">
@@ -332,10 +661,21 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
+
+  if(currentRequiredStep()){
+    closeModal();
+    guideCurrentRequired();
+    return;
+  }
+  if(!validatePricingField("taxOn","taxRate")) return;
+  if(!validatePricingField("travelOn","travelTier")) return;
+  if(!validatePricingField("discountOn","discount")) return;
+
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
   if(!qty) return;
   const note = $("mNote").value.trim();
+
   if(!estimate[area]) estimate[area] = [];
   estimate[area].push({
     name:selectedItem.name,
@@ -379,7 +719,14 @@ function renderEstimate(){
       <div class="itemhead"><h3 style="margin:0">${area}</h3><span class="pill">${estimate[area].length} items</span></div>
       ${estimate[area].slice().sort((x,y)=>x.name.localeCompare(y.name)).map(item=>`
         <div class="line">
-          <div><label>Item</label><div><strong>${item.name}</strong><div class="muted">${item.unit}${item.note ? ' • '+item.note : ''}</div></div></div>
+          <div>
+            <label>Item</label>
+            <div>
+              <strong>${item.name}</strong>
+              <div class="muted">${item.unit}</div>
+              ${item.note ? `<div class="note-badge">NOTE: ${item.note}</div>` : ``}
+            </div>
+          </div>
           <div><label>Qty</label><input value="${item.qty}" data-area="${area}" data-name="${item.name.replace(/"/g,'&quot;')}" class="qty"></div>
           <div><label>Price</label><div style="padding:11px 0">${money(item.price)}</div></div>
           <div><label>Total</label><div style="padding:11px 0">${money(item.total)}</div></div>
@@ -413,22 +760,31 @@ function renderEstimate(){
 
 function calcTotals(){
   const subtotal = Object.values(estimate).flat().reduce((s,i)=>s + Number(i.total||0), 0);
-  const discount = Number($("discount").value||0);
+  const discount = $("discountOn").checked ? Number($("discount").value||0) : 0;
   const afterDiscount = Math.max(0, subtotal - discount);
   const minimumAdj = afterDiscount < 450 ? 450 - afterDiscount : 0;
-  const travel = $("travelOn").checked ? Number(travelTiers[Number($("travelTier").value||0)][1]) : 0;
+  const travel = $("travelOn").checked && $("travelTier").value !== "" ? Number(travelTiers[Number($("travelTier").value)][1]) : 0;
   const taxBase = afterDiscount + minimumAdj + travel;
-  const tax = $("taxOn").checked ? taxBase * (Number($("taxRate").value||0)/100) : 0;
-  return {subtotal, minimumAdj, travel, tax, total: taxBase + tax};
+  const tax = $("taxOn").checked && $("taxRate").value !== "" ? taxBase * (Number($("taxRate").value||0)/100) : 0;
+  return {subtotal, discount, minimumAdj, travel, tax, total: taxBase + tax};
 }
 
 function renderTotals(){
   const t = calcTotals();
-  $("subTop").textContent = money(t.subtotal); $("subBot").textContent = money(t.subtotal);
-  $("minTop").textContent = money(t.minimumAdj); $("minBot").textContent = money(t.minimumAdj);
-  $("travelTop").textContent = money(t.travel); $("travelBot").textContent = money(t.travel);
-  $("taxTop").textContent = money(t.tax); $("taxBot").textContent = money(t.tax);
-  $("totalTop").textContent = money(t.total); $("totalBot").textContent = money(t.total);
+  $("subTop").textContent = money(t.subtotal);
+  $("subBot").textContent = money(t.subtotal);
+  $("discountTop").textContent = money(t.discount);
+  $("discountBot").textContent = money(t.discount);
+  $("discountRowTop").style.display = $("discountOn").checked ? "flex" : "none";
+  $("discountRowBot").style.display = $("discountOn").checked ? "flex" : "none";
+  $("minTop").textContent = money(t.minimumAdj);
+  $("minBot").textContent = money(t.minimumAdj);
+  $("travelTop").textContent = money(t.travel);
+  $("travelBot").textContent = money(t.travel);
+  $("taxTop").textContent = money(t.tax);
+  $("taxBot").textContent = money(t.tax);
+  $("totalTop").textContent = money(t.total);
+  $("totalBot").textContent = money(t.total);
 }
 
 init();
