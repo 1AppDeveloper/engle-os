@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3.4</title>
+<title>Engle OS vWeb2.3.5</title>
 <style>
 :root{
   --red:#c3141b;
@@ -98,7 +98,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3.4 • repeat blocked flashing fix • persistent login</div>
+  <div class="sub">vWeb 2.3.5 • enter-to-advance only • tap-next allowed • password restored</div>
 </header>
 
 <div class="wrap">
@@ -294,7 +294,6 @@ textarea{min-height:84px;resize:vertical}
 
 <script>
 const PASSWORD = "Deerpoop";
-const LOGIN_KEY = "engle_os_logged_in";
 const items = [
   {name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)",unit:"SF",trade:"Painting",retail:3.25,volume:2.35},
   {name:"Paint Walls (2 Coats)",unit:"SF",trade:"Painting",retail:2.75,volume:2.10},
@@ -364,10 +363,7 @@ function getNextStepElement(){
 
 function guideCurrentStep(){
   const nextEl = getNextStepElement();
-  if(nextEl){
-    flashEl(nextEl);
-    nextEl.focus();
-  }
+  if(nextEl) flashEl(nextEl);
 }
 
 function refreshLocks(){
@@ -414,16 +410,14 @@ function handleBlockedAction(e){
   const nextEl = getNextStepElement();
 
   if(e){
+    const target = e.target;
+    if(target === nextEl) return true;
     e.preventDefault();
     e.stopPropagation();
   }
 
   if(nextEl){
-    nextEl.blur();
-    setTimeout(() => {
-      flashEl(nextEl);
-      nextEl.focus();
-    }, 0);
+    flashEl(nextEl);
   }
 
   return false;
@@ -431,11 +425,18 @@ function handleBlockedAction(e){
 
 function login(){
   if($("pw").value === PASSWORD){
-    localStorage.setItem(LOGIN_KEY, "1");
     $("loginView").classList.add("hidden");
     $("appView").classList.remove("hidden");
     refreshLocks();
-    setTimeout(guideCurrentStep, 150);
+    setTimeout(() => {
+      if(!headerComplete()){
+        const nextEl = getNextStepElement();
+        if(nextEl){
+          nextEl.focus();
+          flashEl(nextEl);
+        }
+      }
+    }, 150);
   } else {
     alert("Wrong password");
   }
@@ -467,31 +468,36 @@ function init(){
   $("loginBtn").addEventListener("click", login);
   $("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
 
-  if(localStorage.getItem(LOGIN_KEY) === "1"){
-    $("loginView").classList.add("hidden");
-    $("appView").classList.remove("hidden");
-  }
-
   buildTaxOptions();
   $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("travelTier").innerHTML = `<option value="">Select travel tier</option>` + travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
   $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
 
+  const nextFieldMap = {
+    jobName: "salesRep",
+    salesRep: "jobAddress",
+    jobAddress: "billingAddress",
+    billingAddress: null
+  };
+
   ["jobName","salesRep","jobAddress","billingAddress"].forEach(id => {
     $(id).addEventListener("keydown", e => {
       if(e.key === "Enter"){
         e.preventDefault();
-        const currentStep = headerStep();
-        if(currentStep !== id){
+
+        const value = $(id).value.trim();
+        if(!value){
           flashEl($(id));
           return;
         }
+
         refreshLocks();
-        const nextEl = getNextStepElement();
-        if(nextEl){
-          nextEl.focus();
-          flashEl(nextEl);
+
+        const nextId = nextFieldMap[id];
+        if(nextId && !$(nextId).closest(".field-locked")){
+          $(nextId).focus();
+          flashEl($(nextId));
         }
       }
     });
@@ -610,10 +616,6 @@ function init(){
   refreshLocks();
   renderResults();
   renderEstimate();
-
-  if(localStorage.getItem(LOGIN_KEY) === "1"){
-    setTimeout(()=>{ if(!headerComplete()) guideCurrentStep(); }, 120);
-  }
 }
 
 function renderResults(){
