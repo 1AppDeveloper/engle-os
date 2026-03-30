@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb 2.5</title>
+<title>Engle OS vWeb 2.5.2</title>
 <style>
 :root{
   --red:#c3141b;
@@ -69,13 +69,13 @@ textarea{min-height:84px;resize:vertical}
 .check-row{display:flex;align-items:center;gap:8px;min-height:44px;padding-top:22px}
 .check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
 .check-label{font-size:13px;font-weight:700}
-#billingSameBox{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
-#discountBoxPulse{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
+#billingSameBox,#discountBoxPulse{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
 .pricing-option{position:relative}
 .pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
 .pricing-option .top-check input{width:auto;transform:scale(1.1)}
 .pricing-option .top-check span{font-size:12px;font-weight:700}
 .pricing-option .field-wrap{margin-top:24px}
+.helper{font-size:11px;color:var(--muted);margin-top:4px}
 @media (max-width:768px){
   .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
@@ -102,7 +102,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.5 • discount reminder • trade bubbles browse items</div>
+  <div class="sub">vWeb 2.5.2 • trade bubbles locked until header complete</div>
 </header>
 
 <div class="wrap">
@@ -172,11 +172,12 @@ textarea{min-height:84px;resize:vertical}
             <div id="searchWrap" class="field-locked">
               <label>Search Line Items</label>
               <input id="search" placeholder="Type paint, sink, knob, roof...">
+              <div class="helper">Type to search or tap a trade bubble below after the required header fields are completed.</div>
             </div>
           </div>
 
           <div class="chips field-locked" id="chips" style="margin-top:10px"></div>
-          <div id="results" style="margin-top:10px"><div class="muted">Start typing to search line items.</div></div>
+          <div id="results" style="margin-top:10px"><div class="muted">Complete the required header fields, then search or tap a trade bubble.</div></div>
 
           <div class="totals">
             <div class="grid3">
@@ -654,12 +655,12 @@ function init(){
 
   $("discountOn").addEventListener("change", ()=>{
     if(!$("discountOn").checked){
-      $("discount").value = "";
       renderTotals();
       return;
     }
     flashEl($("discount"));
     $("discount").focus();
+    renderTotals();
   });
 
   $("discount").addEventListener("input", ()=>{
@@ -680,7 +681,17 @@ function init(){
 }
 
 function renderResults(){
+  if(!headerComplete()){
+    $("results").innerHTML = '<div class="muted">Complete the required header fields, then search or tap a trade bubble.</div>';
+    return;
+  }
+
   const q = $("search").value.trim().toLowerCase();
+
+  if(!q && activeTrade === "All"){
+    $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
+    return;
+  }
 
   let rows = items;
   if(activeTrade !== "All"){
@@ -753,7 +764,9 @@ function confirmAdd(){
 
   closeModal();
   $("search").value = "";
-  renderResults();
+  activeTrade = "All";
+  $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade==="All"));
+  $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
 
   refreshLocks();
   renderEstimate();
