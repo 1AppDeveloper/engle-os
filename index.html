@@ -225,8 +225,8 @@ textarea{min-height:84px;resize:vertical}
             <div class="totalrow"><span>Subtotal</span><strong id="subTop">$0.00</strong></div>
             <div class="totalrow" id="discountRowTop" style="display:none"><span>Discount</span><strong id="discountTop">$0.00</strong></div>
             <div class="totalrow"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
-            <div class="totalrow"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
-            <div class="totalrow"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
+            <div class="totalrow" id="travelRowTop" style="display:none"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
+            <div class="totalrow" id="taxRowTop" style="display:none"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
             <div class="totalrow final"><span>Total</span><span id="totalTop">$0.00</span></div>
           </div>
         </section>
@@ -238,8 +238,8 @@ textarea{min-height:84px;resize:vertical}
             <div class="totalrow"><span>Subtotal</span><strong id="subBot">$0.00</strong></div>
             <div class="totalrow" id="discountRowBot" style="display:none"><span>Discount</span><strong id="discountBot">$0.00</strong></div>
             <div class="totalrow"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
-            <div class="totalrow"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
-            <div class="totalrow"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
+            <div class="totalrow" id="travelRowBot" style="display:none"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
+            <div class="totalrow" id="taxRowBot" style="display:none"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
             <div class="totalrow final"><span>Total</span><span id="totalBot">$0.00</span></div>
           </div>
         </section>
@@ -512,17 +512,21 @@ function init(){
   $("salesRep").addEventListener("blur", ()=>{ refreshLocks(); if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
   $("jobAddress").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); });
   $("billingAddress").addEventListener("blur", ()=>{
-    refreshLocks();
-    if(!$("billingSame").checked && !$("billingAddress").value.trim()){ flashEl($("billingAddress")); }
-  });
+  refreshLocks();
+  if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+    flashEl($("billingSameWrap"));
+    flashEl($("billingAddress"));
+  }
+});
 
   $("billingSame").addEventListener("change", ()=>{
-    refreshLocks();
-    if(!$("billingSame").checked){
-      flashEl($("billingAddress"));
-      $("billingAddress").focus();
-    }
-  });
+  refreshLocks();
+  if(!$("billingSame").checked){
+    flashEl($("billingSameWrap"));
+    flashEl($("billingAddress"));
+    $("billingAddress").focus();
+  }
+});
 
   ["areaWrap","searchWrap","chips","taxBoxWrap","travelBoxWrap","discountBoxWrap","jobAddressWrap","billingAddressWrap","billingSameWrap","salesRepWrap"].forEach(id=>{
     const el = $(id);
@@ -770,6 +774,11 @@ function renderTotals(){
   $("travelBot").textContent = money(t.travel);
   $("taxTop").textContent = money(t.tax);
   $("taxBot").textContent = money(t.tax);
+
+  $("travelRowTop").style.display = $("travelOn").checked ? "flex" : "none";
+  $("travelRowBot").style.display = $("travelOn").checked ? "flex" : "none";
+  $("taxRowTop").style.display = $("taxOn").checked ? "flex" : "none";
+  $("taxRowBot").style.display = $("taxOn").checked ? "flex" : "none";
   $("totalTop").textContent = money(t.total);
   $("totalBot").textContent = money(t.total);
 }
