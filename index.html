@@ -240,7 +240,7 @@ textarea{min-height:84px;resize:vertical}
 
             <div class="totalrow"><span>Subtotal</span><strong id="subTop">$0.00</strong></div>
             <div class="totalrow" id="discountRowTop" style="display:none"><span>Discount</span><strong id="discountTop">$0.00</strong></div>
-            <div class="totalrow"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
+            <div class="totalrow" id="minRowTop" style="display:none"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
             <div class="totalrow" id="travelRowTop" style="display:none"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
             <div class="totalrow" id="taxRowTop" style="display:none"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
             <div class="totalrow final"><span>Total</span><span id="totalTop">$0.00</span></div>
@@ -253,7 +253,7 @@ textarea{min-height:84px;resize:vertical}
           <div class="totals">
             <div class="totalrow"><span>Subtotal</span><strong id="subBot">$0.00</strong></div>
             <div class="totalrow" id="discountRowBot" style="display:none"><span>Discount</span><strong id="discountBot">$0.00</strong></div>
-            <div class="totalrow"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
+            <div class="totalrow" id="minRowBot" style="display:none"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
             <div class="totalrow" id="travelRowBot" style="display:none"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
             <div class="totalrow" id="taxRowBot" style="display:none"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
             <div class="totalrow final"><span>Total</span><span id="totalBot">$0.00</span></div>
@@ -886,7 +886,9 @@ function renderTotals(){
   $("discountRowBot").style.display = $("discountOn").checked ? "flex" : "none";
 
   $("minTop").textContent = money(t.minimumAdj);
-  $("minBot").textContent = money(t.minimumAdj);
+$("minBot").textContent = money(t.minimumAdj);
+$("minRowTop").style.display = t.minimumAdj > 0 ? "flex" : "none";
+$("minRowBot").style.display = t.minimumAdj > 0 ? "flex" : "none";
 
   $("travelTop").textContent = money(t.travel);
   $("travelBot").textContent = money(t.travel);
