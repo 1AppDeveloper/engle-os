@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3.1</title>
+<title>Engle OS vWeb2.3.2</title>
 <style>
 :root{
   --red:#c3141b;
@@ -13,7 +13,6 @@
   --border:#d9dde4;
   --muted:#6f7680;
   --hiVis:#d8ff4d;
-  --hiVisBorder:#97b800;
 }
 *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{margin:0;background:var(--bg);color:#111}
@@ -22,37 +21,19 @@ header h1{margin:0;font-size:22px}
 header .sub{font-size:12px;opacity:.85}
 .wrap{max-width:1400px;margin:0 auto;padding:14px 14px 80px}
 .grid{display:grid;grid-template-columns:220px 1fr;gap:14px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
 .nav button.active{background:var(--red);color:#fff}
 .hidden{display:none!important}
-.est-grid{
-  display:grid;
-  grid-template-columns:1.02fr .98fr;
-  gap:12px;
-  align-items:stretch;
-  min-height:calc(100vh - 190px);
-}
-.panel-scroll{
-  height:calc(100vh - 220px);
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding-right:4px;
-  min-height:0;
-}
+.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px;align-items:stretch;min-height:calc(100vh - 190px)}
+.panel-scroll{height:calc(100vh - 220px);overflow-y:auto;overflow-x:hidden;padding-right:4px;min-height:0}
 label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#fff;
-}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
+input[readonly]{background:#f4f5f7}
 textarea{min-height:84px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.right{margin-left:auto}
 .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f3f4f6;font-size:12px;font-weight:700}
 .current-area{background:#fff6f6;border:1px solid #f0cccc;border-radius:14px;padding:10px 12px;margin:10px 0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -76,85 +57,28 @@ textarea{min-height:84px;resize:vertical}
 .primary{padding:10px 14px;border:none;border-radius:10px;background:var(--red);color:#fff;cursor:pointer;font-weight:700}
 .secondary{padding:10px 14px;border:none;border-radius:10px;background:#e7eaef;color:#111;cursor:pointer;font-weight:700}
 .login{max-width:420px;margin:40px auto}
-.bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;grid-template-columns:repeat(5,1fr);padding:8px;border-top:4px solid var(--red)}
-.bottomnav button{background:none;border:none;color:#fff;padding:10px 6px}
-.bottomnav button.active{color:#ffb8bc}
 .divider{height:1px;background:var(--border);margin:12px 0}
-.note-badge{
-  margin-top:6px;
-  display:inline-block;
-  background:#fff7c2;
-  border:1px solid #d7c85a;
-  border-radius:8px;
-  padding:6px 8px;
-  font-size:14px;
-  font-weight:800;
-  line-height:1.35;
-}
+.note-badge{margin-top:6px;display:inline-block;background:#fff7c2;border:1px solid #d7c85a;border-radius:8px;padding:6px 8px;font-size:14px;font-weight:800;line-height:1.35}
 .hivis-flash{animation:hivisFlash 1s ease-in-out 3}
 @keyframes hivisFlash{
   0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0);background:#fff}
   35%,65%{box-shadow:0 0 0 4px rgba(151,184,0,.35);background:var(--hiVis)}
 }
-.field-locked{
-  opacity:.55;
-  pointer-events:none;
-}
-.field-locked input,
-.field-locked select,
-.field-locked textarea,
-.field-locked button{
-  background:#f2f3f5 !important;
-}
-.check-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  min-height:44px;
-  padding-top:22px;
-}
-.check-row input[type="checkbox"]{
-  width:auto;
-  transform:scale(1.15);
-}
-.check-label{
-  font-size:13px;
-  font-weight:700;
-}
-.pricing-option{
-  position:relative;
-}
-.pricing-option .top-check{
-  position:absolute;
-  top:-2px;
-  left:0;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.pricing-option .top-check input{
-  width:auto;
-  transform:scale(1.1);
-}
-.pricing-option .top-check span{
-  font-size:12px;
-  font-weight:700;
-}
-.pricing-option .field-wrap{
-  margin-top:24px;
-}
-.error-text{
-  color:#9c1c21;
-  font-size:12px;
-  font-weight:700;
-  margin-top:6px;
-}
+.field-locked{opacity:.55}
+.field-locked input,.field-locked select,.field-locked textarea,.field-locked button{pointer-events:none;background:#f2f3f5!important}
+.check-row{display:flex;align-items:center;gap:8px;min-height:44px;padding-top:22px}
+.check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
+.check-label{font-size:13px;font-weight:700}
+.pricing-option{position:relative}
+.pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
+.pricing-option .top-check input{width:auto;transform:scale(1.1)}
+.pricing-option .top-check span{font-size:12px;font-weight:700}
+.pricing-option .field-wrap{margin-top:24px}
 @media (max-width:768px){
   .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
   .nav{display:none}
   .panel-scroll{height:auto;max-height:none}
   .line{grid-template-columns:1fr 1fr}
-  .bottomnav{display:grid}
 }
 </style>
 </head>
@@ -176,7 +100,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3.1 • locked required workflow • tax popup • pricing extras unlock after first item</div>
+  <div class="sub">vWeb 2.3.2 • locked workflow fix • repeat flashing • persistent login</div>
 </header>
 
 <div class="wrap">
@@ -271,7 +195,7 @@ textarea{min-height:84px;resize:vertical}
                 </div>
                 <div class="field-wrap">
                   <label>Tax %</label>
-                  <input id="taxRate" type="text" readonly placeholder="">
+                  <input id="taxRate" type="text" readonly>
                 </div>
               </div>
 
@@ -295,7 +219,7 @@ textarea{min-height:84px;resize:vertical}
                 </div>
                 <div class="field-wrap">
                   <label>Discount $</label>
-                  <input id="discount" type="number" placeholder="" step="0.01">
+                  <input id="discount" type="number" step="0.01">
                 </div>
               </div>
             </div>
@@ -325,21 +249,13 @@ textarea{min-height:84px;resize:vertical}
     </main>
   </div>
 </div>
-
-<nav class="bottomnav">
-  <button class="active">Estimate</button>
-  <button>Dash</button>
-  <button>CRM</button>
-  <button>Projects</button>
-  <button>More</button>
-</nav>
 </div>
 
 <div class="modalwrap" id="modalWrap">
   <div class="modal">
     <div class="row">
       <h3 style="margin:0">Add Line Item</h3>
-      <button class="secondary right" id="closeModal">Close</button>
+      <button class="secondary" id="closeModal">Close</button>
     </div>
     <div class="grid2" style="margin-top:10px">
       <div><label>Item</label><input id="mName" readonly></div>
@@ -351,7 +267,7 @@ textarea{min-height:84px;resize:vertical}
     <div class="row" style="margin-top:12px">
       <span class="pill">Price <strong id="mPrice" style="margin-left:6px"></strong></span>
       <span class="pill">Line Total <strong id="mTotal" style="margin-left:6px"></strong></span>
-      <button class="primary right" id="confirmAdd">Confirm Add</button>
+      <button class="primary" id="confirmAdd">Confirm Add</button>
     </div>
   </div>
 </div>
@@ -360,7 +276,7 @@ textarea{min-height:84px;resize:vertical}
   <div class="modal">
     <div class="row">
       <h3 style="margin:0">Select Tax Rate</h3>
-      <button class="secondary right" id="closeTaxModal">Close</button>
+      <button class="secondary" id="closeTaxModal">Close</button>
     </div>
     <div class="grid2" style="margin-top:12px">
       <div>
@@ -373,13 +289,14 @@ textarea{min-height:84px;resize:vertical}
       </div>
     </div>
     <div class="row" style="margin-top:12px">
-      <button class="primary right" id="applyTaxRate">Apply Tax Rate</button>
+      <button class="primary" id="applyTaxRate">Apply Tax Rate</button>
     </div>
   </div>
 </div>
 
 <script>
 const PASSWORD = "Deerpoop";
+const LOGIN_KEY = "engle_os_logged_in";
 const items = [
   {name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)",unit:"SF",trade:"Painting",retail:3.25,volume:2.35},
   {name:"Paint Walls (2 Coats)",unit:"SF",trade:"Painting",retail:2.75,volume:2.10},
@@ -413,16 +330,7 @@ function toast(msg){
   clearTimeout(window._toast);
   window._toast = setTimeout(()=>t.classList.remove("show"), 1800);
 }
-
-function activePrice(item){
-  return $("priceMode").value === "volume" ? item.volume : item.retail;
-}
-
-function setLocked(id, locked){
-  const el = $(id);
-  if(!el) return;
-  el.classList.toggle("field-locked", locked);
-}
+function activePrice(item){ return $("priceMode").value === "volume" ? item.volume : item.retail; }
 
 function flashEl(el){
   if(!el) return;
@@ -439,29 +347,50 @@ function headerStep(){
   return null;
 }
 
-function refreshLocks(){
+function headerComplete(){ return !headerStep(); }
+function hasItems(){ return Object.values(estimate).flat().length > 0; }
+
+function setLocked(id, locked){
+  const el = $(id);
+  if(!el) return;
+  el.classList.toggle("field-locked", locked);
+}
+
+function guideCurrentStep(){
   const step = headerStep();
+  if(step === "jobName"){ flashEl($("jobName")); $("jobName").focus(); }
+  else if(step === "salesRep"){ flashEl($("salesRep")); $("salesRep").focus(); }
+  else if(step === "jobAddress"){ flashEl($("jobAddress")); $("jobAddress").focus(); }
+  else if(step === "billing"){
+    flashEl($("billingSameWrap"));
+    if(!$("billingSame").checked){
+      flashEl($("billingAddress"));
+      $("billingAddress").focus();
+    }
+  }
+}
 
-  setLocked("salesRepWrap", !!(!$("jobName").value.trim()));
-  setLocked("jobAddressWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim()));
-  setLocked("billingSameWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim()));
-  setLocked("billingAddressWrap", !!(!$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim()));
+function refreshLocks(){
+  setLocked("salesRepWrap", !$("jobName").value.trim());
+  setLocked("jobAddressWrap", !$("jobName").value.trim() || !$("salesRep").value.trim());
+  setLocked("billingSameWrap", !$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim());
+  setLocked("billingAddressWrap", !$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim());
 
-  const headerDone = !step;
-  setLocked("areaWrap", !headerDone);
-  setLocked("searchWrap", !headerDone);
-  $("chips").classList.toggle("field-locked", !headerDone);
+  const done = headerComplete();
+  setLocked("areaWrap", !done);
+  setLocked("searchWrap", !done);
+  $("chips").classList.toggle("field-locked", !done);
 
-  const hasItems = Object.values(estimate).flat().length > 0;
-  setLocked("taxBoxWrap", !hasItems);
-  setLocked("travelBoxWrap", !hasItems);
-  setLocked("discountBoxWrap", !hasItems);
+  const pricingEnabled = hasItems();
+  setLocked("taxBoxWrap", !pricingEnabled);
+  setLocked("travelBoxWrap", !pricingEnabled);
+  setLocked("discountBoxWrap", !pricingEnabled);
 
-  $("taxOn").disabled = !hasItems;
-  $("travelOn").disabled = !hasItems;
-  $("discountOn").disabled = !hasItems;
+  $("taxOn").disabled = !pricingEnabled;
+  $("travelOn").disabled = !pricingEnabled;
+  $("discountOn").disabled = !pricingEnabled;
 
-  if(!hasItems){
+  if(!pricingEnabled){
     $("taxOn").checked = false;
     $("travelOn").checked = false;
     $("discountOn").checked = false;
@@ -479,31 +408,19 @@ function refreshLocks(){
   }
 }
 
-function guideCurrentStep(){
-  const step = headerStep();
-  if(step === "jobName"){ flashEl($("jobName")); $("jobName").focus(); }
-  else if(step === "salesRep"){ flashEl($("salesRep")); $("salesRep").focus(); }
-  else if(step === "jobAddress"){ flashEl($("jobAddress")); $("jobAddress").focus(); }
-  else if(step === "billing"){
-    flashEl($("billingSameWrap"));
-    if(!$("billingSame").checked){
-      flashEl($("billingAddress"));
-      $("billingAddress").focus();
-    }
+function handleBlockedAction(e){
+  if(headerComplete()) return true;
+  guideCurrentStep();
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
   }
-}
-
-function canUseMainEstimator(){
-  const step = headerStep();
-  if(step){
-    guideCurrentStep();
-    return false;
-  }
-  return true;
+  return false;
 }
 
 function login(){
   if($("pw").value === PASSWORD){
+    localStorage.setItem(LOGIN_KEY, "1");
     $("loginView").classList.add("hidden");
     $("appView").classList.remove("hidden");
     refreshLocks();
@@ -518,70 +435,94 @@ function openTaxModal(){
   $("taxRateManual").value = "";
   $("taxRateSelect").focus();
 }
-
-function closeTaxModal(){
-  $("taxModalWrap").classList.remove("show");
-}
-
+function closeTaxModal(){ $("taxModalWrap").classList.remove("show"); }
 function applyTaxRate(){
   let val = $("taxRateManual").value.trim();
   if(!val) val = $("taxRateSelect").value;
-  if(!val){
-    flashEl($("taxRateSelect"));
-    return;
-  }
-  $("taxRate").value = val;
+  if(!val){ flashEl($("taxRateSelect")); return; }
+  $("taxRate").value = Number(val).toFixed(1);
   closeTaxModal();
   renderTotals();
 }
 
+function buildTaxOptions(){
+  let opts = `<option value="">Select tax rate</option>`;
+  for(let x=2.5; x<=20.0001; x+=0.1){
+    opts += `<option value="${x.toFixed(1)}">${x.toFixed(1)}%</option>`;
+  }
+  $("taxRateSelect").innerHTML = opts;
+}
+
 function init(){
   $("loginBtn").addEventListener("click", login);
-  $("pw").addEventListener("keydown", e=>{ if(e.key === "Enter") login(); });
+  $("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
 
+  if(localStorage.getItem(LOGIN_KEY) === "1"){
+    $("loginView").classList.add("hidden");
+    $("appView").classList.remove("hidden");
+  }
+
+  buildTaxOptions();
   $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
   $("travelTier").innerHTML = `<option value="">Select travel tier</option>` + travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
-
-  let taxOpts = `<option value="">Select tax rate</option>`;
-  for(let x=2.5; x<=20.0001; x+=0.1){
-    taxOpts += `<option value="${x.toFixed(1)}">${x.toFixed(1)}%</option>`;
-  }
-  $("taxRateSelect").innerHTML = taxOpts;
-
   $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
 
-  $("jobName").addEventListener("input", ()=>{ refreshLocks(); if($("jobName").value.trim()) setTimeout(guideCurrentStep,80); });
-  $("salesRep").addEventListener("input", ()=>{ refreshLocks(); if($("salesRep").value.trim()) setTimeout(guideCurrentStep,80); });
-  $("jobAddress").addEventListener("input", ()=>{ refreshLocks(); if($("jobAddress").value.trim()) setTimeout(guideCurrentStep,80); });
+  $("jobName").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("jobName").value.trim()) flashEl($("jobName"));
+  });
+  $("salesRep").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("salesRep").value.trim()) flashEl($("salesRep"));
+  });
+  $("jobAddress").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("jobAddress").value.trim()) flashEl($("jobAddress"));
+  });
+  $("billingAddress").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+      flashEl($("billingSameWrap"));
+      flashEl($("billingAddress"));
+    }
+  });
+
+  $("jobName").addEventListener("input", refreshLocks);
+  $("salesRep").addEventListener("input", refreshLocks);
+  $("jobAddress").addEventListener("input", refreshLocks);
+  $("billingAddress").addEventListener("input", refreshLocks);
 
   $("billingSame").addEventListener("change", ()=>{
     refreshLocks();
-    if($("billingSame").checked){
-      setTimeout(guideCurrentStep,80);
-    } else {
+    if(!$("billingSame").checked){
       flashEl($("billingSameWrap"));
       flashEl($("billingAddress"));
       $("billingAddress").focus();
     }
   });
 
-  $("billingAddress").addEventListener("input", ()=>{ refreshLocks(); if($("billingAddress").value.trim()) setTimeout(guideCurrentStep,80); });
+  ["area","search","priceMode"].forEach(id=>{
+    $(id).addEventListener("mousedown", handleBlockedAction, true);
+    $(id).addEventListener("touchstart", handleBlockedAction, true);
+    $(id).addEventListener("focus", e=>{ if(!headerComplete()){ handleBlockedAction(e); e.target.blur(); } }, true);
+  });
 
-  $("area").addEventListener("focus", e=>{ if(!canUseMainEstimator()) e.target.blur(); });
-  $("search").addEventListener("focus", e=>{ if(!canUseMainEstimator()) e.target.blur(); });
-  $("priceMode").addEventListener("change", ()=>{ repriceEstimate(); renderResults(); renderEstimate(); });
+  $("chips").addEventListener("mousedown", handleBlockedAction, true);
+  $("chips").addEventListener("touchstart", handleBlockedAction, true);
 
+  $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
   $("search").addEventListener("input", ()=>{
-    if(!canUseMainEstimator()){
+    if(!headerComplete()){
       $("search").value = "";
+      guideCurrentStep();
       return;
     }
     renderResults();
   });
 
   $("chips").addEventListener("click", e=>{
-    if(!canUseMainEstimator()) return;
+    if(!headerComplete()){ guideCurrentStep(); return; }
     const btn = e.target.closest("[data-trade]");
     if(!btn) return;
     activeTrade = btn.dataset.trade;
@@ -590,11 +531,13 @@ function init(){
   });
 
   $("results").addEventListener("click", e=>{
-    if(!canUseMainEstimator()) return;
+    if(!headerComplete()){ guideCurrentStep(); return; }
     const btn = e.target.closest("[data-add]");
     if(!btn) return;
     openModal(btn.dataset.add);
   });
+
+  $("priceMode").addEventListener("change", ()=>{ repriceEstimate(); renderResults(); renderEstimate(); });
 
   $("closeModal").addEventListener("click", closeModal);
   $("confirmAdd").addEventListener("click", confirmAdd);
@@ -609,6 +552,12 @@ function init(){
     }
     openTaxModal();
   });
+  $("closeTaxModal").addEventListener("click", ()=>{
+    if(!$("taxRate").value) $("taxOn").checked = false;
+    closeTaxModal();
+    renderTotals();
+  });
+  $("applyTaxRate").addEventListener("click", applyTaxRate);
 
   $("travelOn").addEventListener("change", ()=>{
     if(!$("travelOn").checked){
@@ -619,7 +568,6 @@ function init(){
     flashEl($("travelTier"));
     $("travelTier").focus();
   });
-
   $("discountOn").addEventListener("change", ()=>{
     if(!$("discountOn").checked){
       $("discount").value = "";
@@ -631,31 +579,22 @@ function init(){
   });
 
   $("travelTier").addEventListener("blur", ()=>{
-    if($("travelOn").checked && !$("travelTier").value){
-      flashEl($("travelTier"));
-    }
+    if($("travelOn").checked && !$("travelTier").value){ flashEl($("travelTier")); }
     renderTotals();
   });
-
   $("discount").addEventListener("blur", ()=>{
-    if($("discountOn").checked && !$("discount").value.trim()){
-      flashEl($("discount"));
-    }
+    if($("discountOn").checked && !$("discount").value.trim()){ flashEl($("discount")); }
     renderTotals();
   });
-
-  $("closeTaxModal").addEventListener("click", ()=>{
-    if(!$("taxRate").value) $("taxOn").checked = false;
-    closeTaxModal();
-    renderTotals();
-  });
-  $("applyTaxRate").addEventListener("click", applyTaxRate);
-
   ["travelTier","discount"].forEach(id=>$(id).addEventListener("input", renderTotals));
 
   refreshLocks();
   renderResults();
   renderEstimate();
+
+  if(localStorage.getItem(LOGIN_KEY) === "1"){
+    setTimeout(()=>{ if(!headerComplete()) guideCurrentStep(); }, 120);
+  }
 }
 
 function renderResults(){
@@ -689,12 +628,7 @@ function openModal(name){
   $("modalWrap").classList.add("show");
   setTimeout(()=>{$("mQty").focus(); $("mQty").select();}, 60);
 }
-
-function closeModal(){
-  $("modalWrap").classList.remove("show");
-  selectedItem = null;
-}
-
+function closeModal(){ $("modalWrap").classList.remove("show"); selectedItem = null; }
 function updateModalTotal(){
   if(!selectedItem) return;
   $("mPrice").textContent = money(activePrice(selectedItem));
@@ -703,7 +637,7 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
-  if(!canUseMainEstimator()) return;
+  if(!headerComplete()){ guideCurrentStep(); return; }
 
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
@@ -717,8 +651,8 @@ function confirmAdd(){
     retail:selectedItem.retail,
     volume:selectedItem.volume,
     price:activePrice(selectedItem),
-    qty:qty,
-    note:note,
+    qty,
+    note,
     total:activePrice(selectedItem) * qty
   });
 
@@ -727,7 +661,6 @@ function confirmAdd(){
   $("currentArea").textContent = area;
 
   closeModal();
-
   $("search").value = "";
   $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
 
