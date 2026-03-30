@@ -326,19 +326,7 @@ textarea{min-height:84px;resize:vertical}
 
 <script>
 const PASSWORD = "Deerpoop";
-const items = [
-  {name:"Paint Walls, Ceilings, Doors & Trim (2 Coats)",unit:"SF",trade:"Painting",retail:3.25,volume:2.35},
-  {name:"Paint Walls (2 Coats)",unit:"SF",trade:"Painting",retail:2.75,volume:2.10},
-  {name:"Paint Ceiling",unit:"SF",trade:"Painting",retail:2.25,volume:1.80},
-  {name:"Paint Trim (2 Coats)",unit:"LF",trade:"Painting",retail:3.25,volume:2.60},
-  {name:"Paint Interior Doors (2 Coats)",unit:"EA",trade:"Painting",retail:145,volume:115},
-  {name:"Replace Sink",unit:"EA",trade:"Plumbing",retail:625,volume:525},
-  {name:"Install Faucet",unit:"EA",trade:"Plumbing",retail:325,volume:265},
-  {name:"Cabinet Knob Replacement",unit:"EA",trade:"Carpentry",retail:18,volume:14},
-  {name:"Toilet Paper Holder Replacement",unit:"EA",trade:"Bath Accessories",retail:65,volume:50},
-  {name:"Install Dishwasher (Customer Supplied)",unit:"EA",trade:"Appliances",retail:325,volume:250},
-  {name:"Install LVP Flooring",unit:"SF",trade:"Flooring",retail:6.50,volume:5.65},
-  {name:"Roof Replacement (Architectural)",unit:"SQ",trade:"Roofing",retail:495,volume:425}
+const items = window.ENGLE_PRICE_BOOK || [];
 ];
 const areas = ["Whole House","Front Exterior","Back Exterior","Living Room","Dining Room","Kitchen","Master Bedroom","Bedroom 1","Bedroom 2","Bathroom 1","Hallway 1","Basement","Attic"];
 const travelTiers = [["0–15 miles",0],["16–30 miles",45],["31–50 miles",75],["51–75 miles",125],["76–100 miles",175],["101–150 miles",250],["151–200 miles",325],["201–300 miles",450],["301–500 miles",700]];
