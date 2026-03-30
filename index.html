@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb 2.4</title>
+<title>Engle OS vWeb 2.5</title>
 <style>
 :root{
   --red:#c3141b;
@@ -70,6 +70,7 @@ textarea{min-height:84px;resize:vertical}
 .check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
 .check-label{font-size:13px;font-weight:700}
 #billingSameBox{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
+#discountBoxPulse{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
 .pricing-option{position:relative}
 .pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
 .pricing-option .top-check input{width:auto;transform:scale(1.1)}
@@ -101,7 +102,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.4 • fixed totals math • full estimator build</div>
+  <div class="sub">vWeb 2.5 • discount reminder • trade bubbles browse items</div>
 </header>
 
 <div class="wrap">
@@ -218,7 +219,9 @@ textarea{min-height:84px;resize:vertical}
 
               <div class="pricing-option field-locked" id="discountBoxWrap">
                 <div class="top-check">
-                  <input id="discountOn" type="checkbox">
+                  <span id="discountBoxPulse">
+                    <input id="discountOn" type="checkbox">
+                  </span>
                   <span>Discount</span>
                 </div>
                 <div class="field-wrap">
@@ -478,6 +481,7 @@ function applyTaxRate(){
   closeTaxModal();
   renderTotals();
 }
+
 function openTravelModal(){
   $("travelModalWrap").classList.add("show");
   $("travelTierModal").focus();
@@ -571,9 +575,7 @@ function init(){
     if(!el) return;
     ["mousedown","touchstart","click"].forEach(evt=>{
       el.addEventListener(evt, e=>{
-        if(!headerComplete()){
-          handleBlockedAction(e);
-        }
+        if(!headerComplete()) handleBlockedAction(e);
       }, true);
     });
   });
@@ -590,16 +592,23 @@ function init(){
   });
 
   $("chips").addEventListener("click", e=>{
-    if(!headerComplete()){ guideCurrentStep(); return; }
+    if(!headerComplete()){
+      guideCurrentStep();
+      return;
+    }
     const btn = e.target.closest("[data-trade]");
     if(!btn) return;
     activeTrade = btn.dataset.trade;
     $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade===activeTrade));
+    $("search").value = "";
     renderResults();
   });
 
   $("results").addEventListener("click", e=>{
-    if(!headerComplete()){ guideCurrentStep(); return; }
+    if(!headerComplete()){
+      guideCurrentStep();
+      return;
+    }
     const btn = e.target.closest("[data-add]");
     if(!btn) return;
     openModal(btn.dataset.add);
@@ -653,11 +662,17 @@ function init(){
     $("discount").focus();
   });
 
+  $("discount").addEventListener("input", ()=>{
+    if(!$("discountOn").checked && $("discount").value.trim()){
+      flashEl($("discountBoxPulse"));
+    }
+    renderTotals();
+  });
+
   $("discount").addEventListener("blur", ()=>{
     if($("discountOn").checked && !$("discount").value.trim()) flashEl($("discount"));
     renderTotals();
   });
-  $("discount").addEventListener("input", renderTotals);
 
   refreshLocks();
   renderResults();
@@ -666,11 +681,20 @@ function init(){
 
 function renderResults(){
   const q = $("search").value.trim().toLowerCase();
-  if(!q){
-    $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
+
+  let rows = items;
+  if(activeTrade !== "All"){
+    rows = rows.filter(i => i.trade === activeTrade);
+  }
+  if(q){
+    rows = rows.filter(i => i.name.toLowerCase().includes(q));
+  }
+
+  if(!rows.length){
+    $("results").innerHTML = '<div class="muted">No matching line items.</div>';
     return;
   }
-  const rows = items.filter(i => (activeTrade==="All" || i.trade===activeTrade) && i.name.toLowerCase().includes(q));
+
   $("results").innerHTML = rows.map(i=>`
     <div class="item">
       <div class="itemhead">
@@ -679,7 +703,7 @@ function renderResults(){
       </div>
       <button class="primary" data-add="${i.name.replace(/"/g,'&quot;')}">+ Add</button>
     </div>
-  `).join("") || '<div class="muted">No matching line items.</div>';
+  `).join("");
 }
 
 function openModal(name){
@@ -729,7 +753,7 @@ function confirmAdd(){
 
   closeModal();
   $("search").value = "";
-  $("results").innerHTML = '<div class="muted">Start typing to search line items.</div>';
+  renderResults();
 
   refreshLocks();
   renderEstimate();
