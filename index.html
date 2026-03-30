@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3.2</title>
+<title>Engle OS vWeb2.3.3</title>
 <style>
 :root{
   --red:#c3141b;
@@ -100,7 +100,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3.2 • locked workflow fix • repeat flashing • persistent login</div>
+  <div class="sub">vWeb 2.3.3 • enter-to-advance • tap-next allowed • repeat flashing</div>
 </header>
 
 <div class="wrap">
@@ -130,7 +130,7 @@ textarea{min-height:84px;resize:vertical}
             </div>
 
             <div id="salesRepWrap" class="field-locked">
-              <label>Sales Rep</label>
+              <label>Sales Rep / Estimator</label>
               <input id="salesRep" placeholder="Required">
             </div>
 
@@ -335,8 +335,9 @@ function activePrice(item){ return $("priceMode").value === "volume" ? item.volu
 function flashEl(el){
   if(!el) return;
   el.classList.remove("hivis-flash");
-  void el.offsetWidth;
-  el.classList.add("hivis-flash");
+  setTimeout(() => {
+    el.classList.add("hivis-flash");
+  }, 10);
 }
 
 function headerStep(){
@@ -346,7 +347,6 @@ function headerStep(){
   if(!$("billingSame").checked && !$("billingAddress").value.trim()) return "billing";
   return null;
 }
-
 function headerComplete(){ return !headerStep(); }
 function hasItems(){ return Object.values(estimate).flat().length > 0; }
 
@@ -356,17 +356,20 @@ function setLocked(id, locked){
   el.classList.toggle("field-locked", locked);
 }
 
-function guideCurrentStep(){
+function getNextStepElement(){
   const step = headerStep();
-  if(step === "jobName"){ flashEl($("jobName")); $("jobName").focus(); }
-  else if(step === "salesRep"){ flashEl($("salesRep")); $("salesRep").focus(); }
-  else if(step === "jobAddress"){ flashEl($("jobAddress")); $("jobAddress").focus(); }
-  else if(step === "billing"){
-    flashEl($("billingSameWrap"));
-    if(!$("billingSame").checked){
-      flashEl($("billingAddress"));
-      $("billingAddress").focus();
-    }
+  if(step === "jobName") return $("jobName");
+  if(step === "salesRep") return $("salesRep");
+  if(step === "jobAddress") return $("jobAddress");
+  if(step === "billing") return $("billingSame").checked ? $("billingSame") : $("billingAddress");
+  return null;
+}
+
+function guideCurrentStep(){
+  const nextEl = getNextStepElement();
+  if(nextEl){
+    flashEl(nextEl);
+    nextEl.focus();
   }
 }
 
@@ -410,10 +413,17 @@ function refreshLocks(){
 
 function handleBlockedAction(e){
   if(headerComplete()) return true;
-  guideCurrentStep();
+
+  const nextEl = getNextStepElement();
   if(e){
+    const target = e.target;
+    if(target === nextEl) return true;
     e.preventDefault();
     e.stopPropagation();
+  }
+  if(nextEl){
+    flashEl(nextEl);
+    nextEl.focus();
   }
   return false;
 }
@@ -444,7 +454,6 @@ function applyTaxRate(){
   closeTaxModal();
   renderTotals();
 }
-
 function buildTaxOptions(){
   let opts = `<option value="">Select tax rate</option>`;
   for(let x=2.5; x<=20.0001; x+=0.1){
@@ -468,24 +477,23 @@ function init(){
   $("travelTier").innerHTML = `<option value="">Select travel tier</option>` + travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
   $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
 
-  $("jobName").addEventListener("blur", ()=>{
-    refreshLocks();
-    if(!$("jobName").value.trim()) flashEl($("jobName"));
-  });
-  $("salesRep").addEventListener("blur", ()=>{
-    refreshLocks();
-    if(!$("salesRep").value.trim()) flashEl($("salesRep"));
-  });
-  $("jobAddress").addEventListener("blur", ()=>{
-    refreshLocks();
-    if(!$("jobAddress").value.trim()) flashEl($("jobAddress"));
-  });
-  $("billingAddress").addEventListener("blur", ()=>{
-    refreshLocks();
-    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
-      flashEl($("billingSameWrap"));
-      flashEl($("billingAddress"));
-    }
+  ["jobName","salesRep","jobAddress","billingAddress"].forEach(id => {
+    $(id).addEventListener("keydown", e => {
+      if(e.key === "Enter"){
+        e.preventDefault();
+        const currentStep = headerStep();
+        if(currentStep !== id){
+          flashEl($(id));
+          return;
+        }
+        refreshLocks();
+        const nextEl = getNextStepElement();
+        if(nextEl){
+          nextEl.focus();
+          flashEl(nextEl);
+        }
+      }
+    });
   });
 
   $("jobName").addEventListener("input", refreshLocks);
@@ -493,10 +501,19 @@ function init(){
   $("jobAddress").addEventListener("input", refreshLocks);
   $("billingAddress").addEventListener("input", refreshLocks);
 
+  $("jobName").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobName").value.trim()) flashEl($("jobName")); });
+  $("salesRep").addEventListener("blur", ()=>{ refreshLocks(); if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
+  $("jobAddress").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); });
+  $("billingAddress").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+      flashEl($("billingAddress"));
+    }
+  });
+
   $("billingSame").addEventListener("change", ()=>{
     refreshLocks();
     if(!$("billingSame").checked){
-      flashEl($("billingSameWrap"));
       flashEl($("billingAddress"));
       $("billingAddress").focus();
     }
