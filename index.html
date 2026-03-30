@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3.3</title>
+<title>Engle OS vWeb2.3.4</title>
 <style>
 :root{
   --red:#c3141b;
-  --black:#111;
   --bg:#eef1f4;
-  --card:#fff;
   --border:#d9dde4;
   --muted:#6f7680;
   --hiVis:#d8ff4d;
@@ -100,7 +98,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3.3 • enter-to-advance • tap-next allowed • repeat flashing</div>
+  <div class="sub">vWeb 2.3.4 • repeat blocked flashing fix • persistent login</div>
 </header>
 
 <div class="wrap">
@@ -335,9 +333,8 @@ function activePrice(item){ return $("priceMode").value === "volume" ? item.volu
 function flashEl(el){
   if(!el) return;
   el.classList.remove("hivis-flash");
-  setTimeout(() => {
-    el.classList.add("hivis-flash");
-  }, 10);
+  void el.offsetWidth;
+  el.classList.add("hivis-flash");
 }
 
 function headerStep(){
@@ -415,16 +412,20 @@ function handleBlockedAction(e){
   if(headerComplete()) return true;
 
   const nextEl = getNextStepElement();
+
   if(e){
-    const target = e.target;
-    if(target === nextEl) return true;
     e.preventDefault();
     e.stopPropagation();
   }
+
   if(nextEl){
-    flashEl(nextEl);
-    nextEl.focus();
+    nextEl.blur();
+    setTimeout(() => {
+      flashEl(nextEl);
+      nextEl.focus();
+    }, 0);
   }
+
   return false;
 }
 
@@ -506,9 +507,7 @@ function init(){
   $("jobAddress").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); });
   $("billingAddress").addEventListener("blur", ()=>{
     refreshLocks();
-    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
-      flashEl($("billingAddress"));
-    }
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){ flashEl($("billingAddress")); }
   });
 
   $("billingSame").addEventListener("change", ()=>{
@@ -519,14 +518,17 @@ function init(){
     }
   });
 
-  ["area","search","priceMode"].forEach(id=>{
-    $(id).addEventListener("mousedown", handleBlockedAction, true);
-    $(id).addEventListener("touchstart", handleBlockedAction, true);
-    $(id).addEventListener("focus", e=>{ if(!headerComplete()){ handleBlockedAction(e); e.target.blur(); } }, true);
+  ["areaWrap","searchWrap","chips","taxBoxWrap","travelBoxWrap","discountBoxWrap","jobAddressWrap","billingAddressWrap","billingSameWrap","salesRepWrap"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    ["mousedown","touchstart","click"].forEach(evt=>{
+      el.addEventListener(evt, e=>{
+        if(!headerComplete()){
+          handleBlockedAction(e);
+        }
+      }, true);
+    });
   });
-
-  $("chips").addEventListener("mousedown", handleBlockedAction, true);
-  $("chips").addEventListener("touchstart", handleBlockedAction, true);
 
   $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
   $("search").addEventListener("input", ()=>{
