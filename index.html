@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb2.3.5</title>
+<title>Engle OS vWeb2.3.6</title>
 <style>
 :root{
   --red:#c3141b;
@@ -67,6 +67,13 @@ textarea{min-height:84px;resize:vertical}
 .check-row{display:flex;align-items:center;gap:8px;min-height:44px;padding-top:22px}
 .check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
 .check-label{font-size:13px;font-weight:700}
+#billingSameBox{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px;
+  border-radius:8px;
+}
 .pricing-option{position:relative}
 .pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
 .pricing-option .top-check input{width:auto;transform:scale(1.1)}
@@ -98,7 +105,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.3.5 • enter-to-advance only • tap-next allowed • password restored</div>
+  <div class="sub">vWeb 2.3.6 • billing checkbox flash fix • tax/travel hide when unchecked</div>
 </header>
 
 <div class="wrap">
@@ -150,7 +157,9 @@ textarea{min-height:84px;resize:vertical}
             <div id="billingSameWrap" class="field-locked">
               <label>&nbsp;</label>
               <div class="check-row">
-                <input type="checkbox" id="billingSame">
+                <span id="billingSameBox">
+                  <input type="checkbox" id="billingSame">
+                </span>
                 <span class="check-label">Check if billing address is the same as the job address</span>
               </div>
             </div>
@@ -357,13 +366,14 @@ function getNextStepElement(){
   if(step === "jobName") return $("jobName");
   if(step === "salesRep") return $("salesRep");
   if(step === "jobAddress") return $("jobAddress");
-  if(step === "billing") return $("billingSame").checked ? $("billingSame") : $("billingAddress");
+  if(step === "billing") return $("billingAddress");
   return null;
 }
 
 function guideCurrentStep(){
   const nextEl = getNextStepElement();
   if(nextEl) flashEl(nextEl);
+  if(headerStep() === "billing") flashEl($("billingSameBox"));
 }
 
 function refreshLocks(){
@@ -419,6 +429,9 @@ function handleBlockedAction(e){
   if(nextEl){
     flashEl(nextEl);
   }
+  if(headerStep() === "billing"){
+    flashEl($("billingSameBox"));
+  }
 
   return false;
 }
@@ -434,6 +447,9 @@ function login(){
         if(nextEl){
           nextEl.focus();
           flashEl(nextEl);
+        }
+        if(headerStep() === "billing"){
+          flashEl($("billingSameBox"));
         }
       }
     }, 150);
@@ -512,21 +528,21 @@ function init(){
   $("salesRep").addEventListener("blur", ()=>{ refreshLocks(); if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
   $("jobAddress").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); });
   $("billingAddress").addEventListener("blur", ()=>{
-  refreshLocks();
-  if(!$("billingSame").checked && !$("billingAddress").value.trim()){
-    flashEl($("billingSameWrap"));
-    flashEl($("billingAddress"));
-  }
-});
+    refreshLocks();
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+      flashEl($("billingSameBox"));
+      flashEl($("billingAddress"));
+    }
+  });
 
   $("billingSame").addEventListener("change", ()=>{
-  refreshLocks();
-  if(!$("billingSame").checked){
-    flashEl($("billingSameWrap"));
-    flashEl($("billingAddress"));
-    $("billingAddress").focus();
-  }
-});
+    refreshLocks();
+    if(!$("billingSame").checked){
+      flashEl($("billingSameBox"));
+      flashEl($("billingAddress"));
+      $("billingAddress").focus();
+    }
+  });
 
   ["areaWrap","searchWrap","chips","taxBoxWrap","travelBoxWrap","discountBoxWrap","jobAddressWrap","billingAddressWrap","billingSameWrap","salesRepWrap"].forEach(id=>{
     const el = $(id);
@@ -764,21 +780,25 @@ function renderTotals(){
   const t = calcTotals();
   $("subTop").textContent = money(t.subtotal);
   $("subBot").textContent = money(t.subtotal);
+
   $("discountTop").textContent = money(t.discount);
   $("discountBot").textContent = money(t.discount);
   $("discountRowTop").style.display = $("discountOn").checked ? "flex" : "none";
   $("discountRowBot").style.display = $("discountOn").checked ? "flex" : "none";
+
   $("minTop").textContent = money(t.minimumAdj);
   $("minBot").textContent = money(t.minimumAdj);
+
   $("travelTop").textContent = money(t.travel);
   $("travelBot").textContent = money(t.travel);
-  $("taxTop").textContent = money(t.tax);
-  $("taxBot").textContent = money(t.tax);
-
   $("travelRowTop").style.display = $("travelOn").checked ? "flex" : "none";
   $("travelRowBot").style.display = $("travelOn").checked ? "flex" : "none";
+
+  $("taxTop").textContent = money(t.tax);
+  $("taxBot").textContent = money(t.tax);
   $("taxRowTop").style.display = $("taxOn").checked ? "flex" : "none";
   $("taxRowBot").style.display = $("taxOn").checked ? "flex" : "none";
+
   $("totalTop").textContent = money(t.total);
   $("totalBot").textContent = money(t.total);
 }
