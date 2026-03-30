@@ -1,74 +1,185 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Estimator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engle Estimator</title>
 <script src="pricebook.js"></script>
+
 <style>
-body { font-family: Arial; margin:20px; }
-input, select { width:100%; padding:10px; margin-bottom:10px; }
-button { padding:10px; background:red; color:white; border:none; }
-.item { border:1px solid #ccc; padding:10px; margin:5px 0; }
+body { font-family: Arial; margin:0; background:#f5f6f8; }
+.container { display:flex; height:100vh; }
+.left, .right { padding:15px; overflow:auto; }
+.left { width:50%; background:white; }
+.right { width:50%; background:#fafafa; border-left:1px solid #ddd; }
+
+input, select {
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button {
+padding:10px;
+background:#c3141b;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.item {
+border:1px solid #ddd;
+padding:10px;
+margin-bottom:8px;
+border-radius:10px;
+background:white;
+}
+
+.highlight {
+animation:flash 1s 2;
+}
+
+@keyframes flash {
+0% { background:#fff; }
+50% { background:#ffe6e6; }
+100% { background:#fff; }
+}
+
+.total {
+font-size:24px;
+font-weight:bold;
+color:#c3141b;
+}
+
+.locked { opacity:.4; pointer-events:none; }
+
 </style>
 </head>
 
 <body>
 
-<h2>Estimator</h2>
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+<h3>Customer Info</h3>
 
 <input id="name" placeholder="Customer Name">
-<input id="search" placeholder="Search items...">
+<input id="sales" placeholder="Sales Rep / Estimator" class="locked">
+<input id="address" placeholder="Job Address" class="locked">
+
+<h3>Search</h3>
+
+<input id="search" placeholder="Search line items..." class="locked">
 
 <div id="results"></div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
 
 <h3>Estimate</h3>
 <div id="estimate"></div>
 
-<h2 id="total">$0</h2>
+<hr>
+
+<label>Discount</label>
+<input id="discount" type="number">
+
+<div class="total" id="total">$0</div>
+
+</div>
+
+</div>
 
 <script>
 
 let estimate = [];
+let stage = 0;
 
-document.getElementById("search").addEventListener("input", function(){
-  let q = this.value.toLowerCase();
+// LOCK FLOW
+function updateLocks(){
+document.getElementById("sales").classList.toggle("locked", !document.getElementById("name").value);
+document.getElementById("address").classList.toggle("locked", !document.getElementById("sales").value);
+document.getElementById("search").classList.toggle("locked", !document.getElementById("address").value);
+}
 
-  let results = window.ENGLE_PRICE_BOOK.filter(i =>
-    i.name.toLowerCase().includes(q)
-  );
-
-  document.getElementById("results").innerHTML = results.map(i => `
-    <div class="item">
-      <b>${i.name}</b><br>
-      ${i.unit} - $${i.retail}
-      <br><br>
-      <button onclick="addItem('${i.name}')">Add</button>
-    </div>
-  `).join("");
+["name","sales","address"].forEach(id=>{
+document.getElementById(id).addEventListener("input", updateLocks);
 });
 
+// SEARCH
+document.getElementById("search").addEventListener("input", function(){
+
+let q = this.value.toLowerCase();
+
+let results = window.ENGLE_PRICE_BOOK.filter(i =>
+i.name.toLowerCase().includes(q)
+);
+
+document.getElementById("results").innerHTML = results.map(i => `
+<div class="item">
+<b>${i.name}</b><br>
+${i.unit} • $${i.retail}
+<br><br>
+<button onclick="addItem('${i.name}')">Add</button>
+</div>
+`).join("");
+
+});
+
+// ADD ITEM
 function addItem(name){
-  let item = window.ENGLE_PRICE_BOOK.find(i => i.name === name);
 
-  let qty = prompt("Enter quantity:");
-  qty = Number(qty);
+let item = window.ENGLE_PRICE_BOOK.find(i => i.name === name);
 
-  let total = item.retail * qty;
+let qty = prompt("Enter quantity:");
+qty = Number(qty);
 
-  estimate.push({name, qty, total});
+if(!qty) return;
 
-  render();
+let price = item.retail;
+let total = price * qty;
+
+estimate.push({
+name:item.name,
+qty,
+price,
+total
+});
+
+render();
+
 }
 
+// RENDER
 function render(){
-  document.getElementById("estimate").innerHTML = estimate.map(i => `
-    <div>${i.name} - ${i.qty} = $${i.total}</div>
-  `).join("");
 
-  let total = estimate.reduce((s,i)=>s+i.total,0);
+document.getElementById("estimate").innerHTML = estimate.map(i => `
+<div class="item highlight">
+${i.name}<br>
+Qty: ${i.qty} • $${i.total}
+</div>
+`).join("");
 
-  document.getElementById("total").innerText = "$" + total;
+let subtotal = estimate.reduce((s,i)=>s+i.total,0);
+
+let discount = Number(document.getElementById("discount").value || 0);
+
+let total = subtotal - discount;
+
+if(total < 450) total = 450;
+
+document.getElementById("total").innerText = "$" + total;
+
 }
+
+// DISCOUNT FIX
+document.getElementById("discount").addEventListener("input", render);
 
 </script>
 
