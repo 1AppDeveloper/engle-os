@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Engle OS vWeb 2.5.2</title>
+<title>Engle OS vWeb 2.5.3</title>
 <style>
 :root{
   --red:#c3141b;
@@ -69,7 +69,13 @@ textarea{min-height:84px;resize:vertical}
 .check-row{display:flex;align-items:center;gap:8px;min-height:44px;padding-top:22px}
 .check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
 .check-label{font-size:13px;font-weight:700}
-#billingSameBox,#discountBoxPulse{display:inline-flex;align-items:center;justify-content:center;padding:4px;border-radius:8px}
+#billingSameBox,#discountBoxPulse{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px;
+  border-radius:8px;
+}
 .pricing-option{position:relative}
 .pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
 .pricing-option .top-check input{width:auto;transform:scale(1.1)}
@@ -102,7 +108,7 @@ textarea{min-height:84px;resize:vertical}
 <div id="appView" class="hidden">
 <header>
   <h1>Estimator for Engle Construction - iRoofOhio</h1>
-  <div class="sub">vWeb 2.5.2 • trade bubbles locked until header complete</div>
+  <div class="sub">vWeb 2.5.3 • most recent inquiry wins • discount clears on uncheck</div>
 </header>
 
 <div class="wrap">
@@ -172,12 +178,12 @@ textarea{min-height:84px;resize:vertical}
             <div id="searchWrap" class="field-locked">
               <label>Search Line Items</label>
               <input id="search" placeholder="Type paint, sink, knob, roof...">
-              <div class="helper">Type to search or tap a trade bubble below after the required header fields are completed.</div>
+              <div class="helper">The most recent inquiry wins: typing search replaces a bubble selection, and tapping a bubble replaces a typed search.</div>
             </div>
           </div>
 
           <div class="chips field-locked" id="chips" style="margin-top:10px"></div>
-          <div id="results" style="margin-top:10px"><div class="muted">Complete the required header fields, then search or tap a trade bubble.</div></div>
+          <div id="results" style="margin-top:10px"><div class="muted">Complete the required contact info above, then type to search or tap a trade bubble.</div></div>
 
           <div class="totals">
             <div class="grid3">
@@ -342,6 +348,7 @@ let activeTrade = "All";
 let estimate = {};
 let selectedItem = null;
 let lastArea = null;
+let inquiryMode = "none"; // none | trade | search
 
 const $ = id => document.getElementById(id);
 const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n||0));
@@ -454,13 +461,10 @@ function login(){
     $("appView").classList.remove("hidden");
     refreshLocks();
     setTimeout(() => {
-      if(!headerComplete()){
-        const nextEl = getNextStepElement();
-        if(nextEl){
-          nextEl.focus();
-          flashEl(nextEl);
-        }
-        if(headerStep() === "billing") flashEl($("billingSameBox"));
+      const nextEl = getNextStepElement();
+      if(nextEl){
+        nextEl.focus();
+        flashEl(nextEl);
       }
     }, 150);
   } else {
@@ -503,6 +507,42 @@ function buildTaxOptions(){
     opts += `<option value="${x.toFixed(1)}">${x.toFixed(1)}%</option>`;
   }
   $("taxRateSelect").innerHTML = opts;
+}
+
+function renderResults(){
+  if(!headerComplete()){
+    $("results").innerHTML = '<div class="muted">Complete the required contact info above, then type to search or tap a trade bubble.</div>';
+    return;
+  }
+
+  if(inquiryMode === "none"){
+    $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
+    return;
+  }
+
+  let rows = items;
+
+  if(inquiryMode === "trade"){
+    rows = rows.filter(i => i.trade === activeTrade);
+  } else if(inquiryMode === "search"){
+    const q = $("search").value.trim().toLowerCase();
+    rows = rows.filter(i => i.name.toLowerCase().includes(q));
+  }
+
+  if(!rows.length){
+    $("results").innerHTML = '<div class="muted">No matching line items.</div>';
+    return;
+  }
+
+  $("results").innerHTML = rows.map(i=>`
+    <div class="item">
+      <div class="itemhead">
+        <div><strong>${i.name}</strong><div class="muted">${i.trade} • Unit: ${i.unit}</div></div>
+        <div><strong>${money(activePrice(i))}</strong></div>
+      </div>
+      <button class="primary" data-add="${i.name.replace(/"/g,'&quot;')}">+ Add</button>
+    </div>
+  `).join("");
 }
 
 function init(){
@@ -589,17 +629,30 @@ function init(){
       guideCurrentStep();
       return;
     }
+
+    const q = $("search").value.trim();
+    if(q){
+      inquiryMode = "search";
+      activeTrade = "All";
+      $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade==="All"));
+    } else {
+      inquiryMode = "none";
+    }
+
     renderResults();
   });
 
   $("chips").addEventListener("click", e=>{
+    const btn = e.target.closest("[data-trade]");
+    if(!btn) return;
+
     if(!headerComplete()){
       guideCurrentStep();
       return;
     }
-    const btn = e.target.closest("[data-trade]");
-    if(!btn) return;
+
     activeTrade = btn.dataset.trade;
+    inquiryMode = activeTrade === "All" ? "none" : "trade";
     $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade===activeTrade));
     $("search").value = "";
     renderResults();
@@ -615,7 +668,11 @@ function init(){
     openModal(btn.dataset.add);
   });
 
-  $("priceMode").addEventListener("change", ()=>{ repriceEstimate(); renderResults(); renderEstimate(); });
+  $("priceMode").addEventListener("change", ()=>{
+    repriceEstimate();
+    renderResults();
+    renderEstimate();
+  });
 
   $("closeModal").addEventListener("click", closeModal);
   $("confirmAdd").addEventListener("click", confirmAdd);
@@ -655,12 +712,15 @@ function init(){
 
   $("discountOn").addEventListener("change", ()=>{
     if(!$("discountOn").checked){
+      $("discount").value = "";
       renderTotals();
       return;
     }
-    flashEl($("discount"));
-    $("discount").focus();
     renderTotals();
+    if(!$("discount").value.trim()){
+      flashEl($("discount"));
+      $("discount").focus();
+    }
   });
 
   $("discount").addEventListener("input", ()=>{
@@ -671,50 +731,18 @@ function init(){
   });
 
   $("discount").addEventListener("blur", ()=>{
-    if($("discountOn").checked && !$("discount").value.trim()) flashEl($("discount"));
+    if($("discountOn").checked && !$("discount").value.trim()){
+      flashEl($("discount"));
+    }
+    if(!$("discountOn").checked && $("discount").value.trim()){
+      flashEl($("discountBoxPulse"));
+    }
     renderTotals();
   });
 
   refreshLocks();
   renderResults();
   renderEstimate();
-}
-
-function renderResults(){
-  if(!headerComplete()){
-    $("results").innerHTML = '<div class="muted">Complete the required header fields, then search or tap a trade bubble.</div>';
-    return;
-  }
-
-  const q = $("search").value.trim().toLowerCase();
-
-  if(!q && activeTrade === "All"){
-    $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
-    return;
-  }
-
-  let rows = items;
-  if(activeTrade !== "All"){
-    rows = rows.filter(i => i.trade === activeTrade);
-  }
-  if(q){
-    rows = rows.filter(i => i.name.toLowerCase().includes(q));
-  }
-
-  if(!rows.length){
-    $("results").innerHTML = '<div class="muted">No matching line items.</div>';
-    return;
-  }
-
-  $("results").innerHTML = rows.map(i=>`
-    <div class="item">
-      <div class="itemhead">
-        <div><strong>${i.name}</strong><div class="muted">${i.trade} • Unit: ${i.unit}</div></div>
-        <div><strong>${money(activePrice(i))}</strong></div>
-      </div>
-      <button class="primary" data-add="${i.name.replace(/"/g,'&quot;')}">+ Add</button>
-    </div>
-  `).join("");
 }
 
 function openModal(name){
@@ -739,7 +767,10 @@ function updateModalTotal(){
 
 function confirmAdd(){
   if(!selectedItem) return;
-  if(!headerComplete()){ guideCurrentStep(); return; }
+  if(!headerComplete()){
+    guideCurrentStep();
+    return;
+  }
 
   const area = $("mArea").value;
   const qty = Number($("mQty").value || 0);
@@ -750,6 +781,7 @@ function confirmAdd(){
   estimate[area].push({
     name:selectedItem.name,
     unit:selectedItem.unit,
+    trade:selectedItem.trade,
     retail:selectedItem.retail,
     volume:selectedItem.volume,
     price:activePrice(selectedItem),
@@ -763,8 +795,10 @@ function confirmAdd(){
   $("currentArea").textContent = area;
 
   closeModal();
+
   $("search").value = "";
   activeTrade = "All";
+  inquiryMode = "none";
   $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade==="All"));
   $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
 
@@ -793,7 +827,7 @@ function renderEstimate(){
             <label>Item</label>
             <div>
               <strong>${item.name}</strong>
-              <div class="muted">${item.unit}</div>
+              <div class="muted">${item.unit} • ${item.trade}</div>
               ${item.note ? `<div class="note-badge">NOTE: ${item.note}</div>` : ``}
             </div>
           </div>
