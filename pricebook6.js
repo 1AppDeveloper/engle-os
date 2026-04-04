@@ -101,4 +101,5 @@ window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
 /* 88 */ { name:"Freeze Protection Service", trade:"Plumbing", category:"Plumbing", subcategory:"Insulation", description:"Apply freeze protection measures", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 /* 89 */ { name:"Emergency Plumbing Service", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"Emergency plumbing service call", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 /* 90 */ { name:"Plumbing System General Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"General plumbing repair service", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
+
 ]);
