@@ -1,8 +1,328 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Engle Estimator vWeb 2.6</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Engle OS vWeb 2.5.3</title>
+<style>
+:root{
+  --red:#c3141b;
+  --bg:#eef1f4;
+  --border:#d9dde4;
+  --muted:#6f7680;
+  --hiVis:#d8ff4d;
+  --card:#fff;
+}
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:#111}
+header{background:linear-gradient(180deg,#1a1a1a,#0f0f0f);color:#fff;padding:14px 16px;border-bottom:4px solid var(--red)}
+header h1{margin:0;font-size:22px}
+header .sub{font-size:12px;opacity:.85}
+.wrap{max-width:1400px;margin:0 auto;padding:14px 14px 80px}
+.grid{display:grid;grid-template-columns:220px 1fr;gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.nav button{display:block;width:100%;text-align:left;padding:12px;border:none;border-radius:12px;margin-bottom:8px;background:#e7eaef;font-weight:700}
+.nav button.active{background:var(--red);color:#fff}
+.hidden{display:none!important}
+.est-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:12px;align-items:stretch;min-height:calc(100vh - 190px)}
+.panel-scroll{height:calc(100vh - 220px);overflow-y:auto;overflow-x:hidden;padding-right:4px;min-height:0}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:#fff}
+input[readonly]{background:#f4f5f7}
+textarea{min-height:84px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.right{margin-left:auto}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f3f4f6;font-size:12px;font-weight:700}
+.current-area{background:#fff6f6;border:1px solid #f0cccc;border-radius:14px;padding:10px 12px;margin:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer}
+.chip.active{background:#111;color:#fff}
+.item{border:1px solid var(--border);border-radius:14px;padding:10px;background:#fff;margin-top:8px}
+.itemhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.muted{color:var(--muted);font-size:12px}
+.area-block{border:1px solid var(--border);border-radius:16px;padding:12px;background:#fff;margin-bottom:10px}
+.area-block.highlight{animation:flashArea 1.6s ease-in-out 2;border-color:var(--red);box-shadow:0 0 0 3px rgba(195,20,27,.12)}
+@keyframes flashArea{0%,100%{background:#fff}25%,75%{background:#fff3f4}50%{background:#ffe7ea}}
+.line{display:grid;grid-template-columns:1.2fr .45fr .55fr .55fr auto;gap:8px;align-items:end;border:1px solid var(--border);padding:10px;border-radius:12px;margin-top:8px}
+.totals{background:#fff;border:1px solid var(--border);border-radius:18px;padding:12px;margin-top:12px}
+.totalrow{display:flex;justify-content:space-between;padding:6px 0}
+.final{font-size:24px;font-weight:900;color:var(--red);border-top:2px solid var(--border);padding-top:10px;margin-top:6px}
+.modalwrap{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.modalwrap.show{display:flex}
+.modal{background:#fff;border:1px solid var(--border);border-radius:18px;max-width:560px;width:100%;padding:16px}
+.toast{position:fixed;top:84px;right:14px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(-8px);transition:.2s;z-index:110}
+.toast.show{opacity:1;transform:translateY(0)}
+.primary{padding:10px 14px;border:none;border-radius:10px;background:var(--red);color:#fff;cursor:pointer;font-weight:700}
+.secondary{padding:10px 14px;border:none;border-radius:10px;background:#e7eaef;color:#111;cursor:pointer;font-weight:700}
+.login{max-width:420px;margin:40px auto}
+.divider{height:1px;background:var(--border);margin:12px 0}
+.note-badge{margin-top:6px;display:inline-block;background:#fff7c2;border:1px solid #d7c85a;border-radius:8px;padding:6px 8px;font-size:14px;font-weight:800;line-height:1.35}
+.hivis-flash{animation:hivisFlash 1s ease-in-out 3}
+@keyframes hivisFlash{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0);background:#fff}
+  35%,65%{box-shadow:0 0 0 4px rgba(151,184,0,.35);background:var(--hiVis)}
+}
+.field-locked{opacity:.55}
+.field-locked input,.field-locked select,.field-locked textarea,.field-locked button{pointer-events:none;background:#f2f3f5!important}
+.check-row{display:flex;align-items:center;gap:8px;min-height:44px;padding-top:22px}
+.check-row input[type="checkbox"]{width:auto;transform:scale(1.15)}
+.check-label{font-size:13px;font-weight:700}
+#billingSameBox,#discountBoxPulse{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px;
+  border-radius:8px;
+}
+.pricing-option{position:relative}
+.pricing-option .top-check{position:absolute;top:-2px;left:0;display:flex;align-items:center;gap:6px}
+.pricing-option .top-check input{width:auto;transform:scale(1.1)}
+.pricing-option .top-check span{font-size:12px;font-weight:700}
+.pricing-option .field-wrap{margin-top:24px}
+.helper{font-size:11px;color:var(--muted);margin-top:4px}
+@media (max-width:768px){
+  .grid,.est-grid,.grid2,.grid3{grid-template-columns:1fr}
+  .nav{display:none}
+  .panel-scroll{height:auto;max-height:none}
+  .line{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<div id="loginView" class="wrap login">
+  <div class="card">
+    <h2 style="margin-top:0">Engle OS Login</h2>
+    <div class="muted">Private test build</div>
+    <div style="margin-top:12px">
+      <label>Password</label>
+      <input type="password" id="pw" placeholder="Enter password">
+      <button class="primary" style="margin-top:10px;width:100%" id="loginBtn">Enter</button>
+    </div>
+  </div>
+</div>
+
+<div id="appView" class="hidden">
+<header>
+  <h1>Estimator for Engle Construction - iRoofOhio</h1>
+  <div class="sub">vWeb 2.5.3 • most recent inquiry wins • discount clears on uncheck</div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <aside class="nav card">
+      <button class="active">Estimator</button>
+      <button>Dashboard</button>
+      <button>CRM</button>
+      <button>Projects</button>
+      <button>Price Book</button>
+    </aside>
+
+    <main class="card">
+      <div class="row">
+        <h2 style="margin:0">Estimator</h2>
+        <span class="pill">$450 minimum job</span>
+      </div>
+
+      <div class="est-grid">
+        <section class="card panel-scroll">
+          <h3>Job Header</h3>
+
+          <div class="grid2">
+            <div id="jobNameWrap">
+              <label>Customer / Job Name</label>
+              <input id="jobName" placeholder="Required before creating estimate">
+            </div>
+
+            <div id="salesRepWrap" class="field-locked">
+              <label>Sales Rep / Estimator</label>
+              <input id="salesRep" placeholder="Required">
+            </div>
+
+            <div id="jobAddressWrap" class="field-locked">
+              <label>Job Address</label>
+              <input id="jobAddress" placeholder="Required">
+            </div>
+
+            <div>
+              <label>Estimate #</label>
+              <input id="estimateNo" value="EST-1001" readonly>
+            </div>
+
+            <div id="billingAddressWrap" class="field-locked">
+              <label>Billing Address</label>
+              <input id="billingAddress" placeholder="Required unless same as job address">
+            </div>
+
+            <div id="billingSameWrap" class="field-locked">
+              <label>&nbsp;</label>
+              <div class="check-row">
+                <span id="billingSameBox">
+                  <input type="checkbox" id="billingSame">
+                </span>
+                <span class="check-label">Check if billing address is the same as the job address</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="current-area"><strong>Current Area:</strong> <span id="currentArea">Whole House</span></div>
+
+          <div class="grid2">
+            <div id="areaWrap" class="field-locked">
+              <label>Area</label>
+              <select id="area"></select>
+            </div>
+            <div id="searchWrap" class="field-locked">
+              <label>Search Line Items</label>
+              <input id="search" placeholder="Type paint, sink, knob, roof...">
+              <div class="helper">The most recent inquiry wins: typing search replaces a bubble selection, and tapping a bubble replaces a typed search.</div>
+            </div>
+          </div>
+
+          <div class="chips field-locked" id="chips" style="margin-top:10px"></div>
+          <div id="results" style="margin-top:10px"><div class="muted">Complete the required contact info above, then type to search or tap a trade bubble.</div></div>
+
+          <div class="totals">
+            <div class="grid3">
+              <div>
+                <label>Pricing Mode</label>
+                <select id="priceMode">
+                  <option value="retail">Retail</option>
+                  <option value="volume">Volume</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="grid3">
+              <div class="pricing-option field-locked" id="taxBoxWrap">
+                <div class="top-check">
+                  <input id="taxOn" type="checkbox">
+                  <span>Tax</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Tax %</label>
+                  <input id="taxRate" type="text" readonly>
+                </div>
+              </div>
+
+              <div class="pricing-option field-locked" id="travelBoxWrap">
+                <div class="top-check">
+                  <input id="travelOn" type="checkbox">
+                  <span>Travel</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Travel</label>
+                  <input id="travelDisplay" type="text" readonly>
+                  <select id="travelTier" class="hidden">
+                    <option value="">Select travel tier</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pricing-option field-locked" id="discountBoxWrap">
+                <div class="top-check">
+                  <span id="discountBoxPulse">
+                    <input id="discountOn" type="checkbox">
+                  </span>
+                  <span>Discount</span>
+                </div>
+                <div class="field-wrap">
+                  <label>Discount $</label>
+                  <input id="discount" type="number" step="0.01" placeholder="">
+                </div>
+              </div>
+            </div>
+
+            <div class="totalrow"><span>Subtotal</span><strong id="subTop">$0.00</strong></div>
+            <div class="totalrow" id="discountRowTop" style="display:none"><span>Discount</span><strong id="discountTop">$0.00</strong></div>
+            <div class="totalrow" id="minRowTop" style="display:none"><span>Minimum adjustment</span><strong id="minTop">$0.00</strong></div>
+            <div class="totalrow" id="travelRowTop" style="display:none"><span>Travel</span><strong id="travelTop">$0.00</strong></div>
+            <div class="totalrow" id="taxRowTop" style="display:none"><span>Tax</span><strong id="taxTop">$0.00</strong></div>
+            <div class="totalrow final"><span>Total</span><span id="totalTop">$0.00</span></div>
+          </div>
+        </section>
+
+        <section class="card panel-scroll">
+          <h3>Estimate Builder</h3>
+          <div id="estimate"></div>
+          <div class="totals">
+            <div class="totalrow"><span>Subtotal</span><strong id="subBot">$0.00</strong></div>
+            <div class="totalrow" id="discountRowBot" style="display:none"><span>Discount</span><strong id="discountBot">$0.00</strong></div>
+            <div class="totalrow" id="minRowBot" style="display:none"><span>Minimum adjustment</span><strong id="minBot">$0.00</strong></div>
+            <div class="totalrow" id="travelRowBot" style="display:none"><span>Travel</span><strong id="travelBot">$0.00</strong></div>
+            <div class="totalrow" id="taxRowBot" style="display:none"><span>Tax</span><strong id="taxBot">$0.00</strong></div>
+            <div class="totalrow final"><span>Total</span><span id="totalBot">$0.00</span></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</div>
+
+<div class="modalwrap" id="modalWrap">
+  <div class="modal">
+    <div class="row">
+      <h3 style="margin:0">Add Line Item</h3>
+      <button class="secondary" id="closeModal">Close</button>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div><label>Item</label><input id="mName" readonly></div>
+      <div><label>Area</label><select id="mArea"></select></div>
+      <div><label>Unit</label><input id="mUnit" readonly></div>
+      <div><label>Quantity</label><input id="mQty" type="number" step="0.01" value="1"></div>
+    </div>
+    <div style="margin-top:10px"><label>Optional Note</label><textarea id="mNote" placeholder="Optional note"></textarea></div>
+    <div class="row" style="margin-top:12px">
+      <span class="pill">Price <strong id="mPrice" style="margin-left:6px"></strong></span>
+      <span class="pill">Line Total <strong id="mTotal" style="margin-left:6px"></strong></span>
+      <button class="primary right" id="confirmAdd">Confirm Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalwrap" id="taxModalWrap">
+  <div class="modal">
+    <div class="row">
+      <h3 style="margin:0">Select Tax Rate</h3>
+      <button class="secondary" id="closeTaxModal">Close</button>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+        <label>Tax rate list</label>
+        <select id="taxRateSelect"></select>
+      </div>
+      <div>
+        <label>Or enter manually</label>
+        <input id="taxRateManual" type="number" step="0.1" placeholder="Example: 7.5">
+      </div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="primary right" id="applyTaxRate">Apply Tax Rate</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalwrap" id="travelModalWrap">
+  <div class="modal">
+    <div class="row">
+      <h3 style="margin:0">Select Travel Charge</h3>
+      <button class="secondary" id="closeTravelModal">Close</button>
+    </div>
+    <div style="margin-top:12px">
+      <label>Travel Distance</label>
+      <select id="travelTierModal"></select>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="primary right" id="applyTravel">Apply Travel</button>
+    </div>
+  </div>
+</div>
 
 <script src="pricebook1.js"></script>
 <script src="pricebook2.js"></script>
@@ -14,186 +334,577 @@
 <script src="pricebook8.js"></script>
 <script src="pricebook9.js"></script>
 <script src="pricebook10.js"></script>
-
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,system-ui;
-  background:#eef1f4;
-}
-
-/* HEADER */
-header{
-  background:#111;
-  color:white;
-  padding:12px;
-  border-bottom:4px solid #c3141b;
-}
-
-/* MAIN LAYOUT */
-.container{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  padding:12px;
-  height:calc(100vh - 70px);
-}
-
-/* PANELS */
-.panel{
-  background:white;
-  border-radius:14px;
-  padding:12px;
-  overflow:auto;
-}
-
-/* ITEMS */
-.item{
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:10px;
-  margin-bottom:8px;
-  background:#fff;
-}
-
-.item-title{
-  font-weight:800;
-}
-
-/* BUTTON */
-button{
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  background:#c3141b;
-  color:white;
-  font-weight:700;
-}
-
-/* TOTALS */
-.totals{
-  border-top:2px solid #ddd;
-  margin-top:10px;
-  padding-top:10px;
-}
-
-.total{
-  display:flex;
-  justify-content:space-between;
-}
-
-.final{
-  font-size:22px;
-  font-weight:900;
-  color:#c3141b;
-}
-
-/* NOTE */
-.note{
-  background:#fff3a0;
-  padding:6px;
-  border-radius:6px;
-  font-weight:800;
-  margin-top:6px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  Engle Estimator vWeb 2.6
-</header>
-
-<div class="container">
-
-<!-- LEFT SIDE -->
-<div class="panel">
-
-<input id="search" placeholder="Search..." style="width:100%;padding:10px;margin-bottom:10px">
-
-<div id="results"></div>
-
-</div>
-
-<!-- RIGHT SIDE -->
-<div class="panel">
-
-<div id="estimate"></div>
-
-<div class="totals">
-  <div class="total"><span>Subtotal</span><span id="subtotal">$0</span></div>
-  <div class="total" id="discountRow"><span>Discount</span><span id="discountVal">$0</span></div>
-  <div class="total" id="taxRow"><span>Tax</span><span id="taxVal">$0</span></div>
-  <div class="final total"><span>Total</span><span id="total">$0</span></div>
-</div>
-
-</div>
-
-</div>
-
+<script src="pricebook11.js"></script>
+<script src="pricebook12.js"></script>
+  
 <script>
-
+const PASSWORD = "Deerpoop";
 const items = window.ENGLE_PRICE_BOOK || [];
+const areas = ["Whole House","Front Exterior","Back Exterior","Living Room","Dining Room","Kitchen","Master Bedroom","Bedroom 1","Bedroom 2","Bathroom 1","Hallway 1","Basement","Attic"];
+const travelTiers = [["0–15 miles",0],["16–30 miles",45],["31–50 miles",75],["51–75 miles",125],["76–100 miles",175],["101–150 miles",250],["151–200 miles",325],["201–300 miles",450],["301–500 miles",700]];
+const trades = ["All"].concat([...new Set(items.map(i=>i.trade).sort())]);
 
-let estimate = [];
-let taxOn = false;
-let discountOn = false;
+let activeTrade = "All";
+let estimate = {};
+let selectedItem = null;
+let lastArea = null;
+let inquiryMode = "none"; // none | trade | search
+
+const $ = id => document.getElementById(id);
+const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n||0));
+
+function toast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window._toast);
+  window._toast = setTimeout(()=>t.classList.remove("show"), 1800);
+}
+function activePrice(item){ return $("priceMode").value === "volume" ? item.volume : item.retail; }
+
+function flashEl(el){
+  if(!el) return;
+  el.classList.remove("hivis-flash");
+  void el.offsetWidth;
+  el.classList.add("hivis-flash");
+}
+
+function headerStep(){
+  if(!$("jobName").value.trim()) return "jobName";
+  if(!$("salesRep").value.trim()) return "salesRep";
+  if(!$("jobAddress").value.trim()) return "jobAddress";
+  if(!$("billingSame").checked && !$("billingAddress").value.trim()) return "billing";
+  return null;
+}
+function headerComplete(){ return !headerStep(); }
+function hasItems(){ return Object.values(estimate).flat().length > 0; }
+
+function setLocked(id, locked){
+  const el = $(id);
+  if(!el) return;
+  el.classList.toggle("field-locked", locked);
+}
+
+function getNextStepElement(){
+  const step = headerStep();
+  if(step === "jobName") return $("jobName");
+  if(step === "salesRep") return $("salesRep");
+  if(step === "jobAddress") return $("jobAddress");
+  if(step === "billing") return $("billingAddress");
+  return null;
+}
+
+function guideCurrentStep(){
+  const nextEl = getNextStepElement();
+  if(nextEl) flashEl(nextEl);
+  if(headerStep() === "billing") flashEl($("billingSameBox"));
+}
+
+function refreshLocks(){
+  setLocked("salesRepWrap", !$("jobName").value.trim());
+  setLocked("jobAddressWrap", !$("jobName").value.trim() || !$("salesRep").value.trim());
+  setLocked("billingSameWrap", !$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim());
+  setLocked("billingAddressWrap", !$("jobName").value.trim() || !$("salesRep").value.trim() || !$("jobAddress").value.trim());
+
+  const done = headerComplete();
+  setLocked("areaWrap", !done);
+  setLocked("searchWrap", !done);
+  $("chips").classList.toggle("field-locked", !done);
+
+  const pricingEnabled = hasItems();
+  setLocked("taxBoxWrap", !pricingEnabled);
+  setLocked("travelBoxWrap", !pricingEnabled);
+  setLocked("discountBoxWrap", !pricingEnabled);
+
+  $("taxOn").disabled = !pricingEnabled;
+  $("travelOn").disabled = !pricingEnabled;
+  $("discountOn").disabled = !pricingEnabled;
+
+  if(!pricingEnabled){
+    $("taxOn").checked = false;
+    $("travelOn").checked = false;
+    $("discountOn").checked = false;
+    $("taxRate").value = "";
+    $("travelTier").value = "";
+    $("travelDisplay").value = "";
+    $("discount").value = "";
+  }
+
+  if($("billingSame").checked){
+    $("billingAddress").value = "Same as Job Address";
+    $("billingAddress").readOnly = true;
+  } else {
+    if($("billingAddress").value === "Same as Job Address") $("billingAddress").value = "";
+    $("billingAddress").readOnly = false;
+  }
+}
+
+function handleBlockedAction(e){
+  if(headerComplete()) return true;
+
+  const nextEl = getNextStepElement();
+  if(e){
+    const target = e.target;
+    if(target === nextEl) return true;
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  if(nextEl) flashEl(nextEl);
+  if(headerStep() === "billing") flashEl($("billingSameBox"));
+  return false;
+}
+
+function login(){
+  if($("pw").value === PASSWORD){
+    $("loginView").classList.add("hidden");
+    $("appView").classList.remove("hidden");
+    refreshLocks();
+    setTimeout(() => {
+      const nextEl = getNextStepElement();
+      if(nextEl){
+        nextEl.focus();
+        flashEl(nextEl);
+      }
+    }, 150);
+  } else {
+    alert("Wrong password");
+  }
+}
+
+function openTaxModal(){
+  $("taxModalWrap").classList.add("show");
+  $("taxRateManual").value = "";
+  $("taxRateSelect").focus();
+}
+function closeTaxModal(){ $("taxModalWrap").classList.remove("show"); }
+function applyTaxRate(){
+  let val = $("taxRateManual").value.trim();
+  if(!val) val = $("taxRateSelect").value;
+  if(!val){ flashEl($("taxRateSelect")); return; }
+  $("taxRate").value = Number(val).toFixed(1);
+  closeTaxModal();
+  renderTotals();
+}
+
+function openTravelModal(){
+  $("travelModalWrap").classList.add("show");
+  $("travelTierModal").focus();
+}
+function closeTravelModal(){ $("travelModalWrap").classList.remove("show"); }
+function applyTravel(){
+  const val = $("travelTierModal").value;
+  if(val === ""){ flashEl($("travelTierModal")); return; }
+  $("travelTier").value = val;
+  $("travelDisplay").value = travelTiers[Number(val)][0] + " — " + money(travelTiers[Number(val)][1]);
+  closeTravelModal();
+  renderTotals();
+}
+
+function buildTaxOptions(){
+  let opts = `<option value="">Select tax rate</option>`;
+  for(let x=2.5; x<=20.0001; x+=0.1){
+    opts += `<option value="${x.toFixed(1)}">${x.toFixed(1)}%</option>`;
+  }
+  $("taxRateSelect").innerHTML = opts;
+}
 
 function renderResults(){
-  const q = document.getElementById("search").value.toLowerCase();
+  if(!headerComplete()){
+    $("results").innerHTML = '<div class="muted">Complete the required contact info above, then type to search or tap a trade bubble.</div>';
+    return;
+  }
 
-  const filtered = items.filter(i =>
-    i.name.toLowerCase().includes(q)
-  ).slice(0,50);
+  if(inquiryMode === "none"){
+    $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
+    return;
+  }
 
-  document.getElementById("results").innerHTML =
-    filtered.map(i => `
-      <div class="item">
-        <div class="item-title">${i.name}</div>
-        <div>$${i.retail}</div>
-        <button onclick="addItem('${i.name}')">Add</button>
+  let rows = items;
+
+  if(inquiryMode === "trade"){
+    rows = rows.filter(i => i.trade === activeTrade);
+  } else if(inquiryMode === "search"){
+    const q = $("search").value.trim().toLowerCase();
+    rows = rows.filter(i => i.name.toLowerCase().includes(q));
+  }
+
+  if(!rows.length){
+    $("results").innerHTML = '<div class="muted">No matching line items.</div>';
+    return;
+  }
+
+  $("results").innerHTML = rows.map(i=>`
+    <div class="item">
+      <div class="itemhead">
+        <div><strong>${i.name}</strong><div class="muted">${i.trade} • Unit: ${i.unit}</div></div>
+        <div><strong>${money(activePrice(i))}</strong></div>
       </div>
-    `).join("");
+      <button class="primary" data-add="${i.name.replace(/"/g,'&quot;')}">+ Add</button>
+    </div>
+  `).join("");
 }
 
-function addItem(name){
-  const item = items.find(i=>i.name===name);
-  estimate.push({...item,qty:1});
+function init(){
+  $("loginBtn").addEventListener("click", login);
+  $("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+
+  buildTaxOptions();
+  $("area").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
+  $("mArea").innerHTML = areas.map(a=>`<option>${a}</option>`).join("");
+
+  const travelOptions = `<option value="">Select travel tier</option>` +
+    travelTiers.map((t,i)=>`<option value="${i}">${t[0]} — ${money(t[1])}</option>`).join("");
+  $("travelTier").innerHTML = travelOptions;
+  $("travelTierModal").innerHTML = travelOptions;
+
+  $("chips").innerHTML = trades.map(t=>`<button class="chip ${t===activeTrade?'active':''}" data-trade="${t}">${t}</button>`).join("");
+
+  const nextFieldMap = {
+    jobName: "salesRep",
+    salesRep: "jobAddress",
+    jobAddress: "billingAddress",
+    billingAddress: null
+  };
+
+  ["jobName","salesRep","jobAddress","billingAddress"].forEach(id => {
+    $(id).addEventListener("keydown", e => {
+      if(e.key === "Enter"){
+        e.preventDefault();
+        const value = $(id).value.trim();
+        if(!value){
+          flashEl($(id));
+          return;
+        }
+        refreshLocks();
+        const nextId = nextFieldMap[id];
+        if(nextId && !$(nextId).closest(".field-locked")){
+          $(nextId).focus();
+          flashEl($(nextId));
+        }
+      }
+    });
+  });
+
+  $("jobName").addEventListener("input", refreshLocks);
+  $("salesRep").addEventListener("input", refreshLocks);
+  $("jobAddress").addEventListener("input", refreshLocks);
+  $("billingAddress").addEventListener("input", refreshLocks);
+
+  $("jobName").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobName").value.trim()) flashEl($("jobName")); });
+  $("salesRep").addEventListener("blur", ()=>{ refreshLocks(); if(!$("salesRep").value.trim()) flashEl($("salesRep")); });
+  $("jobAddress").addEventListener("blur", ()=>{ refreshLocks(); if(!$("jobAddress").value.trim()) flashEl($("jobAddress")); });
+  $("billingAddress").addEventListener("blur", ()=>{
+    refreshLocks();
+    if(!$("billingSame").checked && !$("billingAddress").value.trim()){
+      flashEl($("billingSameBox"));
+      flashEl($("billingAddress"));
+    }
+  });
+
+  $("billingSame").addEventListener("change", ()=>{
+    refreshLocks();
+    if(!$("billingSame").checked){
+      flashEl($("billingSameBox"));
+      flashEl($("billingAddress"));
+      $("billingAddress").focus();
+    }
+  });
+
+  ["areaWrap","searchWrap","chips","taxBoxWrap","travelBoxWrap","discountBoxWrap","jobAddressWrap","billingAddressWrap","billingSameWrap","salesRepWrap"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    ["mousedown","touchstart","click"].forEach(evt=>{
+      el.addEventListener(evt, e=>{
+        if(!headerComplete()) handleBlockedAction(e);
+      }, true);
+    });
+  });
+
+  $("area").addEventListener("change", ()=> $("currentArea").textContent = $("area").value);
+
+  $("search").addEventListener("input", ()=>{
+    if(!headerComplete()){
+      $("search").value = "";
+      guideCurrentStep();
+      return;
+    }
+
+    const q = $("search").value.trim();
+    if(q){
+      inquiryMode = "search";
+      activeTrade = "All";
+      $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade==="All"));
+    } else {
+      inquiryMode = "none";
+    }
+
+    renderResults();
+  });
+
+  $("chips").addEventListener("click", e=>{
+    const btn = e.target.closest("[data-trade]");
+    if(!btn) return;
+
+    if(!headerComplete()){
+      guideCurrentStep();
+      return;
+    }
+
+    activeTrade = btn.dataset.trade;
+    inquiryMode = activeTrade === "All" ? "none" : "trade";
+    $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade===activeTrade));
+    $("search").value = "";
+    renderResults();
+  });
+
+  $("results").addEventListener("click", e=>{
+    if(!headerComplete()){
+      guideCurrentStep();
+      return;
+    }
+    const btn = e.target.closest("[data-add]");
+    if(!btn) return;
+    openModal(btn.dataset.add);
+  });
+
+  $("priceMode").addEventListener("change", ()=>{
+    repriceEstimate();
+    renderResults();
+    renderEstimate();
+  });
+
+  $("closeModal").addEventListener("click", closeModal);
+  $("confirmAdd").addEventListener("click", confirmAdd);
+  $("mQty").addEventListener("focus", ()=> $("mQty").select());
+  $("mQty").addEventListener("input", updateModalTotal);
+
+  $("taxOn").addEventListener("change", ()=>{
+    if(!$("taxOn").checked){
+      $("taxRate").value = "";
+      renderTotals();
+      return;
+    }
+    openTaxModal();
+  });
+  $("closeTaxModal").addEventListener("click", ()=>{
+    if(!$("taxRate").value) $("taxOn").checked = false;
+    closeTaxModal();
+    renderTotals();
+  });
+  $("applyTaxRate").addEventListener("click", applyTaxRate);
+
+  $("travelOn").addEventListener("change", ()=>{
+    if(!$("travelOn").checked){
+      $("travelTier").value = "";
+      $("travelDisplay").value = "";
+      renderTotals();
+      return;
+    }
+    openTravelModal();
+  });
+  $("closeTravelModal").addEventListener("click", ()=>{
+    if(!$("travelTier").value) $("travelOn").checked = false;
+    closeTravelModal();
+    renderTotals();
+  });
+  $("applyTravel").addEventListener("click", applyTravel);
+
+  $("discountOn").addEventListener("change", ()=>{
+    if(!$("discountOn").checked){
+      $("discount").value = "";
+      renderTotals();
+      return;
+    }
+    renderTotals();
+    if(!$("discount").value.trim()){
+      flashEl($("discount"));
+      $("discount").focus();
+    }
+  });
+
+  $("discount").addEventListener("input", ()=>{
+    if(!$("discountOn").checked && $("discount").value.trim()){
+      flashEl($("discountBoxPulse"));
+    }
+    renderTotals();
+  });
+
+  $("discount").addEventListener("blur", ()=>{
+    if($("discountOn").checked && !$("discount").value.trim()){
+      flashEl($("discount"));
+    }
+    if(!$("discountOn").checked && $("discount").value.trim()){
+      flashEl($("discountBoxPulse"));
+    }
+    renderTotals();
+  });
+
+  refreshLocks();
+  renderResults();
   renderEstimate();
 }
 
-function renderEstimate(){
-  let subtotal = 0;
-
-  document.getElementById("estimate").innerHTML =
-    estimate.map(i=>{
-      const total = i.qty * i.retail;
-      subtotal += total;
-
-      return `
-        <div class="item">
-          <div class="item-title">${i.name}</div>
-          <div>$${total}</div>
-        </div>
-      `;
-    }).join("");
-
-  let discount = discountOn ? 50 : 0;
-  let tax = taxOn ? subtotal * .07 : 0;
-
-  document.getElementById("subtotal").innerText = "$"+subtotal;
-  document.getElementById("discountVal").innerText = "-$"+discount;
-  document.getElementById("taxVal").innerText = "$"+tax;
-
-  document.getElementById("total").innerText = "$"+(subtotal - discount + tax);
+function openModal(name){
+  selectedItem = items.find(i=>i.name===name);
+  if(!selectedItem) return;
+  $("mName").value = selectedItem.name;
+  $("mArea").value = $("area").value;
+  $("mUnit").value = selectedItem.unit;
+  $("mQty").value = 1;
+  $("mNote").value = "";
+  $("mPrice").textContent = money(activePrice(selectedItem));
+  updateModalTotal();
+  $("modalWrap").classList.add("show");
+  setTimeout(()=>{$("mQty").focus(); $("mQty").select();}, 60);
+}
+function closeModal(){ $("modalWrap").classList.remove("show"); selectedItem = null; }
+function updateModalTotal(){
+  if(!selectedItem) return;
+  $("mPrice").textContent = money(activePrice(selectedItem));
+  $("mTotal").textContent = money(Number($("mQty").value||0) * activePrice(selectedItem));
 }
 
-document.getElementById("search").addEventListener("input", renderResults);
+function confirmAdd(){
+  if(!selectedItem) return;
+  if(!headerComplete()){
+    guideCurrentStep();
+    return;
+  }
 
-renderResults();
+  const area = $("mArea").value;
+  const qty = Number($("mQty").value || 0);
+  if(!qty) return;
+  const note = $("mNote").value.trim();
 
+  if(!estimate[area]) estimate[area] = [];
+  estimate[area].push({
+    name:selectedItem.name,
+    unit:selectedItem.unit,
+    trade:selectedItem.trade,
+    retail:selectedItem.retail,
+    volume:selectedItem.volume,
+    price:activePrice(selectedItem),
+    qty,
+    note,
+    total:activePrice(selectedItem) * qty
+  });
+
+  lastArea = area;
+  $("area").value = area;
+  $("currentArea").textContent = area;
+
+  closeModal();
+
+  $("search").value = "";
+  activeTrade = "All";
+  inquiryMode = "none";
+  $("chips").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.trade==="All"));
+  $("results").innerHTML = '<div class="muted">Type to search line items, or tap a trade bubble to browse.</div>';
+
+  refreshLocks();
+  renderEstimate();
+  toast(`Added to ${area}`);
+
+  setTimeout(()=>{$("search").focus();}, 50);
+}
+
+function repriceEstimate(){
+  Object.values(estimate).flat().forEach(i=>{
+    i.price = $("priceMode").value === "volume" ? i.volume : i.retail;
+    i.total = i.qty * i.price;
+  });
+}
+
+function renderEstimate(){
+  const keys = Object.keys(estimate).sort((a,b)=>a.localeCompare(b));
+  $("estimate").innerHTML = keys.map(area=>`
+    <div class="area-block ${area===lastArea?'highlight':''}" data-area="${area}">
+      <div class="itemhead"><h3 style="margin:0">${area}</h3><span class="pill">${estimate[area].length} items</span></div>
+      ${estimate[area].slice().sort((x,y)=>x.name.localeCompare(y.name)).map(item=>`
+        <div class="line">
+          <div>
+            <label>Item</label>
+            <div>
+              <strong>${item.name}</strong>
+              <div class="muted">${item.unit} • ${item.trade}</div>
+              ${item.note ? `<div class="note-badge">NOTE: ${item.note}</div>` : ``}
+            </div>
+          </div>
+          <div><label>Qty</label><input value="${item.qty}" data-area="${area}" data-name="${item.name.replace(/"/g,'&quot;')}" class="qty"></div>
+          <div><label>Price</label><div style="padding:11px 0">${money(item.price)}</div></div>
+          <div><label>Total</label><div style="padding:11px 0">${money(item.total)}</div></div>
+          <div><button class="secondary remove" data-area="${area}" data-name="${item.name.replace(/"/g,'&quot;')}">Remove</button></div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("") || '<div class="muted">No items in estimate yet.</div>';
+
+  document.querySelectorAll(".qty").forEach(inp=>inp.addEventListener("change", ()=>{
+    const item = estimate[inp.dataset.area].find(i=>i.name===inp.dataset.name);
+    if(!item) return;
+    item.qty = Number(inp.value||0);
+    item.total = item.qty * item.price;
+    renderEstimate();
+  }));
+
+  document.querySelectorAll(".remove").forEach(btn=>btn.addEventListener("click", ()=>{
+    estimate[btn.dataset.area] = estimate[btn.dataset.area].filter(i=>i.name!==btn.dataset.name);
+    if(!estimate[btn.dataset.area].length) delete estimate[btn.dataset.area];
+    refreshLocks();
+    renderEstimate();
+  }));
+
+  if(lastArea){
+    const block = document.querySelector(`[data-area="${CSS.escape(lastArea)}"]`);
+    if(block) block.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  renderTotals();
+}
+
+function calcTotals(){
+  const subtotal = Object.values(estimate).flat().reduce((s,i)=>s + Number(i.total||0), 0);
+  const discount = $("discountOn").checked ? Number($("discount").value||0) : 0;
+  const afterDiscount = Math.max(0, subtotal - discount);
+  const minimumAdj = afterDiscount < 450 ? 450 - afterDiscount : 0;
+  const travel = $("travelOn").checked && $("travelTier").value !== "" ? Number(travelTiers[Number($("travelTier").value)][1]) : 0;
+  const taxBase = afterDiscount + minimumAdj + travel;
+  const tax = $("taxOn").checked && $("taxRate").value !== "" ? taxBase * (Number($("taxRate").value)/100) : 0;
+  return {subtotal, discount, minimumAdj, travel, tax, total: afterDiscount + minimumAdj + travel + tax};
+}
+
+function renderTotals(){
+  const t = calcTotals();
+
+  $("subTop").textContent = money(t.subtotal);
+  $("subBot").textContent = money(t.subtotal);
+
+  $("discountTop").textContent = "-" + money(t.discount);
+  $("discountBot").textContent = "-" + money(t.discount);
+  $("discountRowTop").style.display = $("discountOn").checked ? "flex" : "none";
+  $("discountRowBot").style.display = $("discountOn").checked ? "flex" : "none";
+
+  $("minTop").textContent = money(t.minimumAdj);
+$("minBot").textContent = money(t.minimumAdj);
+$("minRowTop").style.display = t.minimumAdj > 0 ? "flex" : "none";
+$("minRowBot").style.display = t.minimumAdj > 0 ? "flex" : "none";
+
+  $("travelTop").textContent = money(t.travel);
+  $("travelBot").textContent = money(t.travel);
+  $("travelRowTop").style.display = $("travelOn").checked ? "flex" : "none";
+  $("travelRowBot").style.display = $("travelOn").checked ? "flex" : "none";
+
+  $("taxTop").textContent = money(t.tax);
+  $("taxBot").textContent = money(t.tax);
+  $("taxRowTop").style.display = $("taxOn").checked ? "flex" : "none";
+  $("taxRowBot").style.display = $("taxOn").checked ? "flex" : "none";
+
+  $("totalTop").textContent = money(t.total);
+  $("totalBot").textContent = money(t.total);
+}
+
+init();
 </script>
-
 </body>
 </html>
