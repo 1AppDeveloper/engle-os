@@ -1,303 +1,105 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Baseboard Install - Primed MDF", trade:"Carpentry", subcategory:"Trim", unit:"LF", retail:5.83, volume:4.20 },
+/* 2 */ { name:"Baseboard Install - Stain Grade", trade:"Carpentry", subcategory:"Trim", unit:"LF", retail:8.74, volume:6.30 },
+/* 3 */ { name:"Quarter Round Install", trade:"Carpentry", subcategory:"Trim", unit:"LF", retail:3.89, volume:2.80 },
+/* 4 */ { name:"Crown Molding Install", trade:"Carpentry", subcategory:"Trim", unit:"LF", retail:11.65, volume:8.40 },
+/* 5 */ { name:"Door Casing Install (Both Sides)", trade:"Carpentry", subcategory:"Trim", unit:"EA", retail:194.25, volume:140 },
+/* 6 */ { name:"Window Casing Install", trade:"Carpentry", subcategory:"Trim", unit:"EA", retail:145.69, volume:105 },
+/* 7 */ { name:"Interior Trim Repair", trade:"Carpentry", subcategory:"Trim", unit:"EA", retail:null, volume:null },
+/* 8 */ { name:"Closet Shelf Install", trade:"Carpentry", subcategory:"Shelving", unit:"EA", retail:97.12, volume:70 },
+/* 9 */ { name:"Closet Rod Install", trade:"Carpentry", subcategory:"Shelving", unit:"EA", retail:58.28, volume:42 },
+/* 10 */ { name:"Wire Closet System Install", trade:"Carpentry", subcategory:"Shelving", unit:"EA", retail:194.25, volume:140 },
 
-  // ========================
-  // CABINETS
-  // ========================
-  {
-    name: "Install Kitchen Base Cabinets",
-    category: "Cabinets",
-    description: "Install kitchen base cabinets",
-    unit: "LF",
-    retail: 165,
-    volume: 125
-  },
-  {
-    name: "Install Kitchen Wall Cabinets",
-    category: "Cabinets",
-    description: "Install kitchen wall cabinets",
-    unit: "LF",
-    retail: 175,
-    volume: 135
-  },
-  {
-    name: "Install Vanity Cabinet",
-    category: "Cabinets",
-    description: "Install vanity cabinet",
-    unit: "EA",
-    retail: 225,
-    volume: 175
-  },
-  {
-    name: "Install Cabinet Knobs / Pulls",
-    category: "Cabinets",
-    description: "Install cabinet hardware",
-    unit: "EA",
-    retail: 15,
-    volume: 10
-  },
-  {
-    name: "Adjust Cabinet Doors / Drawers",
-    category: "Cabinets",
-    description: "Adjust cabinet alignment and operation",
-    unit: "EA",
-    retail: 35,
-    volume: 25
-  },
-  {
-    name: "Replace Cabinet Hinge",
-    category: "Cabinets",
-    description: "Remove and replace cabinet hinge",
-    unit: "EA",
-    retail: 22,
-    volume: 15
-  },
+/* 11 */ { name:"Interior Wall Framing - Non Load Bearing", trade:"Carpentry", subcategory:"Framing", unit:"LF", retail:14.56, volume:10.50 },
+/* 12 */ { name:"Interior Wall Framing - Load Bearing", trade:"Carpentry", subcategory:"Framing", unit:"LF", retail:24.28, volume:17.50 },
+/* 13 */ { name:"Subfloor Repair - Minor", trade:"Carpentry", subcategory:"Subfloor", unit:"SF", retail:6.80, volume:4.90 },
+/* 14 */ { name:"Subfloor Replacement - Major", trade:"Carpentry", subcategory:"Subfloor", unit:"SF", retail:12.62, volume:9.10 },
+/* 15 */ { name:"Stair Tread Replacement", trade:"Carpentry", subcategory:"Stairs", unit:"EA", retail:116.56, volume:84 },
+/* 16 */ { name:"Stair Riser Replacement", trade:"Carpentry", subcategory:"Stairs", unit:"EA", retail:87.42, volume:63 },
+/* 17 */ { name:"Handrail Install", trade:"Carpentry", subcategory:"Stairs", unit:"LF", retail:17.48, volume:12.60 },
+/* 18 */ { name:"Baluster Replacement", trade:"Carpentry", subcategory:"Stairs", unit:"EA", retail:19.42, volume:14 },
+/* 19 */ { name:"Deck Board Replacement", trade:"Carpentry", subcategory:"Exterior", unit:"LF", retail:9.71, volume:7 },
+/* 20 */ { name:"Deck Repair General", trade:"Carpentry", subcategory:"Exterior", unit:"EA", retail:null, volume:null },
 
-  // ========================
-  // WINDOWS
-  // ========================
-  {
-    name: "Install Replacement Window",
-    category: "Windows",
-    description: "Install replacement window",
-    unit: "EA",
-    retail: 575,
-    volume: 425
-  },
-  {
-    name: "Replace Window Screen",
-    category: "Windows",
-    description: "Remove and replace window screen",
-    unit: "EA",
-    retail: 65,
-    volume: 45
-  },
-  {
-    name: "Install Window Blinds",
-    category: "Windows",
-    description: "Install blinds or shades",
-    unit: "EA",
-    retail: 55,
-    volume: 40
-  },
-  {
-    name: "Install Curtain Rod",
-    category: "Windows",
-    description: "Install curtain rod",
-    unit: "EA",
-    retail: 60,
-    volume: 42
-  },
+/* 21 */ { name:"Drywall Patch Small (≤1 SF)", trade:"Drywall", subcategory:"Patch", unit:"EA", retail:77.10, volume:55 },
+/* 22 */ { name:"Drywall Patch Medium (≤4 SF)", trade:"Drywall", subcategory:"Patch", unit:"EA", retail:145.69, volume:105 },
+/* 23 */ { name:"Drywall Patch Large (≤12 SF)", trade:"Drywall", subcategory:"Patch", unit:"EA", retail:291.38, volume:210 },
+/* 24 */ { name:"Drywall Replacement - Wall", trade:"Drywall", subcategory:"Replace", unit:"SF", retail:4.85, volume:3.50 },
+/* 25 */ { name:"Drywall Replacement - Ceiling", trade:"Drywall", subcategory:"Replace", unit:"SF", retail:5.83, volume:4.20 },
+/* 26 */ { name:"Texture Match - Orange Peel", trade:"Drywall", subcategory:"Finish", unit:"SF", retail:1.94, volume:1.40 },
+/* 27 */ { name:"Texture Match - Knockdown", trade:"Drywall", subcategory:"Finish", unit:"SF", retail:2.43, volume:1.75 },
+/* 28 */ { name:"Skim Coat Full Room", trade:"Drywall", subcategory:"Finish", unit:"SF", retail:3.40, volume:2.45 },
+/* 29 */ { name:"Ceiling Popcorn Removal", trade:"Drywall", subcategory:"Finish", unit:"SF", retail:3.88, volume:2.80 },
+/* 30 */ { name:"Drywall General Repair", trade:"Drywall", subcategory:"Repair", unit:"EA", retail:null, volume:null }
+/* 31 */ ,{ name:"Interior Door Slab Replace", trade:"Carpentry", subcategory:"Doors", unit:"EA", retail:194.25, volume:140 },
+/* 32 */ { name:"Prehung Interior Door Install", trade:"Carpentry", subcategory:"Doors", unit:"EA", retail:291.38, volume:210 },
+/* 33 */ { name:"Exterior Door Replace", trade:"Carpentry", subcategory:"Doors", unit:"EA", retail:582.75, volume:420 },
+/* 34 */ { name:"Door Hardware Install", trade:"Carpentry", subcategory:"Doors", unit:"EA", retail:58.28, volume:42 },
+/* 35 */ { name:"Door Adjustment / Rehang", trade:"Carpentry", subcategory:"Doors", unit:"EA", retail:97.12, volume:70 },
 
-  // ========================
-  // DOORS
-  // ========================
-  {
-    name: "Install Exterior Door",
-    category: "Doors",
-    description: "Install exterior entry door",
-    unit: "EA",
-    retail: 850,
-    volume: 625
-  },
-  {
-    name: "Replace Door Hardware",
-    category: "Doors",
-    description: "Remove and replace door hardware",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Install Deadbolt",
-    category: "Doors",
-    description: "Install deadbolt lockset",
-    unit: "EA",
-    retail: 85,
-    volume: 60
-  },
-  {
-    name: "Install Door Stop",
-    category: "Doors",
-    description: "Install door stop",
-    unit: "EA",
-    retail: 20,
-    volume: 14
-  },
-  {
-    name: "Replace Weather Stripping",
-    category: "Doors",
-    description: "Remove and replace weather stripping",
-    unit: "LF",
-    retail: 4.5,
-    volume: 3.25
-  },
+/* 36 */ { name:"Cabinet Install - Base", trade:"Carpentry", subcategory:"Cabinets", unit:"EA", retail:145.69, volume:105 },
+/* 37 */ { name:"Cabinet Install - Wall", trade:"Carpentry", subcategory:"Cabinets", unit:"EA", retail:145.69, volume:105 },
+/* 38 */ { name:"Cabinet Adjustment", trade:"Carpentry", subcategory:"Cabinets", unit:"EA", retail:58.28, volume:42 },
+/* 39 */ { name:"Cabinet Hardware Install", trade:"Carpentry", subcategory:"Cabinets", unit:"EA", retail:4.85, volume:3.50 },
+/* 40 */ { name:"Cabinet Repair", trade:"Carpentry", subcategory:"Cabinets", unit:"EA", retail:null, volume:null },
 
-  // ========================
-  // ROOFING
-  // ========================
-  {
-    name: "Replace Asphalt Shingle Roof",
-    category: "Roofing",
-    description: "Full asphalt shingle roof replacement",
-    unit: "SQ",
-    retail: 475,
-    volume: 375
-  },
-  {
-    name: "Roof Repair - Minor",
-    category: "Roofing",
-    description: "Minor roof repair",
-    unit: "EA",
-    retail: 250,
-    volume: 180
-  },
-  {
-    name: "Roof Repair - Major",
-    category: "Roofing",
-    description: "Major roof repair",
-    unit: "EA",
-    retail: 650,
-    volume: 485
-  },
-  {
-    name: "Replace Roof Vent",
-    category: "Roofing",
-    description: "Remove and replace roof vent",
-    unit: "EA",
-    retail: 145,
-    volume: 105
-  },
+/* 41 */ { name:"Laminate Countertop Install", trade:"Carpentry", subcategory:"Countertops", unit:"LF", retail:38.84, volume:28 },
+/* 42 */ { name:"Quartz Countertop Install", trade:"Carpentry", subcategory:"Countertops", unit:"SF", retail:77.67, volume:56 },
+/* 43 */ { name:"Granite Countertop Install", trade:"Carpentry", subcategory:"Countertops", unit:"SF", retail:87.42, volume:63 },
+/* 44 */ { name:"Countertop Cutout - Sink", trade:"Carpentry", subcategory:"Countertops", unit:"EA", retail:97.12, volume:70 },
+/* 45 */ { name:"Countertop Repair", trade:"Carpentry", subcategory:"Countertops", unit:"EA", retail:null, volume:null },
 
-  // ========================
-  // EXTERIOR
-  // ========================
-  {
-    name: "Install Vinyl Siding",
-    category: "Exterior",
-    description: "Install vinyl siding",
-    unit: "SF",
-    retail: 10.5,
-    volume: 8
-  },
-  {
-    name: "Repair Siding",
-    category: "Exterior",
-    description: "Repair damaged siding",
-    unit: "EA",
-    retail: 225,
-    volume: 160
-  },
-  {
-    name: "Install Gutters",
-    category: "Exterior",
-    description: "Install gutters",
-    unit: "LF",
-    retail: 22,
-    volume: 16
-  },
-  {
-    name: "Clean Gutters - One Story",
-    category: "Exterior",
-    description: "Clean gutters on one-story home",
-    unit: "LF",
-    retail: 1.25,
-    volume: 0.9
-  },
-  {
-    name: "Clean Gutters - Two Story",
-    category: "Exterior",
-    description: "Clean gutters on two-story home",
-    unit: "LF",
-    retail: 1.9,
-    volume: 1.35
-  },
-  {
-    name: "Install Gutter Guards",
-    category: "Exterior",
-    description: "Install gutter guards",
-    unit: "LF",
-    retail: 14.5,
-    volume: 10.25
-  },
+/* 46 */ { name:"Vinyl Flooring Install - Plank", trade:"Flooring", subcategory:"Install", unit:"SF", retail:4.85, volume:3.50 },
+/* 47 */ { name:"Laminate Flooring Install", trade:"Flooring", subcategory:"Install", unit:"SF", retail:4.37, volume:3.15 },
+/* 48 */ { name:"Hardwood Flooring Install", trade:"Flooring", subcategory:"Install", unit:"SF", retail:9.71, volume:7 },
+/* 49 */ { name:"Carpet Install", trade:"Flooring", subcategory:"Install", unit:"SF", retail:3.40, volume:2.45 },
+/* 50 */ { name:"Tile Floor Install", trade:"Flooring", subcategory:"Install", unit:"SF", retail:12.62, volume:9.10 },
 
-  // ========================
-  // DRIVEWAY / CONCRETE
-  // ========================
-  {
-    name: "Concrete Crack Repair",
-    category: "Driveway",
-    description: "Repair concrete crack",
-    unit: "EA",
-    retail: 95,
-    volume: 68
-  },
-  {
-    name: "Driveway Cleaning",
-    category: "Driveway",
-    description: "Pressure wash driveway",
-    unit: "SF",
-    retail: 0.55,
-    volume: 0.38
-  },
-  {
-    name: "Concrete Patch Repair",
-    category: "Driveway",
-    description: "Patch damaged concrete area",
-    unit: "SF",
-    retail: 8.5,
-    volume: 6.25
-  },
+/* 51 */ { name:"Flooring Removal - Carpet", trade:"Flooring", subcategory:"Demo", unit:"SF", retail:1.94, volume:1.40 },
+/* 52 */ { name:"Flooring Removal - Tile", trade:"Flooring", subcategory:"Demo", unit:"SF", retail:3.40, volume:2.45 },
+/* 53 */ { name:"Flooring Removal - Hardwood", trade:"Flooring", subcategory:"Demo", unit:"SF", retail:4.37, volume:3.15 },
+/* 54 */ { name:"Subfloor Leveling", trade:"Flooring", subcategory:"Prep", unit:"SF", retail:3.88, volume:2.80 },
+/* 55 */ { name:"Moisture Barrier Install", trade:"Flooring", subcategory:"Prep", unit:"SF", retail:1.46, volume:1.05 },
 
-  // ========================
-  // LANDSCAPE
-  // ========================
-  {
-    name: "Mulch Install",
-    category: "Landscape",
-    description: "Install mulch",
-    unit: "CY",
-    retail: 95,
-    volume: 68
-  },
-  {
-    name: "Bush Trimming",
-    category: "Landscape",
-    description: "Trim bush under 6 feet",
-    unit: "EA",
-    retail: 18,
-    volume: 12.5
-  },
-  {
-    name: "Bush Removal",
-    category: "Landscape",
-    description: "Remove bush under 6 feet",
-    unit: "EA",
-    retail: 42,
-    volume: 29
-  },
-  {
-    name: "Tree Trimming",
-    category: "Landscape",
-    description: "Trim tree under 10 feet",
-    unit: "EA",
-    retail: 125,
-    volume: 88
-  },
-  {
-    name: "Tree Removal",
-    category: "Landscape",
-    description: "Remove tree under 10 feet",
-    unit: "EA",
-    retail: 155,
-    volume: 108
-  },
-  {
-    name: "Weed Control",
-    category: "Landscape",
-    description: "Remove weeds / weed control",
-    unit: "LF",
-    retail: 1.9,
-    volume: 1.35
-  }
+/* 56 */ { name:"Tile Backsplash Install", trade:"Flooring", subcategory:"Tile", unit:"SF", retail:14.56, volume:10.50 },
+/* 57 */ { name:"Tile Shower Wall Install", trade:"Flooring", subcategory:"Tile", unit:"SF", retail:19.42, volume:14 },
+/* 58 */ { name:"Tile Grout Repair", trade:"Flooring", subcategory:"Tile", unit:"SF", retail:4.85, volume:3.50 },
+/* 59 */ { name:"Tile Regrout Full Area", trade:"Flooring", subcategory:"Tile", unit:"SF", retail:6.80, volume:4.90 },
+/* 60 */ { name:"Flooring General Repair", trade:"Flooring", subcategory:"Repair", unit:"EA", retail:null, volume:null }
+/* 61 */ ,{ name:"Interior Paint - Walls (2 Coat)", trade:"Painting", subcategory:"Interior", unit:"SF", retail:2.35, volume:1.75 },
+/* 62 */ { name:"Interior Paint - Ceiling", trade:"Painting", subcategory:"Interior", unit:"SF", retail:1.94, volume:1.40 },
+/* 63 */ { name:"Interior Paint - Trim", trade:"Painting", subcategory:"Interior", unit:"LF", retail:2.91, volume:2.10 },
+/* 64 */ { name:"Interior Paint - Doors", trade:"Painting", subcategory:"Interior", unit:"EA", retail:58.28, volume:42 },
+/* 65 */ { name:"Interior Paint - Accent Wall", trade:"Painting", subcategory:"Interior", unit:"SF", retail:2.91, volume:2.10 },
+
+/* 66 */ { name:"Exterior Paint - Siding", trade:"Painting", subcategory:"Exterior", unit:"SF", retail:2.91, volume:2.10 },
+/* 67 */ { name:"Exterior Paint - Trim", trade:"Painting", subcategory:"Exterior", unit:"LF", retail:3.40, volume:2.45 },
+/* 68 */ { name:"Exterior Paint - Door", trade:"Painting", subcategory:"Exterior", unit:"EA", retail:77.67, volume:56 },
+/* 69 */ { name:"Deck Stain", trade:"Painting", subcategory:"Exterior", unit:"SF", retail:2.43, volume:1.75 },
+/* 70 */ { name:"Fence Stain", trade:"Painting", subcategory:"Exterior", unit:"LF", retail:2.43, volume:1.75 },
+
+/* 71 */ { name:"Primer Application", trade:"Painting", subcategory:"Prep", unit:"SF", retail:1.46, volume:1.05 },
+/* 72 */ { name:"Paint Touch Up", trade:"Painting", subcategory:"Repair", unit:"EA", retail:58.28, volume:42 },
+/* 73 */ { name:"Drywall Prep for Paint", trade:"Painting", subcategory:"Prep", unit:"SF", retail:1.94, volume:1.40 },
+/* 74 */ { name:"Caulking and Sealing", trade:"Painting", subcategory:"Prep", unit:"LF", retail:1.46, volume:1.05 },
+/* 75 */ { name:"Wallpaper Removal", trade:"Painting", subcategory:"Demo", unit:"SF", retail:2.91, volume:2.10 },
+
+/* 76 */ { name:"Pressure Washing - Exterior", trade:"Exterior", subcategory:"Cleaning", unit:"SF", retail:0.78, volume:0.55 },
+/* 77 */ { name:"Gutter Cleaning", trade:"Exterior", subcategory:"Cleaning", unit:"LF", retail:1.46, volume:1.05 },
+/* 78 */ { name:"Gutter Repair", trade:"Exterior", subcategory:"Repair", unit:"LF", retail:4.85, volume:3.50 },
+/* 79 */ { name:"Downspout Replacement", trade:"Exterior", subcategory:"Repair", unit:"EA", retail:58.28, volume:42 },
+/* 80 */ { name:"Siding Repair - Minor", trade:"Exterior", subcategory:"Repair", unit:"EA", retail:97.12, volume:70 },
+
+/* 81 */ { name:"Siding Replacement - Section", trade:"Exterior", subcategory:"Replace", unit:"SF", retail:9.71, volume:7 },
+/* 82 */ { name:"Window Replacement - Standard", trade:"Exterior", subcategory:"Windows", unit:"EA", retail:485.63, volume:350 },
+/* 83 */ { name:"Window Repair", trade:"Exterior", subcategory:"Windows", unit:"EA", retail:145.69, volume:105 },
+/* 84 */ { name:"Screen Replacement", trade:"Exterior", subcategory:"Windows", unit:"EA", retail:38.84, volume:28 },
+/* 85 */ { name:"Exterior Caulking", trade:"Exterior", subcategory:"Sealant", unit:"LF", retail:1.94, volume:1.40 },
+
+/* 86 */ { name:"Roof Shingle Repair", trade:"Roofing", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 87 */ { name:"Roof Leak Repair", trade:"Roofing", subcategory:"Repair", unit:"EA", retail:291.38, volume:210 },
+/* 88 */ { name:"Flashing Repair", trade:"Roofing", subcategory:"Repair", unit:"EA", retail:194.25, volume:140 },
+/* 89 */ { name:"Vent Boot Replacement", trade:"Roofing", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 90 */ { name:"Roof Inspection", trade:"Roofing", subcategory:"Inspection", unit:"EA", retail:97.12, volume:70 }
 
 ]);
