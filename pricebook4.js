@@ -1,271 +1,105 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Refresh Top out package ", trade:"General Repairs", category:"General Repairs", subcategory:"Top Out Package", description:"Install Doorstops, Faceplates, Smoke/Carbon Batteries, and Light Bulbs as needed. Leave air fresheners in the home.", spec:"N/A", unit:"EA", baseColumbusPrice:100, volume:104, retail:161.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 2 */ { name:"Top out package - Initial", trade:"General Repairs", category:"General Repairs", subcategory:"Top Out Package", description:"Install Doorstops, Faceplates, Smoke/Carbon Batteries, and Light Bulbs. Tighten And Adjust All Hardware In House, Install vinyl under sinks in all wet areas. Leave air fresheners in home. ", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:260, retail:403, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 3 */ { name:"Vanity Top (24\")", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 24\" (Includes Sink)", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:150, volume:156, retail:241.8, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 4 */ { name:"Vanity Top (30\")", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 30\" (Includes Sink)", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:175, volume:182, retail:282.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 5 */ { name:"Vanity Top (36\")", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 36\" (Includes Sink)", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:200, volume:208, retail:322.4, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 6 */ { name:"Vanity Top (48\")", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 48\" (Includes Sink)", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:225, volume:234, retail:362.7, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 7 */ { name:"Vanity Top (60\" - Double Sink)", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 60\" Double Sink (Includes Sinks) Does not include Hookup", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:600, volume:624, retail:967.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 8 */ { name:"Vanity Top (60\" - Single Sink)", trade:"General Repairs", category:"General Repairs", subcategory:"Vanity Top", description:"Remove/Replace Vanity Top - 60\" Single Sink (Includes Sink) Does not include hookup", spec:"Home Depot -  Cultured Marble", unit:"EA", baseColumbusPrice:600, volume:624, retail:967.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 9 */ { name:"Washer General Repair", trade:"General Repairs", category:"General Repairs", subcategory:"Washer", description:"Washer General Repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 10 */ { name:"Gutter Cleaning (One Story)", trade:"Gutters", category:"Gutters", subcategory:"Cleaning - One Story", description:"Clean Gutters (Whole House)", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:260, retail:416, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // EXTERIOR PAINT / WOOD
-  // ========================
-  {
-    name: "Paint Exterior Siding",
-    category: "Exterior",
-    description: "Prep and paint exterior siding",
-    unit: "SF",
-    retail: 2.45,
-    volume: 1.9
-  },
-  {
-    name: "Paint Exterior Trim",
-    category: "Exterior",
-    description: "Prep and paint exterior trim",
-    unit: "LF",
-    retail: 4.95,
-    volume: 3.85
-  },
-  {
-    name: "Paint Exterior Door",
-    category: "Exterior",
-    description: "Prep and paint exterior door",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Paint Deck / Porch",
-    category: "Exterior",
-    description: "Prep and paint or stain deck / porch",
-    unit: "SF",
-    retail: 2.65,
-    volume: 2.05
-  },
-  {
-    name: "Paint Fence",
-    category: "Exterior",
-    description: "Prep and paint or stain fence",
-    unit: "SF",
-    retail: 2.2,
-    volume: 1.7
-  },
+/* 11 */ { name:"Gutter Cleaning (Two Story)", trade:"Gutters", category:"Gutters", subcategory:"Cleaning - Two Story", description:"Clean Gutters (Whole House)", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:364, retail:582.4, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 12 */ { name:"Install Leaf Guard to Existing Gutters (Per Ln Foot)", trade:"Gutters", category:"Gutters", subcategory:"Leaf Guard", description:"Used For Homes Where Leaf Accumulation Will Be Significant", spec:"N/A", unit:"LF", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 13 */ { name:"Gutters General Repair", trade:"Gutters", category:"Gutters", subcategory:"Repair", description:"Gutters General Repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 14 */ { name:"Resecure Existing Gutters (Whole House)", trade:"Gutters", category:"Gutters", subcategory:"Repair", description:"Resecure Existing Gutters Where Needed (Whole House)", spec:"N/A", unit:"EA", baseColumbusPrice:50, volume:52, retail:83.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 15 */ { name:"Install Gutters with Leaf Guard (One Story, Per Ln Foot)", trade:"Gutters", category:"Gutters", subcategory:"Replacement", description:"Includes Demo Of Existing, Installing New Gutters With Leaf Guard, Downspouts, And Splash Blocks. Used For Homes Where Leaf Accumulation Will Be Significant", spec:"N/A", unit:"LF", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 16 */ { name:"Install Gutters with Leaf Guard (Two Story, Per Ln Foot)", trade:"Gutters", category:"Gutters", subcategory:"Replacement", description:"Includes Demo Of Existing, Installing New Gutters With Leaf Guard, Downspouts, And Splash Blocks. Used For Homes Where Leaf Accumulation Will Be Significant", spec:"N/A", unit:"LF", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 17 */ { name:"Air Handler General Repair", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Air Handler General Repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 18 */ { name:"Air Handler Replacement Only 1.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2325, volume:2394.75, retail:3232.91, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 19 */ { name:"Air Handler Replacement Only 2 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2325, volume:2394.75, retail:3232.91, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 20 */ { name:"Air Handler Replacement Only 2.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2350, volume:2420.5, retail:3267.68, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // FENCE / DECK
-  // ========================
-  {
-    name: "Fence Repair",
-    category: "Fence",
-    description: "Repair fence section",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Install Fence Panel",
-    category: "Fence",
-    description: "Install fence panel",
-    unit: "EA",
-    retail: 185,
-    volume: 145
-  },
-  {
-    name: "Deck Repair",
-    category: "Exterior",
-    description: "Repair deck boards / framing",
-    unit: "SF",
-    retail: 14.5,
-    volume: 11
-  },
-  {
-    name: "Install Handrail",
-    category: "Exterior",
-    description: "Install exterior handrail",
-    unit: "LF",
-    retail: 28,
-    volume: 21
-  },
+/* 21 */ { name:"Air Handler Replacement Only 3 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2400, volume:2472, retail:3337.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 22 */ { name:"Air Handler Replacement Only 3.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2450, volume:2523.5, retail:3406.73, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 23 */ { name:"Air Handler Replacement Only 4 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2500, volume:2575, retail:3476.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 24 */ { name:"Air Handler Replacement Only 5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Air Handler", description:"Remove and Replace Air Handler Only", spec:"Goodman", unit:"EA", baseColumbusPrice:2550, volume:2626.5, retail:3545.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 25 */ { name:"Ceiling or Wall 3-Way Vent Register", trade:"HVAC", category:"HVAC", subcategory:"Air Vent", description:"Remove/Replace Ceiling Or Wall 3-Way Vent", spec:"Home Depot - TruAire - White", unit:"EA", baseColumbusPrice:45, volume:46.35, retail:62.57, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 26 */ { name:"HVAC Register", trade:"HVAC", category:"HVAC", subcategory:"Air Vent/Register", description:"Remove and Replace Air Vent/Register - White", spec:"N/A", unit:"EA", baseColumbusPrice:20, volume:20.6, retail:27.81, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 27 */ { name:"HVAC Cage", trade:"HVAC", category:"HVAC", subcategory:"Cage", description:"Install HVAC Cage and Includes Pad", spec:"N/A", unit:"EA", baseColumbusPrice:475, volume:489.25, retail:660.49, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 28 */ { name:"Condenser & Evapoator Coil Replacement 1.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evapoator Coil Replacement", spec:"Goodman", unit:"EA", baseColumbusPrice:3100, volume:3193, retail:4310.55, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 29 */ { name:"Condenser & Evapoator Coil Replacement 2 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evapoator Coil Replacement", spec:"Goodman", unit:"EA", baseColumbusPrice:3150, volume:3244.5, retail:4380.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 30 */ { name:"Condenser & Evapoator Coil Replacement 2.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evapoator Coil Replacement", spec:"Goodman", unit:"EA", baseColumbusPrice:3250, volume:3347.5, retail:4519.12, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 31 */ ,{ name:"Condenser & Evaporator Coil Replacement 3 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evaporator Coil", spec:"Goodman", unit:"EA", baseColumbusPrice:3350, volume:3450.5, retail:4658.16, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 32 */ { name:"Condenser & Evaporator Coil Replacement 3.5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evaporator Coil", spec:"Goodman", unit:"EA", baseColumbusPrice:3450, volume:3553.5, retail:4797.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 33 */ { name:"Condenser & Evaporator Coil Replacement 4 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evaporator Coil", spec:"Goodman", unit:"EA", baseColumbusPrice:3550, volume:3656.5, retail:4936.24, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 34 */ { name:"Condenser & Evaporator Coil Replacement 5 Ton", trade:"HVAC", category:"HVAC", subcategory:"Condenser", description:"Remove and Replace Condenser & Evaporator Coil", spec:"Goodman", unit:"EA", baseColumbusPrice:3650, volume:3759.5, retail:5075.28, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 35 */ { name:"Condensate Pump Replacement", trade:"HVAC", category:"HVAC", subcategory:"Pump", description:"Remove and Replace Condensate Pump", spec:"N/A", unit:"EA", baseColumbusPrice:185, volume:190.55, retail:257.24, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // BATH ACCESSORIES / HARDWARE
-  // ========================
-  {
-    name: "Install Towel Bar",
-    category: "General",
-    description: "Install towel bar",
-    unit: "EA",
-    retail: 38,
-    volume: 26
-  },
-  {
-    name: "Install Towel Ring",
-    category: "General",
-    description: "Install towel ring",
-    unit: "EA",
-    retail: 34,
-    volume: 24
-  },
-  {
-    name: "Install Toilet Paper Holder",
-    category: "General",
-    description: "Install toilet paper holder",
-    unit: "EA",
-    retail: 34,
-    volume: 24
-  },
-  {
-    name: "Install Mirror",
-    category: "General",
-    description: "Install wall mirror",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Install Medicine Cabinet",
-    category: "General",
-    description: "Install medicine cabinet",
-    unit: "EA",
-    retail: 185,
-    volume: 145
-  },
+/* 36 */ { name:"Drain Line Flush", trade:"HVAC", category:"HVAC", subcategory:"Maintenance", description:"Flush HVAC Drain Line", spec:"N/A", unit:"EA", baseColumbusPrice:75, volume:77.25, retail:104.27, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 37 */ { name:"Refrigerant Leak Repair", trade:"HVAC", category:"HVAC", subcategory:"Repair", description:"Locate and Repair Refrigerant Leak", spec:"N/A", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 38 */ { name:"System Recharge Refrigerant", trade:"HVAC", category:"HVAC", subcategory:"Service", description:"Recharge Refrigerant System", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 39 */ { name:"Blower Motor Replacement", trade:"HVAC", category:"HVAC", subcategory:"Repair", description:"Remove and Replace Blower Motor", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 40 */ { name:"Capacitor Replacement", trade:"HVAC", category:"HVAC", subcategory:"Repair", description:"Replace HVAC Capacitor", spec:"N/A", unit:"EA", baseColumbusPrice:120, volume:123.6, retail:167.03, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // WINDOW TREATMENTS / MOUNTS
-  // ========================
-  {
-    name: "Install Blinds",
-    category: "Windows",
-    description: "Install blinds",
-    unit: "EA",
-    retail: 28,
-    volume: 20
-  },
-  {
-    name: "Install Roller Shade",
-    category: "Windows",
-    description: "Install roller shade",
-    unit: "EA",
-    retail: 45,
-    volume: 32
-  },
-  {
-    name: "Mount TV - Standard",
-    category: "General",
-    description: "Mount TV with standard bracket",
-    unit: "EA",
-    retail: 185,
-    volume: 135
-  },
-  {
-    name: "Mount TV - Full Motion",
-    category: "General",
-    description: "Mount TV with full motion bracket",
-    unit: "EA",
-    retail: 245,
-    volume: 185
-  },
+/* 41 */ { name:"Thermostat Replacement - Standard", trade:"HVAC", category:"HVAC", subcategory:"Controls", description:"Replace Standard Thermostat", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 42 */ { name:"Thermostat Replacement - Smart", trade:"HVAC", category:"HVAC", subcategory:"Controls", description:"Replace Smart Thermostat", spec:"Nest / Ecobee", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 43 */ { name:"Duct Seal - Minor", trade:"HVAC", category:"HVAC", subcategory:"Duct", description:"Seal Minor Duct Leaks", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 44 */ { name:"Duct Seal - Major", trade:"HVAC", category:"HVAC", subcategory:"Duct", description:"Seal Major Duct Leaks", spec:"N/A", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 45 */ { name:"Duct Replacement Section", trade:"HVAC", category:"HVAC", subcategory:"Duct", description:"Replace Section of HVAC Ductwork", spec:"N/A", unit:"LF", baseColumbusPrice:45, volume:46.35, retail:62.57, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // GARAGE / MISC
-  // ========================
-  {
-    name: "Install Garage Door Opener",
-    category: "Garage",
-    description: "Install garage door opener",
-    unit: "EA",
-    retail: 425,
-    volume: 325
-  },
-  {
-    name: "Replace Garage Door Seal",
-    category: "Garage",
-    description: "Replace garage door weather seal",
-    unit: "LF",
-    retail: 8.5,
-    volume: 6.25
-  },
-  {
-    name: "Program Garage Remote",
-    category: "Garage",
-    description: "Program garage remote",
-    unit: "EA",
-    retail: 38,
-    volume: 26
-  },
+/* 46 */ { name:"Attic Insulation Add-On", trade:"Insulation", category:"Insulation", subcategory:"Blown-In", description:"Add Blown-In Insulation", spec:"R-30+", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 47 */ { name:"Wall Insulation Add-On", trade:"Insulation", category:"Insulation", subcategory:"Blown-In", description:"Add Wall Insulation", spec:"Dense Pack", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 48 */ { name:"Insulation Removal - Attic", trade:"Insulation", category:"Insulation", subcategory:"Removal", description:"Remove Existing Attic Insulation", spec:"N/A", unit:"SF", baseColumbusPrice:1.25, volume:1.29, retail:1.74, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 49 */ { name:"Vapor Barrier Install", trade:"Insulation", category:"Insulation", subcategory:"Barrier", description:"Install Vapor Barrier", spec:"6 Mil", unit:"SF", baseColumbusPrice:1.10, volume:1.13, retail:1.53, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 50 */ { name:"Crawlspace Encapsulation", trade:"Insulation", category:"Insulation", subcategory:"Barrier", description:"Encapsulate Crawlspace", spec:"Full System", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
 
-  // ========================
-  // ROOF / GUTTER ADDITIONS
-  // ========================
-  {
-    name: "Replace Chimney Cap",
-    category: "Roofing",
-    description: "Remove and replace chimney cap",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
-  {
-    name: "Seal Roof Penetration",
-    category: "Roofing",
-    description: "Seal roof penetration / flashing area",
-    unit: "EA",
-    retail: 125,
-    volume: 90
-  },
-  {
-    name: "Downspout Repair",
-    category: "Exterior",
-    description: "Repair downspout",
-    unit: "EA",
-    retail: 85,
-    volume: 62
-  },
-  {
-    name: "Replace Downspout",
-    category: "Exterior",
-    description: "Replace downspout",
-    unit: "EA",
-    retail: 145,
-    volume: 108
-  },
+/* 51 */ { name:"Concrete Crack Injection", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Inject Crack in Concrete", spec:"Epoxy", unit:"LF", baseColumbusPrice:15, volume:15.45, retail:20.87, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 52 */ { name:"Concrete Resurface", trade:"Concrete", category:"Concrete", subcategory:"Finish", description:"Resurface Concrete Slab", spec:"N/A", unit:"SF", baseColumbusPrice:6.50, volume:6.70, retail:9.05, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 53 */ { name:"Concrete Leveling", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Level Concrete Slab", spec:"Foam Injection", unit:"SF", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 54 */ { name:"Driveway Seal Coat", trade:"Concrete", category:"Concrete", subcategory:"Finish", description:"Seal Coat Driveway", spec:"Asphalt", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 55 */ { name:"Sidewalk Repair Section", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Repair Section of Sidewalk", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // FINAL GENERAL / SMALLS
-  // ========================
-  {
-    name: "Install Shelf",
-    category: "General",
-    description: "Install shelf",
-    unit: "LF",
-    retail: 22,
-    volume: 16
-  },
-  {
-    name: "Install Coat Hook",
-    category: "General",
-    description: "Install coat hook",
-    unit: "EA",
-    retail: 24,
-    volume: 17
-  },
-  {
-    name: "Install House Numbers",
-    category: "General",
-    description: "Install house numbers",
-    unit: "EA",
-    retail: 18,
-    volume: 12
-  },
-  {
-    name: "Trip Charge / Service Call",
-    category: "General",
-    description: "Trip charge or service call",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Final Touch-Up / Punch Work",
-    category: "General",
-    description: "Final touch-up or punch list work",
-    unit: "HR",
-    retail: 95,
-    volume: 70
-  }
+/* 56 */ { name:"Interior Demo - Light", trade:"Demo", category:"Demo", subcategory:"Interior", description:"Light Interior Demolition", spec:"N/A", unit:"SF", baseColumbusPrice:2.00, volume:2.06, retail:2.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 57 */ { name:"Interior Demo - Heavy", trade:"Demo", category:"Demo", subcategory:"Interior", description:"Heavy Interior Demolition", spec:"N/A", unit:"SF", baseColumbusPrice:4.00, volume:4.12, retail:5.56, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 58 */ { name:"Exterior Demo - Light", trade:"Demo", category:"Demo", subcategory:"Exterior", description:"Light Exterior Demolition", spec:"N/A", unit:"SF", baseColumbusPrice:3.00, volume:3.09, retail:4.17, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 59 */ { name:"Exterior Demo - Heavy", trade:"Demo", category:"Demo", subcategory:"Exterior", description:"Heavy Exterior Demolition", spec:"N/A", unit:"SF", baseColumbusPrice:5.50, volume:5.67, retail:7.65, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 60 */ { name:"Debris Disposal Per Load", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Dispose of Construction Debris", spec:"Per Load", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 61 */ ,{ name:"Trash Out - Light", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Light Trash Removal From Property", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 62 */ { name:"Trash Out - Heavy", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Heavy Trash Removal From Property", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 63 */ { name:"Appliance Removal", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Remove and Dispose of Appliance", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 64 */ { name:"Furniture Removal", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Remove and Dispose of Furniture", spec:"N/A", unit:"EA", baseColumbusPrice:100, volume:103, retail:139.05, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 65 */ { name:"Construction Debris Haul Off", trade:"Demo", category:"Demo", subcategory:"Cleanup", description:"Haul Off Construction Debris", spec:"N/A", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 66 */ { name:"Final Cleaning - Standard", trade:"Cleaning", category:"Cleaning", subcategory:"Interior", description:"Standard Cleaning After Work Completion", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 67 */ { name:"Final Cleaning - Deep", trade:"Cleaning", category:"Cleaning", subcategory:"Interior", description:"Deep Cleaning After Renovation", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 68 */ { name:"Carpet Cleaning", trade:"Cleaning", category:"Cleaning", subcategory:"Interior", description:"Clean Carpets", spec:"N/A", unit:"SF", baseColumbusPrice:0.45, volume:0.46, retail:0.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 69 */ { name:"Window Cleaning Interior", trade:"Cleaning", category:"Cleaning", subcategory:"Interior", description:"Clean Interior Windows", spec:"N/A", unit:"EA", baseColumbusPrice:10, volume:10.3, retail:13.91, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 70 */ { name:"Window Cleaning Exterior", trade:"Cleaning", category:"Cleaning", subcategory:"Exterior", description:"Clean Exterior Windows", spec:"N/A", unit:"EA", baseColumbusPrice:12, volume:12.36, retail:16.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 71 */ { name:"Dryer Vent Cleaning", trade:"Cleaning", category:"Cleaning", subcategory:"Mechanical", description:"Clean Dryer Vent", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 72 */ { name:"Air Duct Cleaning", trade:"Cleaning", category:"Cleaning", subcategory:"Mechanical", description:"Clean Air Duct System", spec:"N/A", unit:"EA", baseColumbusPrice:400, volume:412, retail:556.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 73 */ { name:"Mold Treatment", trade:"Cleaning", category:"Cleaning", subcategory:"Specialty", description:"Treat Mold Affected Areas", spec:"N/A", unit:"SF", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 74 */ { name:"Odor Treatment", trade:"Cleaning", category:"Cleaning", subcategory:"Specialty", description:"Treat Odors in Home", spec:"Ozone or Chemical", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 75 */ { name:"Pest Treatment Coordination", trade:"Cleaning", category:"Cleaning", subcategory:"Specialty", description:"Coordinate Pest Treatment Service", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 76 */ { name:"Lock Change - Standard", trade:"Security", category:"Security", subcategory:"Locks", description:"Change Standard Lock Set", spec:"Kwikset/Schlage", unit:"EA", baseColumbusPrice:85, volume:87.55, retail:118.24, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 77 */ { name:"Lock Change - Deadbolt", trade:"Security", category:"Security", subcategory:"Locks", description:"Replace Deadbolt Lock", spec:"Kwikset/Schlage", unit:"EA", baseColumbusPrice:95, volume:97.85, retail:132.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 78 */ { name:"Rekey Lock", trade:"Security", category:"Security", subcategory:"Locks", description:"Rekey Existing Lock", spec:"N/A", unit:"EA", baseColumbusPrice:45, volume:46.35, retail:62.57, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 79 */ { name:"Install Lockbox", trade:"Security", category:"Security", subcategory:"Access", description:"Install Lockbox on Property", spec:"N/A", unit:"EA", baseColumbusPrice:50, volume:51.5, retail:69.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 80 */ { name:"Security System Install", trade:"Security", category:"Security", subcategory:"System", description:"Install Basic Security System", spec:"N/A", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+
+/* 81 */ { name:"Garage Door Adjustment", trade:"Garage", category:"Garage", subcategory:"Door", description:"Adjust Garage Door Operation", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 82 */ { name:"Garage Door Opener Install", trade:"Garage", category:"Garage", subcategory:"Door", description:"Install Garage Door Opener", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 83 */ { name:"Garage Door Spring Replace", trade:"Garage", category:"Garage", subcategory:"Door", description:"Replace Garage Door Spring", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 84 */ { name:"Garage Door Panel Replace", trade:"Garage", category:"Garage", subcategory:"Door", description:"Replace Garage Door Panel", spec:"N/A", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 85 */ { name:"Garage Door Track Repair", trade:"Garage", category:"Garage", subcategory:"Door", description:"Repair Garage Door Track", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 86 */ { name:"Mailbox Install", trade:"Exterior", category:"Exterior", subcategory:"Install", description:"Install Mailbox", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 87 */ { name:"Fence Repair - Section", trade:"Exterior", category:"Exterior", subcategory:"Fence", description:"Repair Fence Section", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 88 */ { name:"Fence Replacement - Section", trade:"Exterior", category:"Exterior", subcategory:"Fence", description:"Replace Fence Section", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 89 */ { name:"Gate Install", trade:"Exterior", category:"Exterior", subcategory:"Fence", description:"Install Fence Gate", spec:"N/A", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 90 */ { name:"Exterior General Repair", trade:"Exterior", category:"Exterior", subcategory:"Repair", description:"General Exterior Repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
 
 ]);
