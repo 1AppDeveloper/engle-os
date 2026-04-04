@@ -1,187 +1,104 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name: "Shower General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Shower", description: "Shower General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
+/* 2 */ { name: "Oversized Bathtub", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Remove jetted garden tub. Replace with oversized non-jetted tub.", spec: "N/A", unit: "EA", baseColumbusPrice: 1400, volume: 1470, retail: 3087, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 3 */ { name: "Resurface Bathtub", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Properly clean and degrease the tub. Prep the surface for proper adhesion and resurface evenly to ensure tub is fully functional and free of defects.", spec: "N/A", unit: "EA", baseColumbusPrice: 400, volume: 420, retail: 882, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 4 */ { name: "Resurface Shower Surround", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Properly clean and degrease the surround. Prep the surface for proper adhesion and resurface evenly to ensure surround is fully functional and free of defects.", spec: "N/A", unit: "EA", baseColumbusPrice: 300, volume: 315, retail: 661.5, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 5 */ { name: "Resurface Bathtub & Shower Surround", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Properly clean and degrease the tub and surround. Prep the surface for proper adhesion and resurface evenly to ensure tub and surround are fully functional and free of defects.", spec: "N/A", unit: "EA", baseColumbusPrice: 650, volume: 682.5, retail: 1433.25, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 6 */ { name: "Shower and 3-Piece Insert", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Remove/Replace Fiberglass Stand up Shower base And 3-Piece Insert. Includes Shower Door and Complete Trim Kit", spec: "N/A", unit: "EA", baseColumbusPrice: 1200, volume: 1260, retail: 2646, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 7 */ { name: "Shower with Fiberglass Base", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Remove/Replace Shower With Fiberglass Base and tile surround. Includes Shower door and complete trim kit", spec: "N/A", unit: "EA", baseColumbusPrice: 2400, volume: 2520, retail: 5292, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 8 */ { name: "Shower/Tub General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Shower/Tub General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
+/* 9 */ { name: "Stand up Shower with Tile Base", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Remove/Replace Shower With Tile Base (60\" Stand up Shower with Tile base and surround) Includes Sliding shower door and complete trim kit)", spec: "White 2\" Tile for Shower Base", unit: "EA", baseColumbusPrice: 2600, volume: 2730, retail: 5733, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 10 */ { name: "Tub General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub", description: "Tub General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
 
-  // ========================
-  // TILE / BATHROOM FINISHES
-  // ========================
-  {
-    name: "Install Shower Tile",
-    category: "Flooring",
-    description: "Install tile in shower walls",
-    unit: "SF",
-    retail: 32.50,
-    volume: 25.00
-  },
-  {
-    name: "Install Floor Tile (Bathroom)",
-    category: "Flooring",
-    description: "Install bathroom floor tile",
-    unit: "SF",
-    retail: 14.50,
-    volume: 11.00
-  },
-  {
-    name: "Install Tile Base",
-    category: "Flooring",
-    description: "Install tile base trim",
-    unit: "LF",
-    retail: 18.50,
-    volume: 14.00
-  },
-  {
-    name: "Grout / Regrout Tile",
-    category: "Flooring",
-    description: "Grout or regrout tile surfaces",
-    unit: "SF",
-    retail: 4.50,
-    volume: 3.25
-  },
+/* 11 */ { name: "Rubber Stopper (Sink or Drain)", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Rubber Stopper (Sink or Drain)", spec: "N/A", unit: "EA", baseColumbusPrice: 10, volume: 10.5, retail: 22.05, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 12 */ { name: "Shower 3-handle conversion", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove and replace shower handle. Convert from 3 handle to single handle", spec: "N/A", unit: "EA", baseColumbusPrice: 100, volume: 105, retail: 220.5, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 13 */ { name: "Shower Cartridge Replacement Only", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Replacement cartridge only", spec: "N/A", unit: "EA", baseColumbusPrice: 75, volume: 78.75, retail: 165.38, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 14 */ { name: "Shower Handle", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Shower single Handle with Trim", spec: "Match Existing Fixtures", unit: "EA", baseColumbusPrice: 40, volume: 42, retail: 88.2, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 15 */ { name: "Shower Head", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Shower Head ", spec: "Home Depot - Glacier Bay", unit: "EA", baseColumbusPrice: 20, volume: 21, retail: 44.1, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 16 */ { name: "Shower Head Arm", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Shower Head Arm", spec: "Home Depot - Glacier Bay", unit: "EA", baseColumbusPrice: 20, volume: 21, retail: 44.1, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 17 */ { name: "Shower Trim Kit (Black)", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Shower Trim Kit (Include Temp Control, Drain, Shower Head And Arm Cartridge)", spec: "Home Depot - Moen", unit: "EA", baseColumbusPrice: 250, volume: 262.5, retail: 551.25, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 18 */ { name: "Shower Trim Kit Complete (Brushed Nickel)", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Remove/Replace Shower Trim Kit (Include Temp Control, Drain, Shower Head And Arm Cartridge and valve)", spec: "Home Depot - Moen", unit: "EA", baseColumbusPrice: 250, volume: 262.5, retail: 551.25, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 19 */ { name: "Shower Trim Kit Only (Shower head/spout/handle)", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Trim Only (Valves/Cartridge not Included)", spec: "Home Depot - Moen", unit: "EA", baseColumbusPrice: 150, volume: 157.5, retail: 330.75, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 20 */ { name: "Tub Drain Assembly", trade: "Plumbing", category: "Plumbing", subcategory: "Shower/Tub Fixture", description: "Tub Drain Assembly (Brush Nickel)", spec: "Home Depot - Everbilt - Brushed Nickel", unit: "EA", baseColumbusPrice: 75, volume: 78.75, retail: 165.38, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
 
-  // ========================
-  // DRYWALL / FINISH
-  // ========================
-  {
-    name: "Install Drywall",
-    category: "General",
-    description: "Install drywall panels",
-    unit: "SF",
-    retail: 3.75,
-    volume: 2.85
-  },
-  {
-    name: "Finish Drywall",
-    category: "General",
-    description: "Tape and finish drywall",
-    unit: "SF",
-    retail: 3.25,
-    volume: 2.45
-  },
-  {
-    name: "Texture Drywall",
-    category: "General",
-    description: "Apply texture to drywall",
-    unit: "SF",
-    retail: 1.95,
-    volume: 1.45
-  },
-  {
-    name: "Patch Ceiling (Water Damage)",
-    category: "General",
-    description: "Repair water damaged ceiling",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
+/* 21 */ { name: "Shut-off Valve", trade: "Plumbing", category: "Plumbing", subcategory: "Shut-off Valve", description: "Remove/Replace Shut Off Valve", spec: "N/A", unit: "EA", baseColumbusPrice: 25, volume: 26.25, retail: 55.12, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 22 */ { name: "Sump Pump General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Sump Pump", description: "Sump Pump General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
+/* 23 */ { name: "Cap Refrigerator Water Supply Line", trade: "Plumbing", category: "Plumbing", subcategory: "Supply Line", description: "Cap Refrigerator Water Supply Line and Install Access Panel", spec: "N/A", unit: "EA", baseColumbusPrice: 50, volume: 52.5, retail: 110.25, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 24 */ { name: "Supply Line", trade: "Plumbing", category: "Plumbing", subcategory: "Supply Line", description: "Remove/Replace Supply Line", spec: "N/A", unit: "EA", baseColumbusPrice: 15, volume: 15.75, retail: 33.08, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 25 */ { name: "Supply Line General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Supply Line", description: "Supply Line General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
+/* 26 */ { name: "Replumb - Exterior Supply Line", trade: "Plumbing", category: "Plumbing", subcategory: "Supply Lines", description: "Replumb exterior supply line from main to the house", spec: "N/A", unit: "LF", baseColumbusPrice: 125, volume: 131.25, retail: 275.62, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 27 */ { name: "Replumb - Supply Lines", trade: "Plumbing", category: "Plumbing", subcategory: "Supply Lines", description: "Per Drop Replacement (Inside of Home Only) Does not include exterior line to main) Does not include drywall repairs", spec: "N/A", unit: "EA", baseColumbusPrice: 175, volume: 183.75, retail: 385.88, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 28 */ { name: "Toilet Caps", trade: "Plumbing", category: "Plumbing", subcategory: "Toilet", description: "Remove/Replace Toilet Caps", spec: "N/A", unit: "EA", baseColumbusPrice: 10, volume: 10.5, retail: 22.05, source: "Columbus Master", reviewFlag: "", quoteRequired: false },
+/* 29 */ { name: "Toilet General Repair", trade: "Plumbing", category: "Plumbing", subcategory: "Toilet", description: "Toilet General Repair", spec: "", unit: "EA", baseColumbusPrice: null, volume: null, retail: null, source: "Columbus Master", reviewFlag: "", quoteRequired: true },
+/* 30 */ { name: "Toilet Remove and Reinstall", trade: "Plumbing", category: "Plumbing", subcategory: "Toilet", description: "Used When Changing Flooring And/Or Shower -Requires Two Trips From The Vendor. Includes New Wax Ring. ", spec: "N/A", unit: "EA", baseColumbusPrice: 50, volume: 52.5, retail: 110.25, source: "Columbus Master", reviewFlag: "", quoteRequired: false }
+/* 31 */ ,{ name:"Toilet Replacement - Standard", trade:"Plumbing", category:"Plumbing", subcategory:"Toilet", description:"Remove and replace standard toilet", spec:"Standard White", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 32 */ { name:"Toilet Install Only (New Location)", trade:"Plumbing", category:"Plumbing", subcategory:"Toilet", description:"Install toilet in new rough location", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 33 */ { name:"Wax Ring Replacement", trade:"Plumbing", category:"Plumbing", subcategory:"Toilet", description:"Replace toilet wax ring", spec:"N/A", unit:"EA", baseColumbusPrice:35, volume:36.75, retail:77.18, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 34 */ { name:"Toilet Flange Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Toilet", description:"Repair or replace toilet flange", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 35 */ { name:"Toilet Leak Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Toilet", description:"Repair leaking toilet base or tank", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // DOORS / HARDWARE ADDITIONS
-  // ========================
-  {
-    name: "Install Bi-Fold Door",
-    category: "Carpentry",
-    description: "Install bi-fold door",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Install Sliding Closet Door",
-    category: "Carpentry",
-    description: "Install sliding closet door",
-    unit: "EA",
-    retail: 325,
-    volume: 250
-  },
-  {
-    name: "Adjust Door",
-    category: "Carpentry",
-    description: "Adjust door for proper fit",
-    unit: "EA",
-    retail: 75,
-    volume: 55
-  },
+/* 36 */ { name:"Vanity Install - 24in", trade:"Plumbing", category:"Plumbing", subcategory:"Vanity", description:"Install 24 inch vanity", spec:"Standard", unit:"EA", baseColumbusPrice:350, volume:367.5, retail:771.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 37 */ { name:"Vanity Install - 36in", trade:"Plumbing", category:"Plumbing", subcategory:"Vanity", description:"Install 36 inch vanity", spec:"Standard", unit:"EA", baseColumbusPrice:425, volume:446.25, retail:937.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 38 */ { name:"Vanity Install - 60in Double", trade:"Plumbing", category:"Plumbing", subcategory:"Vanity", description:"Install double sink vanity", spec:"Standard", unit:"EA", baseColumbusPrice:650, volume:682.5, retail:1433.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 39 */ { name:"Vanity Replacement - Full", trade:"Plumbing", category:"Plumbing", subcategory:"Vanity", description:"Remove and replace vanity with reconnect", spec:"Standard", unit:"EA", baseColumbusPrice:550, volume:577.5, retail:1212.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 40 */ { name:"Vanity General Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Vanity", description:"Vanity general repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
 
-  // ========================
-  // EXTERIOR REPAIRS
-  // ========================
-  {
-    name: "Repair Fascia",
-    category: "Exterior",
-    description: "Repair fascia board",
-    unit: "LF",
-    retail: 18.50,
-    volume: 14.00
-  },
-  {
-    name: "Repair Soffit",
-    category: "Exterior",
-    description: "Repair soffit",
-    unit: "SF",
-    retail: 16.50,
-    volume: 12.50
-  },
-  {
-    name: "Replace Exterior Trim Board",
-    category: "Exterior",
-    description: "Replace trim board",
-    unit: "LF",
-    retail: 14.50,
-    volume: 11.00
-  },
+/* 41 */ { name:"Kitchen Sink Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Sink", description:"Replace kitchen sink", spec:"Standard Stainless", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 42 */ { name:"Bathroom Sink Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Sink", description:"Replace bathroom sink", spec:"Standard", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 43 */ { name:"Sink Faucet Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Faucet", description:"Replace sink faucet", spec:"Standard", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 44 */ { name:"Kitchen Faucet Install", trade:"Plumbing", category:"Plumbing", subcategory:"Faucet", description:"Install kitchen faucet", spec:"Standard", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 45 */ { name:"Garbage Disposal Install", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Install garbage disposal", spec:"Standard", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // CLEANING ADDITIONS
-  // ========================
-  {
-    name: "Interior Window Cleaning",
-    category: "Cleaning",
-    description: "Clean interior windows",
-    unit: "EA",
-    retail: 12,
-    volume: 8
-  },
-  {
-    name: "Exterior Window Cleaning",
-    category: "Cleaning",
-    description: "Clean exterior windows",
-    unit: "EA",
-    retail: 15,
-    volume: 11
-  },
-  {
-    name: "Appliance Cleaning",
-    category: "Cleaning",
-    description: "Clean appliances",
-    unit: "EA",
-    retail: 25,
-    volume: 18
-  },
+/* 46 */ { name:"Garbage Disposal Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Replace garbage disposal", spec:"Standard", unit:"EA", baseColumbusPrice:200, volume:210, retail:441, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 47 */ { name:"Dishwasher Install", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Install dishwasher", spec:"Standard", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 48 */ { name:"Dishwasher Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Replace dishwasher", spec:"Standard", unit:"EA", baseColumbusPrice:225, volume:236.25, retail:496.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 49 */ { name:"Refrigerator Water Line Install", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Install refrigerator water line", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 50 */ { name:"Ice Maker Line Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Appliance", description:"Repair ice maker line", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // GARAGE / STORAGE
-  // ========================
-  {
-    name: "Install Garage Shelving",
-    category: "Garage",
-    description: "Install garage shelving",
-    unit: "LF",
-    retail: 22,
-    volume: 16
-  },
-  {
-    name: "Install Storage Rack",
-    category: "Garage",
-    description: "Install storage rack",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Organize Garage",
-    category: "Garage",
-    description: "Garage organization service",
-    unit: "HR",
-    retail: 85,
-    volume: 60
-  }
+/* 51 */ { name:"Water Heater Install - Electric", trade:"Plumbing", category:"Plumbing", subcategory:"Water Heater", description:"Install electric water heater", spec:"Standard", unit:"EA", baseColumbusPrice:1200, volume:1260, retail:2646, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 52 */ { name:"Water Heater Install - Gas", trade:"Plumbing", category:"Plumbing", subcategory:"Water Heater", description:"Install gas water heater", spec:"Standard", unit:"EA", baseColumbusPrice:1500, volume:1575, retail:3307.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 53 */ { name:"Water Heater Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Water Heater", description:"Replace existing water heater", spec:"Standard", unit:"EA", baseColumbusPrice:1100, volume:1155, retail:2425.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 54 */ { name:"Water Heater Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Water Heater", description:"Repair water heater", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 55 */ { name:"Water Heater Flush", trade:"Plumbing", category:"Plumbing", subcategory:"Water Heater", description:"Flush water heater", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
+/* 56 */ { name:"Water Softener Install", trade:"Plumbing", category:"Plumbing", subcategory:"Water Treatment", description:"Install water softener", spec:"Standard", unit:"EA", baseColumbusPrice:850, volume:892.5, retail:1873.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 57 */ { name:"Water Softener Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Water Treatment", description:"Replace water softener", spec:"Standard", unit:"EA", baseColumbusPrice:750, volume:787.5, retail:1653.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 58 */ { name:"Water Filter Install", trade:"Plumbing", category:"Plumbing", subcategory:"Water Treatment", description:"Install water filtration system", spec:"Standard", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 59 */ { name:"Leak Detection Service", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"Leak detection service", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 60 */ { name:"Whole House Plumbing Inspection", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"Full plumbing inspection", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 61 */ ,{ name:"Main Water Line Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Main Line", description:"Repair main water service line", spec:"N/A", unit:"LF", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 62 */ { name:"Main Water Line Replacement", trade:"Plumbing", category:"Plumbing", subcategory:"Main Line", description:"Replace main water service line", spec:"N/A", unit:"LF", baseColumbusPrice:225, volume:236.25, retail:496.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 63 */ { name:"Sewer Line Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Sewer", description:"Repair sewer line", spec:"N/A", unit:"LF", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 64 */ { name:"Sewer Line Replacement", trade:"Plumbing", category:"Plumbing", subcategory:"Sewer", description:"Replace sewer line", spec:"N/A", unit:"LF", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 65 */ { name:"Drain Cleaning - Minor", trade:"Plumbing", category:"Plumbing", subcategory:"Drain", description:"Minor drain cleaning service", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 66 */ { name:"Drain Cleaning - Major", trade:"Plumbing", category:"Plumbing", subcategory:"Drain", description:"Major drain cleaning service", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 67 */ { name:"Hydro Jetting Service", trade:"Plumbing", category:"Plumbing", subcategory:"Drain", description:"Hydro jetting drain cleaning", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 68 */ { name:"Cleanout Install", trade:"Plumbing", category:"Plumbing", subcategory:"Drain", description:"Install drain cleanout", spec:"N/A", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 69 */ { name:"Backflow Preventer Install", trade:"Plumbing", category:"Plumbing", subcategory:"Safety", description:"Install backflow preventer", spec:"N/A", unit:"EA", baseColumbusPrice:550, volume:577.5, retail:1212.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 70 */ { name:"Backflow Preventer Test", trade:"Plumbing", category:"Plumbing", subcategory:"Safety", description:"Test backflow preventer", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 71 */ { name:"Gas Line Install", trade:"Plumbing", category:"Plumbing", subcategory:"Gas", description:"Install gas line", spec:"N/A", unit:"LF", baseColumbusPrice:45, volume:47.25, retail:99.23, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 72 */ { name:"Gas Line Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Gas", description:"Repair gas line", spec:"N/A", unit:"LF", baseColumbusPrice:55, volume:57.75, retail:121.28, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 73 */ { name:"Gas Appliance Hookup", trade:"Plumbing", category:"Plumbing", subcategory:"Gas", description:"Hook up gas appliance", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 74 */ { name:"Pressure Regulator Install", trade:"Plumbing", category:"Plumbing", subcategory:"Pressure", description:"Install pressure regulator", spec:"N/A", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 75 */ { name:"Pressure Regulator Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Pressure", description:"Replace pressure regulator", spec:"N/A", unit:"EA", baseColumbusPrice:225, volume:236.25, retail:496.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 76 */ { name:"Hose Bib Install", trade:"Plumbing", category:"Plumbing", subcategory:"Exterior", description:"Install exterior hose bib", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 77 */ { name:"Hose Bib Replace", trade:"Plumbing", category:"Plumbing", subcategory:"Exterior", description:"Replace exterior hose bib", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 78 */ { name:"Outdoor Spigot Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Exterior", description:"Repair outdoor spigot", spec:"N/A", unit:"EA", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 79 */ { name:"Winterization Service", trade:"Plumbing", category:"Plumbing", subcategory:"Seasonal", description:"Winterize plumbing system", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 80 */ { name:"De-winterization Service", trade:"Plumbing", category:"Plumbing", subcategory:"Seasonal", description:"Restore plumbing after winterization", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 81 */ { name:"Laundry Hookup Install", trade:"Plumbing", category:"Plumbing", subcategory:"Laundry", description:"Install washer hookup", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 82 */ { name:"Laundry Drain Install", trade:"Plumbing", category:"Plumbing", subcategory:"Laundry", description:"Install laundry drain", spec:"N/A", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 83 */ { name:"Laundry Box Install", trade:"Plumbing", category:"Plumbing", subcategory:"Laundry", description:"Install laundry box", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:210, retail:441, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 84 */ { name:"Laundry Hookup Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Laundry", description:"Repair washer hookup", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 85 */ { name:"Laundry Drain Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Laundry", description:"Repair laundry drain", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 86 */ { name:"Pipe Insulation Install", trade:"Plumbing", category:"Plumbing", subcategory:"Insulation", description:"Install pipe insulation", spec:"N/A", unit:"LF", baseColumbusPrice:3.5, volume:3.68, retail:7.72, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 87 */ { name:"Pipe Insulation Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Insulation", description:"Repair pipe insulation", spec:"N/A", unit:"LF", baseColumbusPrice:2.5, volume:2.63, retail:5.51, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 88 */ { name:"Freeze Protection Service", trade:"Plumbing", category:"Plumbing", subcategory:"Insulation", description:"Apply freeze protection measures", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 89 */ { name:"Emergency Plumbing Service", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"Emergency plumbing service call", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 90 */ { name:"Plumbing System General Repair", trade:"Plumbing", category:"Plumbing", subcategory:"Service", description:"General plumbing repair service", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
 ]);
