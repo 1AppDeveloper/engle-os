@@ -1,255 +1,107 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Toilet Install - New (Rough-In Ready)", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 2 */ { name:"Toilet Replace (Remove & Install)", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:291.38, volume:210 },
+/* 3 */ { name:"Vanity Install - Standard", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:291.38, volume:210 },
+/* 4 */ { name:"Vanity Install - Double Sink", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:388.44, volume:280 },
+/* 5 */ { name:"Vanity Replacement (Remove & Install)", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:485.63, volume:350 },
+/* 6 */ { name:"Faucet Install - Bathroom", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:97.12, volume:70 },
+/* 7 */ { name:"Faucet Install - Kitchen", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:116.56, volume:84 },
+/* 8 */ { name:"Shower Valve Replace", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:388.44, volume:280 },
+/* 9 */ { name:"Shower Head Replace", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:58.28, volume:42 },
+/* 10 */ { name:"Tub Install - Standard", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:582.75, volume:420 },
 
-  // ========================
-  // PLUMBING (EXPANDED)
-  // ========================
-  {
-    name: "Replace Faucet",
-    category: "Plumbing",
-    description: "Remove and replace faucet",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Install Faucet (New)",
-    category: "Plumbing",
-    description: "Install new faucet",
-    unit: "EA",
-    retail: 150,
-    volume: 115
-  },
-  {
-    name: "Replace Garbage Disposal",
-    category: "Plumbing",
-    description: "Remove and replace garbage disposal",
-    unit: "EA",
-    retail: 295,
-    volume: 225
-  },
-  {
-    name: "Install Garbage Disposal (New)",
-    category: "Plumbing",
-    description: "Install new garbage disposal",
-    unit: "EA",
-    retail: 260,
-    volume: 200
-  },
-  {
-    name: "Replace Shut Off Valve",
-    category: "Plumbing",
-    description: "Replace shut off valve",
-    unit: "EA",
-    retail: 85,
-    volume: 60
-  },
-  {
-    name: "Install Supply Line",
-    category: "Plumbing",
-    description: "Install supply line",
-    unit: "EA",
-    retail: 35,
-    volume: 25
-  },
-  {
-    name: "Install P-Trap",
-    category: "Plumbing",
-    description: "Install drain P-trap",
-    unit: "EA",
-    retail: 45,
-    volume: 32
-  },
-  {
-    name: "Clear Drain - Minor",
-    category: "Plumbing",
-    description: "Minor drain clearing",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Clear Drain - Major",
-    category: "Plumbing",
-    description: "Major drain clearing",
-    unit: "EA",
-    retail: 225,
-    volume: 165
-  },
-  {
-    name: "Replace Water Heater",
-    category: "Plumbing",
-    description: "Remove and replace water heater",
-    unit: "EA",
-    retail: 1650,
-    volume: 1250
-  },
+/* 11 */ { name:"Sink Install - Kitchen", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 12 */ { name:"Sink Install - Bathroom", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:145.69, volume:105 },
+/* 13 */ { name:"Garbage Disposal Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 14 */ { name:"Dishwasher Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 15 */ { name:"Ice Maker Line Install", trade:"Plumbing", subcategory:"Lines", unit:"EA", retail:145.69, volume:105 },
 
-  // ========================
-  // ELECTRICAL (EXPANDED)
-  // ========================
-  {
-    name: "Replace Outlet",
-    category: "Electrical",
-    description: "Remove and replace outlet",
-    unit: "EA",
-    retail: 65,
-    volume: 45
-  },
-  {
-    name: "Replace Switch",
-    category: "Electrical",
-    description: "Remove and replace light switch",
-    unit: "EA",
-    retail: 55,
-    volume: 40
-  },
-  {
-    name: "Install GFCI Outlet",
-    category: "Electrical",
-    description: "Install GFCI outlet",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Install Smoke Detector",
-    category: "Electrical",
-    description: "Install smoke detector",
-    unit: "EA",
-    retail: 85,
-    volume: 65
-  },
-  {
-    name: "Install Carbon Monoxide Detector",
-    category: "Electrical",
-    description: "Install CO detector",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Install Bathroom Exhaust Fan",
-    category: "Electrical",
-    description: "Install exhaust fan",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
+/* 16 */ { name:"Water Line Repair - Minor", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 17 */ { name:"Water Line Repair - Major", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:291.38, volume:210 },
+/* 18 */ { name:"Drain Line Repair - Minor", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 19 */ { name:"Drain Line Repair - Major", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:291.38, volume:210 },
+/* 20 */ { name:"Clog Removal - Standard", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:145.69, volume:105 },
 
-  // ========================
-  // APPLIANCES (EXPANDED)
-  // ========================
-  {
-    name: "Install Refrigerator",
-    category: "Appliances",
-    description: "Install refrigerator",
-    unit: "EA",
-    retail: 175,
-    volume: 135
-  },
-  {
-    name: "Install Microwave",
-    category: "Appliances",
-    description: "Install microwave",
-    unit: "EA",
-    retail: 185,
-    volume: 145
-  },
-  {
-    name: "Install Washer",
-    category: "Appliances",
-    description: "Install washer",
-    unit: "EA",
-    retail: 150,
-    volume: 115
-  },
-  {
-    name: "Install Dryer",
-    category: "Appliances",
-    description: "Install dryer",
-    unit: "EA",
-    retail: 150,
-    volume: 115
-  },
+/* 21 */ { name:"Clog Removal - Severe", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:291.38, volume:210 },
+/* 22 */ { name:"Water Heater Install - Tank", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:1456.88, volume:1050 },
+/* 23 */ { name:"Water Heater Install - Tankless", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:2913.75, volume:2100 },
+/* 24 */ { name:"Water Heater Repair", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:291.38, volume:210 },
+/* 25 */ { name:"Expansion Tank Install", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:194.25, volume:140 },
 
-  // ========================
-  // HVAC
-  // ========================
-  {
-    name: "Replace HVAC Filter",
-    category: "HVAC",
-    description: "Replace HVAC filter",
-    unit: "EA",
-    retail: 12,
-    volume: 8
-  },
-  {
-    name: "HVAC Service Call",
-    category: "HVAC",
-    description: "HVAC service and inspection",
-    unit: "EA",
-    retail: 175,
-    volume: 125
-  },
-  {
-    name: "Replace Thermostat",
-    category: "HVAC",
-    description: "Replace thermostat",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Install Thermostat (New)",
-    category: "HVAC",
-    description: "Install new thermostat",
-    unit: "EA",
-    retail: 225,
-    volume: 165
-  },
+/* 26 */ { name:"Sump Pump Install", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:582.75, volume:420 },
+/* 27 */ { name:"Sump Pump Replacement", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:485.63, volume:350 },
+/* 28 */ { name:"Backflow Preventer Install", trade:"Plumbing", subcategory:"Safety", unit:"EA", retail:388.44, volume:280 },
+/* 29 */ { name:"Hose Bib Install", trade:"Plumbing", subcategory:"Exterior", unit:"EA", retail:145.69, volume:105 },
+/* 30 */ { name:"Plumbing Diagnostic", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:97.12, volume:70 }
+/* 31 */ ,{ name:"PEX Water Line Install", trade:"Plumbing", subcategory:"Lines", unit:"LF", retail:7.77, volume:5.60 },
+/* 32 */ { name:"Copper Water Line Install", trade:"Plumbing", subcategory:"Lines", unit:"LF", retail:12.62, volume:9.10 },
+/* 33 */ { name:"Drain Line Install - PVC", trade:"Plumbing", subcategory:"Lines", unit:"LF", retail:9.71, volume:7 },
+/* 34 */ { name:"Gas Line Install", trade:"Plumbing", subcategory:"Lines", unit:"LF", retail:14.56, volume:10.50 },
+/* 35 */ { name:"Water Shutoff Valve Install", trade:"Plumbing", subcategory:"Valves", unit:"EA", retail:97.12, volume:70 },
 
-  // ========================
-  // GENERAL REPAIRS
-  // ========================
-  {
-    name: "Drywall Repair - Small",
-    category: "General",
-    description: "Small drywall repair",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Drywall Repair - Medium",
-    category: "General",
-    description: "Medium drywall repair",
-    unit: "EA",
-    retail: 185,
-    volume: 135
-  },
-  {
-    name: "Drywall Repair - Large",
-    category: "General",
-    description: "Large drywall repair",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
-  {
-    name: "Replace Door Stop",
-    category: "General",
-    description: "Replace door stop",
-    unit: "EA",
-    retail: 22,
-    volume: 15
-  },
-  {
-    name: "Install Closet Shelving",
-    category: "General",
-    description: "Install closet shelving",
-    unit: "LF",
-    retail: 18,
-    volume: 13
-  }
+/* 36 */ { name:"Main Water Shutoff Replace", trade:"Plumbing", subcategory:"Valves", unit:"EA", retail:291.38, volume:210 },
+/* 37 */ { name:"Angle Stop Replace", trade:"Plumbing", subcategory:"Valves", unit:"EA", retail:58.28, volume:42 },
+/* 38 */ { name:"Pressure Regulator Install", trade:"Plumbing", subcategory:"Valves", unit:"EA", retail:388.44, volume:280 },
+/* 39 */ { name:"Water Softener Install", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:582.75, volume:420 },
+/* 40 */ { name:"Water Filtration System Install", trade:"Plumbing", subcategory:"Equipment", unit:"EA", retail:485.63, volume:350 },
+
+/* 41 */ { name:"Laundry Box Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 42 */ { name:"Washer Hookup Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:145.69, volume:105 },
+/* 43 */ { name:"Dryer Vent Install", trade:"Plumbing", subcategory:"Vent", unit:"EA", retail:194.25, volume:140 },
+/* 44 */ { name:"Floor Drain Install", trade:"Plumbing", subcategory:"Drainage", unit:"EA", retail:291.38, volume:210 },
+/* 45 */ { name:"Grease Trap Install", trade:"Plumbing", subcategory:"Drainage", unit:"EA", retail:582.75, volume:420 },
+
+/* 46 */ { name:"Leak Detection", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:145.69, volume:105 },
+/* 47 */ { name:"Water Pressure Test", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:97.12, volume:70 },
+/* 48 */ { name:"Camera Drain Inspection", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:291.38, volume:210 },
+/* 49 */ { name:"Hydro Jetting", trade:"Plumbing", subcategory:"Service", unit:"EA", retail:485.63, volume:350 },
+/* 50 */ { name:"Pipe Insulation Install", trade:"Plumbing", subcategory:"Protection", unit:"LF", retail:2.91, volume:2.10 },
+
+/* 51 */ { name:"Frozen Pipe Repair", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:291.38, volume:210 },
+/* 52 */ { name:"Burst Pipe Repair", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:388.44, volume:280 },
+/* 53 */ { name:"Toilet Flange Repair", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 54 */ { name:"Wax Ring Replacement", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:58.28, volume:42 },
+/* 55 */ { name:"P-Trap Replacement", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:97.12, volume:70 },
+
+/* 56 */ { name:"Shower Pan Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:582.75, volume:420 },
+/* 57 */ { name:"Shower Door Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:388.44, volume:280 },
+/* 58 */ { name:"Bathtub Replacement", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:873.94, volume:630 },
+/* 59 */ { name:"Bidet Install", trade:"Plumbing", subcategory:"Fixtures", unit:"EA", retail:194.25, volume:140 },
+/* 60 */ { name:"Plumbing General Repair", trade:"Plumbing", subcategory:"Repair", unit:"EA", retail:null, volume:null }
+/* 61 */ ,{ name:"HVAC Tune-Up", trade:"HVAC", subcategory:"Service", unit:"EA", retail:145.69, volume:105 },
+/* 62 */ { name:"Furnace Install", trade:"HVAC", subcategory:"Equipment", unit:"EA", retail:2913.75, volume:2100 },
+/* 63 */ { name:"AC Unit Install", trade:"HVAC", subcategory:"Equipment", unit:"EA", retail:2913.75, volume:2100 },
+/* 64 */ { name:"Thermostat Install", trade:"HVAC", subcategory:"Controls", unit:"EA", retail:145.69, volume:105 },
+/* 65 */ { name:"Smart Thermostat Install", trade:"HVAC", subcategory:"Controls", unit:"EA", retail:194.25, volume:140 },
+
+/* 66 */ { name:"Ductwork Install", trade:"HVAC", subcategory:"Duct", unit:"LF", retail:19.42, volume:14 },
+/* 67 */ { name:"Duct Repair", trade:"HVAC", subcategory:"Duct", unit:"EA", retail:145.69, volume:105 },
+/* 68 */ { name:"Duct Cleaning", trade:"HVAC", subcategory:"Duct", unit:"EA", retail:388.44, volume:280 },
+/* 69 */ { name:"Vent Register Replace", trade:"HVAC", subcategory:"Vent", unit:"EA", retail:58.28, volume:42 },
+/* 70 */ { name:"Air Filter Replacement", trade:"HVAC", subcategory:"Maintenance", unit:"EA", retail:38.84, volume:28 },
+
+/* 71 */ { name:"Refrigerant Recharge", trade:"HVAC", subcategory:"Service", unit:"EA", retail:291.38, volume:210 },
+/* 72 */ { name:"Blower Motor Replace", trade:"HVAC", subcategory:"Repair", unit:"EA", retail:485.63, volume:350 },
+/* 73 */ { name:"Capacitor Replacement", trade:"HVAC", subcategory:"Repair", unit:"EA", retail:145.69, volume:105 },
+/* 74 */ { name:"Evaporator Coil Replace", trade:"HVAC", subcategory:"Repair", unit:"EA", retail:873.94, volume:630 },
+/* 75 */ { name:"Condensor Unit Replace", trade:"HVAC", subcategory:"Repair", unit:"EA", retail:1456.88, volume:1050 },
+
+/* 76 */ { name:"Insulation Install - Attic", trade:"Insulation", subcategory:"Install", unit:"SF", retail:2.91, volume:2.10 },
+/* 77 */ { name:"Insulation Install - Walls", trade:"Insulation", subcategory:"Install", unit:"SF", retail:3.40, volume:2.45 },
+/* 78 */ { name:"Insulation Removal", trade:"Insulation", subcategory:"Demo", unit:"SF", retail:1.94, volume:1.40 },
+/* 79 */ { name:"Air Sealing", trade:"Insulation", subcategory:"Seal", unit:"EA", retail:291.38, volume:210 },
+/* 80 */ { name:"Radiant Barrier Install", trade:"Insulation", subcategory:"Install", unit:"SF", retail:3.88, volume:2.80 },
+
+/* 81 */ { name:"Concrete Crack Repair", trade:"Concrete", subcategory:"Repair", unit:"LF", retail:6.80, volume:4.90 },
+/* 82 */ { name:"Concrete Patch", trade:"Concrete", subcategory:"Repair", unit:"SF", retail:4.85, volume:3.50 },
+/* 83 */ { name:"Concrete Slab Pour", trade:"Concrete", subcategory:"Install", unit:"SF", retail:14.56, volume:10.50 },
+/* 84 */ { name:"Driveway Repair", trade:"Concrete", subcategory:"Repair", unit:"EA", retail:582.75, volume:420 },
+/* 85 */ { name:"Sidewalk Install", trade:"Concrete", subcategory:"Install", unit:"SF", retail:12.62, volume:9.10 },
+
+/* 86 */ { name:"Demolition - Interior", trade:"Demo", subcategory:"Interior", unit:"SF", retail:3.40, volume:2.45 },
+/* 87 */ { name:"Demolition - Exterior", trade:"Demo", subcategory:"Exterior", unit:"SF", retail:4.85, volume:3.50 },
+/* 88 */ { name:"Debris Haul Off", trade:"Demo", subcategory:"Cleanup", unit:"EA", retail:291.38, volume:210 },
+/* 89 */ { name:"Dumpster Rental Coordination", trade:"Demo", subcategory:"Cleanup", unit:"EA", retail:194.25, volume:140 },
+/* 90 */ { name:"Final Site Cleanup", trade:"Demo", subcategory:"Cleanup", unit:"EA", retail:145.69, volume:105 }
 
 ]);
