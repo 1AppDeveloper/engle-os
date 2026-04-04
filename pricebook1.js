@@ -1,247 +1,43 @@
-window.ENGLE_PRICE_BOOK = [
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+{ name:"Toilet – Reset (Wax Ring Replace)", trade:"Plumbing", subcategory:"Toilet", unit:"each", retail:195, volume:145, description:"Remove toilet, replace wax ring, reinstall" },
+{ name:"Toilet – Replace Standard", trade:"Plumbing", subcategory:"Toilet", unit:"each", retail:395, volume:315, description:"Remove and replace standard toilet" },
+{ name:"Toilet – Replace ADA", trade:"Plumbing", subcategory:"Toilet", unit:"each", retail:450, volume:360, description:"Install ADA height toilet" },
 
-  // ========================
-  // CLEANING
-  // ========================
-  {
-    name: "Deep Cleaning",
-    category: "Cleaning",
-    description: "Deep cleaning service",
-    unit: "SF",
-    retail: 0.28,
-    volume: 0.20
-  },
-  {
-    name: "Move-Out Cleaning",
-    category: "Cleaning",
-    description: "Full move-out cleaning",
-    unit: "SF",
-    retail: 0.32,
-    volume: 0.24
-  },
-  {
-    name: "Post-Construction Cleaning",
-    category: "Cleaning",
-    description: "Cleaning after construction or remodel",
-    unit: "SF",
-    retail: 0.25,
-    volume: 0.18
-  },
+{ name:"Vanity – Install 24in", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:375, volume:295, description:"Install 24in vanity, reconnect plumbing" },
+{ name:"Vanity – Install 30in", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:395, volume:315, description:"Install 30in vanity, reconnect plumbing" },
+{ name:"Vanity – Install 36in", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:425, volume:345, description:"Install 36in vanity, reconnect plumbing" },
+{ name:"Vanity – Install 48in", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:495, volume:395, description:"Install 48in vanity, reconnect plumbing" },
+{ name:"Vanity – Install 60in Double Sink", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:650, volume:525, description:"Install 60in double sink vanity, reconnect plumbing" },
+{ name:"Vanity – Remove and Replace", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:575, volume:465, description:"Remove existing vanity and install new unit" },
+{ name:"Vanity – General Repair", trade:"Plumbing", subcategory:"Vanity", unit:"each", retail:225, volume:175, description:"General vanity repair service" },
 
-  // ========================
-  // PAINTING
-  // ========================
-  {
-    name: "Paint Walls (2 Coats)",
-    category: "Painting",
-    description: "Prep and paint walls, 2 coats",
-    unit: "SF",
-    retail: 2.75,
-    volume: 2.35
-  },
-  {
-    name: "Paint Walls (1 Coat)",
-    category: "Painting",
-    description: "Prep and paint walls, 1 coat",
-    unit: "SF",
-    retail: 2.10,
-    volume: 1.85
-  },
-  {
-    name: "Paint Ceilings",
-    category: "Painting",
-    description: "Prep and paint ceilings",
-    unit: "SF",
-    retail: 2.25,
-    volume: 1.90
-  },
-  {
-    name: "Paint Trim",
-    category: "Painting",
-    description: "Prep and paint trim",
-    unit: "LF",
-    retail: 3.75,
-    volume: 3.10
-  },
-  {
-    name: "Paint Doors",
-    category: "Painting",
-    description: "Prep and paint doors",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Paint Full Interior (Walls, Ceilings, Trim, Doors)",
-    category: "Painting",
-    description: "Full interior paint package, 2 coats",
-    unit: "SF",
-    retail: 3.10,
-    volume: 2.35
-  },
+{ name:"Faucet – Replace Bathroom", trade:"Plumbing", subcategory:"Faucet", unit:"each", retail:195, volume:150, description:"Remove and replace bathroom faucet" },
+{ name:"Faucet – Replace Kitchen", trade:"Plumbing", subcategory:"Faucet", unit:"each", retail:225, volume:175, description:"Remove and replace kitchen faucet" },
 
-  // ========================
-  // GENERAL
-  // ========================
-  {
-    name: "Project Supervision",
-    category: "General",
-    description: "Project supervision and coordination",
-    unit: "JOB",
-    retail: 750,
-    volume: 600
-  },
-  {
-    name: "Debris Removal",
-    category: "General",
-    description: "Removal of job site debris",
-    unit: "LOAD",
-    retail: 250,
-    volume: 200
-  },
+{ name:"Sink – Replace Bathroom", trade:"Plumbing", subcategory:"Sink", unit:"each", retail:275, volume:215, description:"Replace bathroom sink and reconnect plumbing" },
+{ name:"Sink – Replace Kitchen", trade:"Plumbing", subcategory:"Sink", unit:"each", retail:350, volume:275, description:"Replace kitchen sink and reconnect plumbing" },
 
-  // ========================
-  // DEMO
-  // ========================
-  {
-    name: "Interior Demo",
-    category: "Demo",
-    description: "General interior demolition",
-    unit: "SF",
-    retail: 3.25,
-    volume: 2.50
-  },
-  {
-    name: "Cabinet Removal",
-    category: "Demo",
-    description: "Remove cabinets",
-    unit: "LF",
-    retail: 45,
-    volume: 35
-  },
-  {
-    name: "Floor Removal",
-    category: "Demo",
-    description: "Remove flooring",
-    unit: "SF",
-    retail: 2.75,
-    volume: 2.10
-  },
+{ name:"Garbage Disposal – Install", trade:"Plumbing", subcategory:"Disposal", unit:"each", retail:325, volume:255, description:"Install garbage disposal unit" },
+{ name:"Garbage Disposal – Replace", trade:"Plumbing", subcategory:"Disposal", unit:"each", retail:375, volume:295, description:"Remove and replace disposal" },
 
-  // ========================
-  // FLOORING
-  // ========================
-  {
-    name: "Install LVP Flooring",
-    category: "Flooring",
-    description: "Install luxury vinyl plank flooring",
-    unit: "SF",
-    retail: 7.50,
-    volume: 5.75
-  },
-  {
-    name: "Install Carpet",
-    category: "Flooring",
-    description: "Install carpet",
-    unit: "SF",
-    retail: 6.25,
-    volume: 4.75
-  },
-  {
-    name: "Install Tile Flooring",
-    category: "Flooring",
-    description: "Install tile flooring",
-    unit: "SF",
-    retail: 12.50,
-    volume: 9.50
-  },
+{ name:"Shower Valve – Replace", trade:"Plumbing", subcategory:"Shower", unit:"each", retail:525, volume:425, description:"Replace shower mixing valve" },
+{ name:"Shower Head – Replace", trade:"Plumbing", subcategory:"Shower", unit:"each", retail:125, volume:95, description:"Replace shower head" },
 
-  // ========================
-  // CARPENTRY
-  // ========================
-  {
-    name: "Install Baseboard",
-    category: "Carpentry",
-    description: "Install baseboard trim",
-    unit: "LF",
-    retail: 9.50,
-    volume: 7.25
-  },
-  {
-    name: "Install Interior Door",
-    category: "Carpentry",
-    description: "Install interior door",
-    unit: "EA",
-    retail: 325,
-    volume: 250
-  },
+{ name:"Water Heater – Replace (Standard)", trade:"Plumbing", subcategory:"Water Heater", unit:"each", retail:1650, volume:1350, description:"Remove and replace standard water heater" },
 
-  // ========================
-  // PLUMBING
-  // ========================
-  {
-    name: "Replace Toilet",
-    category: "Plumbing",
-    description: "Remove and replace toilet",
-    unit: "EA",
-    retail: 325,
-    volume: 275
-  },
-  {
-    name: "Install Toilet (New)",
-    category: "Plumbing",
-    description: "Install new toilet",
-    unit: "EA",
-    retail: 275,
-    volume: 225
-  },
-  {
-    name: "Install Vanity",
-    category: "Plumbing",
-    description: "Install bathroom vanity",
-    unit: "EA",
-    retail: 450,
-    volume: 350
-  },
+{ name:"Paint – Interior Wall (per SF)", trade:"Paint", subcategory:"Interior", unit:"sqft", retail:2.25, volume:1.75, description:"Interior wall paint per square foot" },
+{ name:"Paint – Ceiling (per SF)", trade:"Paint", subcategory:"Interior", unit:"sqft", retail:1.75, volume:1.35, description:"Ceiling paint per square foot" },
 
-  // ========================
-  // ELECTRICAL
-  // ========================
-  {
-    name: "Install Light Fixture",
-    category: "Electrical",
-    description: "Remove and replace light fixture",
-    unit: "EA",
-    retail: 185,
-    volume: 145
-  },
-  {
-    name: "Install Ceiling Fan",
-    category: "Electrical",
-    description: "Install ceiling fan",
-    unit: "EA",
-    retail: 245,
-    volume: 175
-  },
+{ name:"Drywall – Patch Small", trade:"Drywall", subcategory:"Repair", unit:"each", retail:125, volume:95, description:"Small drywall patch repair" },
+{ name:"Drywall – Patch Medium", trade:"Drywall", subcategory:"Repair", unit:"each", retail:195, volume:150, description:"Medium drywall patch repair" },
 
-  // ========================
-  // APPLIANCES
-  // ========================
-  {
-    name: "Install Dishwasher",
-    category: "Appliances",
-    description: "Install dishwasher",
-    unit: "EA",
-    retail: 550,
-    volume: 450
-  },
-  {
-    name: "Install Range",
-    category: "Appliances",
-    description: "Install range",
-    unit: "EA",
-    retail: 250,
-    volume: 200
-  }
+{ name:"Electrical – Outlet Replace", trade:"Electrical", subcategory:"Outlet", unit:"each", retail:125, volume:95, description:"Replace electrical outlet" },
+{ name:"Electrical – Light Fixture Replace", trade:"Electrical", subcategory:"Lighting", unit:"each", retail:195, volume:150, description:"Replace light fixture" },
 
-];
+{ name:"Door – Interior Replace", trade:"Carpentry", subcategory:"Door", unit:"each", retail:450, volume:360, description:"Replace interior door" },
+{ name:"Door – Exterior Replace", trade:"Carpentry", subcategory:"Door", unit:"each", retail:750, volume:600, description:"Replace exterior door" },
+
+{ name:"Roof – Shingle Repair", trade:"Roofing", subcategory:"Repair", unit:"each", retail:325, volume:255, description:"Minor shingle repair" },
+{ name:"Roof – Full Replacement (per SQ)", trade:"Roofing", subcategory:"Replacement", unit:"square", retail:450, volume:375, description:"Full roof replacement per square" }
+
+]);
