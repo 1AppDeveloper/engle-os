@@ -440,42 +440,15 @@ function refreshLocks(){
 }
 
 function handleBlockedAction(e){
-  if (headerComplete()) return true;
+  if(headerComplete()) return true;
 
   const nextEl = getNextStepElement();
-  const billingStep = headerStep() === "billing";
-  const billingBox = $("billingSame");
-  const billingBoxWrap = $("billingSameBox");
-
-  if (e) {
+  if(e){
     const target = e.target;
-
-    const clickedBillingBox =
-      billingStep &&
-      (target === billingBox ||
-       target === billingBoxWrap ||
-       billingBoxWrap.contains(target));
-
-    const clickedNextField = target === nextEl;
-
-    if (clickedNextField || clickedBillingBox) return true;
-
+    if(target === nextEl) return true;
     e.preventDefault();
     e.stopPropagation();
   }
-
-  if (nextEl) flashEl(nextEl);
-  if (billingStep) flashEl(billingBoxWrap);
-
-  return false;
-}
-  
-
-  if(nextEl) flashEl(nextEl);
-  if(billingStep) flashEl(billingBoxWrap);
-
-  return false;
-}
 
   if(nextEl) flashEl(nextEl);
   if(headerStep() === "billing") flashEl($("billingSameBox"));
