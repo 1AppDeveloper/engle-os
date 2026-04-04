@@ -1,219 +1,108 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Door Install - Interior Prehung", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Install interior prehung door", spec:"Standard Hollow Core", unit:"EA", baseColumbusPrice:225, volume:236.25, retail:496.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 2 */ { name:"Door Install - Exterior Entry", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Install exterior entry door", spec:"Standard Steel", unit:"EA", baseColumbusPrice:650, volume:682.5, retail:1433.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 3 */ { name:"Door Replace - Interior", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Replace interior door slab", spec:"Standard", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 4 */ { name:"Door Replace - Exterior", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Replace exterior door unit", spec:"Standard", unit:"EA", baseColumbusPrice:750, volume:787.5, retail:1653.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 5 */ { name:"Door Trim Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install door casing trim", spec:"Standard MDF", unit:"LF", baseColumbusPrice:3.25, volume:3.41, retail:7.16, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // KITCHEN / CABINET ADDITIONS
-  // ========================
-  {
-    name: "Install Countertop - Laminate",
-    category: "Cabinets",
-    description: "Install laminate countertop",
-    unit: "LF",
-    retail: 85,
-    volume: 65
-  },
-  {
-    name: "Install Countertop - Quartz",
-    category: "Cabinets",
-    description: "Install quartz countertop",
-    unit: "SF",
-    retail: 95,
-    volume: 75
-  },
-  {
-    name: "Install Countertop - Granite",
-    category: "Cabinets",
-    description: "Install granite countertop",
-    unit: "SF",
-    retail: 110,
-    volume: 85
-  },
-  {
-    name: "Install Cabinet Crown",
-    category: "Cabinets",
-    description: "Install cabinet crown molding",
-    unit: "LF",
-    retail: 12.50,
-    volume: 9.50
-  },
-  {
-    name: "Install Toe Kick",
-    category: "Cabinets",
-    description: "Install cabinet toe kick",
-    unit: "LF",
-    retail: 9.50,
-    volume: 7.25
-  },
+/* 6 */ { name:"Door Hardware Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Hardware", description:"Replace door handle and hardware", spec:"Standard", unit:"EA", baseColumbusPrice:65, volume:68.25, retail:143.33, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 7 */ { name:"Deadbolt Install", trade:"Carpentry", category:"Carpentry", subcategory:"Hardware", description:"Install deadbolt lock", spec:"Standard", unit:"EA", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 8 */ { name:"Door Adjustment", trade:"Carpentry", category:"Carpentry", subcategory:"Repair", description:"Adjust door for proper fit", spec:"N/A", unit:"EA", baseColumbusPrice:75, volume:78.75, retail:165.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 9 */ { name:"Door General Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Repair", description:"General door repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 10 */ { name:"Sliding Door Install", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Install sliding patio door", spec:"Standard", unit:"EA", baseColumbusPrice:950, volume:997.5, retail:2094.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // ELECTRICAL ADDITIONS
-  // ========================
-  {
-    name: "Install Recessed Light",
-    category: "Electrical",
-    description: "Install recessed lighting",
-    unit: "EA",
-    retail: 225,
-    volume: 175
-  },
-  {
-    name: "Install Dimmer Switch",
-    category: "Electrical",
-    description: "Install dimmer switch",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Install Breaker",
-    category: "Electrical",
-    description: "Install breaker in panel",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Electrical Troubleshooting",
-    category: "Electrical",
-    description: "Electrical diagnostic service",
-    unit: "HR",
-    retail: 125,
-    volume: 95
-  },
+/* 11 */ { name:"Baseboard Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install baseboard trim", spec:"Standard MDF", unit:"LF", baseColumbusPrice:2.50, volume:2.63, retail:5.51, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 12 */ { name:"Crown Molding Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install crown molding", spec:"Standard", unit:"LF", baseColumbusPrice:5.50, volume:5.78, retail:12.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 13 */ { name:"Chair Rail Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install chair rail molding", spec:"Standard", unit:"LF", baseColumbusPrice:4.00, volume:4.20, retail:8.82, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 14 */ { name:"Window Trim Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install window casing trim", spec:"Standard", unit:"LF", baseColumbusPrice:3.50, volume:3.68, retail:7.72, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 15 */ { name:"Trim Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Repair damaged trim", spec:"N/A", unit:"EA", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // PLUMBING ADDITIONS
-  // ========================
-  {
-    name: "Replace Shower Valve",
-    category: "Plumbing",
-    description: "Remove and replace shower valve",
-    unit: "EA",
-    retail: 525,
-    volume: 395
-  },
-  {
-    name: "Install Dishwasher Line",
-    category: "Plumbing",
-    description: "Install water line for dishwasher",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
-  {
-    name: "Replace Hose Bib",
-    category: "Plumbing",
-    description: "Replace exterior hose bib",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Install Hose Bib",
-    category: "Plumbing",
-    description: "Install new hose bib",
-    unit: "EA",
-    retail: 175,
-    volume: 135
-  },
+/* 16 */ { name:"Cabinet Install - Base", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Install base cabinet", spec:"Standard", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 17 */ { name:"Cabinet Install - Wall", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Install wall cabinet", spec:"Standard", unit:"EA", baseColumbusPrice:225, volume:236.25, retail:496.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 18 */ { name:"Cabinet Replace - Full Set", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Replace full cabinet set", spec:"Standard", unit:"EA", baseColumbusPrice:3500, volume:3675, retail:7717.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 19 */ { name:"Cabinet Door Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Replace cabinet door", spec:"Standard", unit:"EA", baseColumbusPrice:75, volume:78.75, retail:165.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 20 */ { name:"Cabinet Hardware Install", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Install cabinet knobs/pulls", spec:"Standard", unit:"EA", baseColumbusPrice:15, volume:15.75, retail:33.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // EXTERIOR / LANDSCAPE ADDITIONS
-  // ========================
-  {
-    name: "Install Landscape Fabric",
-    category: "Landscape",
-    description: "Install weed barrier fabric",
-    unit: "SF",
-    retail: 1.25,
-    volume: 0.95
-  },
-  {
-    name: "Install Decorative Stone",
-    category: "Landscape",
-    description: "Install decorative stone",
-    unit: "SF",
-    retail: 4.50,
-    volume: 3.25
-  },
-  {
-    name: "Sod Installation",
-    category: "Landscape",
-    description: "Install sod",
-    unit: "SF",
-    retail: 3.75,
-    volume: 2.85
-  },
-  {
-    name: "Lawn Seeding",
-    category: "Landscape",
-    description: "Seed lawn",
-    unit: "SF",
-    retail: 1.95,
-    volume: 1.45
-  },
+/* 21 */ { name:"Cabinet Adjustment", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"Adjust cabinet alignment", spec:"N/A", unit:"EA", baseColumbusPrice:75, volume:78.75, retail:165.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 22 */ { name:"Cabinet General Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinetry", description:"General cabinet repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 23 */ { name:"Closet Shelf Install", trade:"Carpentry", category:"Carpentry", subcategory:"Closet", description:"Install closet shelf", spec:"Standard", unit:"LF", baseColumbusPrice:4.00, volume:4.20, retail:8.82, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 24 */ { name:"Closet Rod Install", trade:"Carpentry", category:"Carpentry", subcategory:"Closet", description:"Install closet rod", spec:"Standard", unit:"LF", baseColumbusPrice:3.00, volume:3.15, retail:6.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 25 */ { name:"Closet System Install", trade:"Carpentry", category:"Carpentry", subcategory:"Closet", description:"Install full closet system", spec:"Standard", unit:"EA", baseColumbusPrice:850, volume:892.5, retail:1873.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // HVAC ADDITIONS
-  // ========================
-  {
-    name: "Clean HVAC System",
-    category: "HVAC",
-    description: "Clean HVAC system",
-    unit: "EA",
-    retail: 225,
-    volume: 165
-  },
-  {
-    name: "Install Vent Cover",
-    category: "HVAC",
-    description: "Install vent cover",
-    unit: "EA",
-    retail: 28,
-    volume: 20
-  },
-  {
-    name: "Replace Vent Cover",
-    category: "HVAC",
-    description: "Replace vent cover",
-    unit: "EA",
-    retail: 22,
-    volume: 16
-  },
+/* 26 */ { name:"Stair Tread Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Replace stair tread", spec:"Standard", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 27 */ { name:"Stair Railing Install", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Install stair railing", spec:"Standard", unit:"LF", baseColumbusPrice:18, volume:18.9, retail:39.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 28 */ { name:"Stair Railing Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Repair stair railing", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 29 */ { name:"Staircase General Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"General staircase repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 30 */ { name:"Framing Repair - Interior Wall", trade:"Carpentry", category:"Carpentry", subcategory:"Framing", description:"Repair interior wall framing", spec:"N/A", unit:"LF", baseColumbusPrice:12, volume:12.6, retail:26.46, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 31 */ ,{ name:"Framing Repair - Exterior Wall", trade:"Carpentry", category:"Carpentry", subcategory:"Framing", description:"Repair exterior wall framing", spec:"N/A", unit:"LF", baseColumbusPrice:18, volume:18.9, retail:39.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 32 */ { name:"Wall Framing - New Section", trade:"Carpentry", category:"Carpentry", subcategory:"Framing", description:"Frame new interior wall section", spec:"2x4 Studs", unit:"LF", baseColumbusPrice:22, volume:23.1, retail:48.51, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 33 */ { name:"Ceiling Framing Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Framing", description:"Repair ceiling joists/framing", spec:"N/A", unit:"LF", baseColumbusPrice:20, volume:21, retail:44.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 34 */ { name:"Beam Install - LVL", trade:"Carpentry", category:"Carpentry", subcategory:"Structural", description:"Install LVL beam", spec:"Engineered Lumber", unit:"LF", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 35 */ { name:"Beam Repair - Structural", trade:"Carpentry", category:"Carpentry", subcategory:"Structural", description:"Repair structural beam", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // GENERAL / SMALL SERVICES
-  // ========================
-  {
-    name: "Install Smoke Alarm (Hardwired)",
-    category: "Electrical",
-    description: "Install hardwired smoke alarm",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Install Doorbell",
-    category: "Electrical",
-    description: "Install doorbell",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Replace Doorbell",
-    category: "Electrical",
-    description: "Replace doorbell",
-    unit: "EA",
-    retail: 75,
-    volume: 55
-  },
-  {
-    name: "Minor Punch List Work",
-    category: "General",
-    description: "Small miscellaneous repairs",
-    unit: "HR",
-    retail: 95,
-    volume: 70
-  }
+/* 36 */ { name:"Header Install - Door/Window", trade:"Carpentry", category:"Carpentry", subcategory:"Structural", description:"Install structural header", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 37 */ { name:"Subfloor Framing Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Structural", description:"Repair subfloor framing", spec:"N/A", unit:"SF", baseColumbusPrice:12, volume:12.6, retail:26.46, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 38 */ { name:"Deck Framing Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair deck framing", spec:"N/A", unit:"SF", baseColumbusPrice:14, volume:14.7, retail:30.87, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 39 */ { name:"Deck Board Replacement", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Replace deck boards", spec:"PT Lumber", unit:"SF", baseColumbusPrice:8, volume:8.4, retail:17.64, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 40 */ { name:"Deck Railing Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install deck railing", spec:"Wood", unit:"LF", baseColumbusPrice:22, volume:23.1, retail:48.51, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 41 */ { name:"Deck Stairs Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install deck stairs", spec:"Standard", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 42 */ { name:"Fence Install - Wood", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install wood fence", spec:"Standard", unit:"LF", baseColumbusPrice:28, volume:29.4, retail:61.74, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 43 */ { name:"Fence Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair wood fence", spec:"N/A", unit:"LF", baseColumbusPrice:18, volume:18.9, retail:39.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 44 */ { name:"Fence Gate Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install fence gate", spec:"Standard", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 45 */ { name:"Fence Gate Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair fence gate", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 46 */ { name:"Soffit Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair soffit", spec:"Vinyl/Wood", unit:"LF", baseColumbusPrice:18, volume:18.9, retail:39.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 47 */ { name:"Fascia Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair fascia board", spec:"Wood", unit:"LF", baseColumbusPrice:16, volume:16.8, retail:35.28, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 48 */ { name:"Siding Repair - Wood", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair wood siding", spec:"N/A", unit:"SF", baseColumbusPrice:10, volume:10.5, retail:22.05, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 49 */ { name:"Siding Repair - Vinyl", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair vinyl siding", spec:"N/A", unit:"SF", baseColumbusPrice:8, volume:8.4, retail:17.64, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 50 */ { name:"Siding Replacement - Section", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Replace siding section", spec:"Vinyl", unit:"SF", baseColumbusPrice:14, volume:14.7, retail:30.87, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 51 */ { name:"Window Install - Standard", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Install standard window", spec:"Vinyl", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 52 */ { name:"Window Replace - Standard", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Replace standard window", spec:"Vinyl", unit:"EA", baseColumbusPrice:400, volume:420, retail:882, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 53 */ { name:"Window Repair - Minor", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Minor window repair", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 54 */ { name:"Window Glass Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Replace window glass pane", spec:"Standard", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 55 */ { name:"Window Trim Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Repair window trim", spec:"N/A", unit:"EA", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 56 */ { name:"Garage Door Install", trade:"Carpentry", category:"Carpentry", subcategory:"Garage", description:"Install garage door", spec:"Standard", unit:"EA", baseColumbusPrice:950, volume:997.5, retail:2094.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 57 */ { name:"Garage Door Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Garage", description:"Replace garage door", spec:"Standard", unit:"EA", baseColumbusPrice:850, volume:892.5, retail:1873.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 58 */ { name:"Garage Door Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Garage", description:"Repair garage door", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 59 */ { name:"Garage Door Opener Install", trade:"Carpentry", category:"Carpentry", subcategory:"Garage", description:"Install garage opener", spec:"Standard", unit:"EA", baseColumbusPrice:350, volume:367.5, retail:771.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 60 */ { name:"Garage Door Opener Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Garage", description:"Repair garage opener", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 61 */ ,{ name:"Handrail Install - Interior", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Install interior handrail", spec:"Wood", unit:"LF", baseColumbusPrice:18, volume:18.9, retail:39.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 62 */ { name:"Handrail Repair - Interior", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Repair interior handrail", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 63 */ { name:"Baluster Replacement", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Replace stair balusters", spec:"Wood/Metal", unit:"EA", baseColumbusPrice:15, volume:15.75, retail:33.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 64 */ { name:"Stair Stringer Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Stairs", description:"Repair stair stringer", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:367.5, retail:771.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 65 */ { name:"Attic Access Install", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Install attic access hatch", spec:"Standard", unit:"EA", baseColumbusPrice:275, volume:288.75, retail:606.38, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 66 */ { name:"Attic Ladder Install", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Install attic ladder", spec:"Pull Down", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 67 */ { name:"Attic Ladder Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Replace attic ladder", spec:"Standard", unit:"EA", baseColumbusPrice:400, volume:420, retail:882, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 68 */ { name:"Access Panel Install", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Install wall/ceiling access panel", spec:"Standard", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 69 */ { name:"Access Panel Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Repair access panel", spec:"N/A", unit:"EA", baseColumbusPrice:95, volume:99.75, retail:209.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 70 */ { name:"Crawl Space Access Install", trade:"Carpentry", category:"Carpentry", subcategory:"Access", description:"Install crawl space access", spec:"Standard", unit:"EA", baseColumbusPrice:300, volume:315, retail:661.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 71 */ { name:"Exterior Trim Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior Trim", description:"Install exterior trim boards", spec:"Wood/PVC", unit:"LF", baseColumbusPrice:4.5, volume:4.73, retail:9.92, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 72 */ { name:"Exterior Trim Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior Trim", description:"Repair exterior trim", spec:"N/A", unit:"LF", baseColumbusPrice:3.5, volume:3.68, retail:7.72, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 73 */ { name:"Window Sill Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Replace interior window sill", spec:"Wood", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 74 */ { name:"Window Sill Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Repair window sill", spec:"N/A", unit:"EA", baseColumbusPrice:85, volume:89.25, retail:187.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 75 */ { name:"Door Frame Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Repair door frame/jamb", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 76 */ { name:"Door Frame Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Replace door frame", spec:"Standard", unit:"EA", baseColumbusPrice:300, volume:315, retail:661.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 77 */ { name:"Pocket Door Install", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Install pocket door system", spec:"Standard", unit:"EA", baseColumbusPrice:550, volume:577.5, retail:1212.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 78 */ { name:"Pocket Door Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Repair pocket door track/rollers", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:262.5, retail:551.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 79 */ { name:"Barn Door Install", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Install barn style sliding door", spec:"Standard Kit", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 80 */ { name:"Barn Door Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Repair barn door hardware", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 81 */ { name:"Pergola Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install pergola", spec:"Wood", unit:"EA", baseColumbusPrice:1800, volume:1890, retail:3969, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 82 */ { name:"Pergola Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair pergola structure", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:472.5, retail:992.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 83 */ { name:"Gazebo Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install gazebo structure", spec:"Standard", unit:"EA", baseColumbusPrice:2200, volume:2310, retail:4851, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 84 */ { name:"Gazebo Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair gazebo structure", spec:"N/A", unit:"EA", baseColumbusPrice:550, volume:577.5, retail:1212.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 85 */ { name:"Exterior Stair Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Repair exterior stairs", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:367.5, retail:771.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 86 */ { name:"Exterior Stair Install", trade:"Carpentry", category:"Carpentry", subcategory:"Exterior", description:"Install exterior stairs", spec:"Standard", unit:"EA", baseColumbusPrice:850, volume:892.5, retail:1873.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 87 */ { name:"Framing Inspection", trade:"Carpentry", category:"Carpentry", subcategory:"Inspection", description:"Inspect framing condition", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:131.25, retail:275.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 88 */ { name:"Structural Inspection", trade:"Carpentry", category:"Carpentry", subcategory:"Inspection", description:"Inspect structural integrity", spec:"N/A", unit:"EA", baseColumbusPrice:175, volume:183.75, retail:385.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 89 */ { name:"Carpentry Service Call", trade:"Carpentry", category:"Carpentry", subcategory:"Service", description:"General carpentry service call", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:157.5, retail:330.75, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 90 */ { name:"Carpentry General Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Service", description:"General carpentry repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
 
 ]);
