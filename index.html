@@ -440,14 +440,14 @@ function refreshLocks(){
 }
 
 function handleBlockedAction(e){
-  if(headerComplete()) return true;
+  if (headerComplete()) return true;
 
   const nextEl = getNextStepElement();
   const billingStep = headerStep() === "billing";
   const billingBox = $("billingSame");
   const billingBoxWrap = $("billingSameBox");
 
-  if(e){
+  if (e) {
     const target = e.target;
 
     const clickedBillingBox =
@@ -458,11 +458,18 @@ function handleBlockedAction(e){
 
     const clickedNextField = target === nextEl;
 
-    if(clickedNextField || clickedBillingBox) return true;
+    if (clickedNextField || clickedBillingBox) return true;
 
     e.preventDefault();
     e.stopPropagation();
   }
+
+  if (nextEl) flashEl(nextEl);
+  if (billingStep) flashEl(billingBoxWrap);
+
+  return false;
+}
+  
 
   if(nextEl) flashEl(nextEl);
   if(billingStep) flashEl(billingBoxWrap);
