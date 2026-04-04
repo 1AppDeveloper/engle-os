@@ -1,227 +1,108 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Interior Door Replace - Hollow Core", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Remove and Replace Hollow Core Interior Door", spec:"6 Panel", unit:"EA", baseColumbusPrice:185, volume:190.55, retail:257.24, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 2 */ { name:"Interior Door Replace - Solid Core", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Remove and Replace Solid Core Interior Door", spec:"6 Panel", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 3 */ { name:"Exterior Door Replace - Steel", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Remove and Replace Steel Exterior Door", spec:"Prehung", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 4 */ { name:"Exterior Door Replace - Fiberglass", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Remove and Replace Fiberglass Exterior Door", spec:"Prehung", unit:"EA", baseColumbusPrice:650, volume:669.5, retail:904.03, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 5 */ { name:"Door Frame Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Doors", description:"Repair Damaged Door Frame", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // FLOORING ADDITIONS
-  // ========================
-  {
-    name: "Install Laminate Flooring",
-    category: "Flooring",
-    description: "Install laminate flooring",
-    unit: "SF",
-    retail: 6.85,
-    volume: 5.25
-  },
-  {
-    name: "Install Engineered Hardwood",
-    category: "Flooring",
-    description: "Install engineered hardwood flooring",
-    unit: "SF",
-    retail: 11.50,
-    volume: 8.75
-  },
-  {
-    name: "Install Hardwood Flooring",
-    category: "Flooring",
-    description: "Install solid hardwood flooring",
-    unit: "SF",
-    retail: 13.50,
-    volume: 10.25
-  },
-  {
-    name: "Floor Leveling",
-    category: "Flooring",
-    description: "Floor leveling compound application",
-    unit: "SF",
-    retail: 3.75,
-    volume: 2.85
-  },
-  {
-    name: "Install Underlayment",
-    category: "Flooring",
-    description: "Install underlayment",
-    unit: "SF",
-    retail: 1.75,
-    volume: 1.25
-  },
+/* 6 */ { name:"Window Replace - Single Hung", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Remove and Replace Single Hung Window", spec:"Vinyl", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 7 */ { name:"Window Replace - Double Hung", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Remove and Replace Double Hung Window", spec:"Vinyl", unit:"EA", baseColumbusPrice:425, volume:437.75, retail:590.96, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 8 */ { name:"Window Replace - Sliding", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Remove and Replace Sliding Window", spec:"Vinyl", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 9 */ { name:"Window Glass Replace", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Replace Broken Window Glass", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 10 */ { name:"Window Trim Repair", trade:"Carpentry", category:"Carpentry", subcategory:"Windows", description:"Repair Interior/Exterior Window Trim", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // CARPENTRY ADDITIONS
-  // ========================
-  {
-    name: "Install Crown Molding",
-    category: "Carpentry",
-    description: "Install crown molding",
-    unit: "LF",
-    retail: 14.50,
-    volume: 11.00
-  },
-  {
-    name: "Install Chair Rail",
-    category: "Carpentry",
-    description: "Install chair rail",
-    unit: "LF",
-    retail: 10.50,
-    volume: 8.00
-  },
-  {
-    name: "Install Wainscoting",
-    category: "Carpentry",
-    description: "Install wainscoting panels",
-    unit: "SF",
-    retail: 18.50,
-    volume: 14.00
-  },
-  {
-    name: "Repair Door Frame",
-    category: "Carpentry",
-    description: "Repair door frame",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Install Door Casing",
-    category: "Carpentry",
-    description: "Install door casing trim",
-    unit: "LF",
-    retail: 9.50,
-    volume: 7.25
-  },
+/* 11 */ { name:"Baseboard Replace - Standard", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Remove and Replace Baseboard", spec:"Primed MDF", unit:"LF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 12 */ { name:"Baseboard Replace - Stain Grade", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Remove and Replace Stain Grade Baseboard", spec:"Oak/Pine", unit:"LF", baseColumbusPrice:5.75, volume:5.92, retail:8.00, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 13 */ { name:"Crown Molding Install - Standard", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install Crown Molding", spec:"Primed MDF", unit:"LF", baseColumbusPrice:8.50, volume:8.76, retail:11.83, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 14 */ { name:"Chair Rail Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install Chair Rail", spec:"Primed MDF", unit:"LF", baseColumbusPrice:4.50, volume:4.64, retail:6.26, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 15 */ { name:"Wainscoting Install", trade:"Carpentry", category:"Carpentry", subcategory:"Trim", description:"Install Wainscoting Panels", spec:"N/A", unit:"SF", baseColumbusPrice:12.00, volume:12.36, retail:16.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // PAINTING ADDITIONS
-  // ========================
-  {
-    name: "Prime Walls",
-    category: "Painting",
-    description: "Prime walls before painting",
-    unit: "SF",
-    retail: 1.25,
-    volume: 0.95
-  },
-  {
-    name: "Prime Ceilings",
-    category: "Painting",
-    description: "Prime ceilings",
-    unit: "SF",
-    retail: 1.15,
-    volume: 0.85
-  },
-  {
-    name: "Stain Trim",
-    category: "Painting",
-    description: "Stain trim woodwork",
-    unit: "LF",
-    retail: 4.50,
-    volume: 3.25
-  },
-  {
-    name: "Paint Accent Wall",
-    category: "Painting",
-    description: "Paint single accent wall",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
+/* 16 */ { name:"Cabinet Replace - Base", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinets", description:"Remove and Replace Base Cabinet", spec:"Standard", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 17 */ { name:"Cabinet Replace - Wall", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinets", description:"Remove and Replace Wall Cabinet", spec:"Standard", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.08, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 18 */ { name:"Cabinet Repair - Door/Hinge", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinets", description:"Repair Cabinet Door or Hinges", spec:"N/A", unit:"EA", baseColumbusPrice:75, volume:77.25, retail:104.27, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 19 */ { name:"Cabinet Hardware Install", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinets", description:"Install Cabinet Knobs/Pulls", spec:"N/A", unit:"EA", baseColumbusPrice:5, volume:5.15, retail:6.96, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 20 */ { name:"Cabinet Alignment Adjustment", trade:"Carpentry", category:"Carpentry", subcategory:"Cabinets", description:"Adjust Cabinet Alignment", spec:"N/A", unit:"EA", baseColumbusPrice:50, volume:51.5, retail:69.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // GENERAL LABOR / SERVICE
-  // ========================
-  {
-    name: "Handyman Hour",
-    category: "General",
-    description: "General handyman labor",
-    unit: "HR",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Helper Labor",
-    category: "General",
-    description: "Helper labor rate",
-    unit: "HR",
-    retail: 65,
-    volume: 48
-  },
-  {
-    name: "Material Pickup / Delivery",
-    category: "General",
-    description: "Material pickup and delivery",
-    unit: "EA",
-    retail: 125,
-    volume: 95
-  },
+/* 21 */ { name:"Deck Board Replacement", trade:"Exterior", category:"Exterior", subcategory:"Deck", description:"Replace Deck Boards", spec:"Pressure Treated", unit:"LF", baseColumbusPrice:8.50, volume:8.76, retail:11.83, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 22 */ { name:"Deck Repair - Structural", trade:"Exterior", category:"Exterior", subcategory:"Deck", description:"Repair Structural Deck Components", spec:"N/A", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+/* 23 */ { name:"Deck Stain and Seal", trade:"Exterior", category:"Exterior", subcategory:"Deck", description:"Stain and Seal Deck", spec:"N/A", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 24 */ { name:"Fence Install - Wood", trade:"Exterior", category:"Exterior", subcategory:"Fence", description:"Install Wood Fence", spec:"Privacy", unit:"LF", baseColumbusPrice:25, volume:25.75, retail:34.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 25 */ { name:"Fence Install - Vinyl", trade:"Exterior", category:"Exterior", subcategory:"Fence", description:"Install Vinyl Fence", spec:"Privacy", unit:"LF", baseColumbusPrice:35, volume:36.05, retail:48.67, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // BATHROOM ADDITIONS
-  // ========================
-  {
-    name: "Install Shower Valve",
-    category: "Plumbing",
-    description: "Install shower valve",
-    unit: "EA",
-    retail: 425,
-    volume: 325
-  },
-  {
-    name: "Install Shower Head",
-    category: "Plumbing",
-    description: "Install shower head",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Install Tub Spout",
-    category: "Plumbing",
-    description: "Install tub spout",
-    unit: "EA",
-    retail: 85,
-    volume: 60
-  },
-  {
-    name: "Install Bathroom Exhaust Fan (Replacement)",
-    category: "Electrical",
-    description: "Replace existing exhaust fan",
-    unit: "EA",
-    retail: 285,
-    volume: 215
-  },
+/* 26 */ { name:"Siding Replace - Vinyl", trade:"Exterior", category:"Exterior", subcategory:"Siding", description:"Replace Vinyl Siding Section", spec:"N/A", unit:"SF", baseColumbusPrice:8.50, volume:8.76, retail:11.83, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 27 */ { name:"Siding Replace - Fiber Cement", trade:"Exterior", category:"Exterior", subcategory:"Siding", description:"Replace Fiber Cement Siding", spec:"Hardie", unit:"SF", baseColumbusPrice:12.00, volume:12.36, retail:16.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 28 */ { name:"Soffit Repair", trade:"Exterior", category:"Exterior", subcategory:"Roofline", description:"Repair Soffit Section", spec:"N/A", unit:"LF", baseColumbusPrice:12.50, volume:12.88, retail:17.39, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 29 */ { name:"Fascia Repair", trade:"Exterior", category:"Exterior", subcategory:"Roofline", description:"Repair Fascia Board", spec:"N/A", unit:"LF", baseColumbusPrice:13.50, volume:13.91, retail:18.79, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 30 */ { name:"Exterior Caulking Full House", trade:"Exterior", category:"Exterior", subcategory:"Sealant", description:"Caulk Exterior Gaps and Joints", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 31 */ ,{ name:"Roof Shingle Replacement - 3 Tab", trade:"Roofing", category:"Roofing", subcategory:"Shingles", description:"Replace 3-Tab Shingles", spec:"GAF / Owens Corning", unit:"SQ", baseColumbusPrice:285, volume:293.55, retail:396.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 32 */ { name:"Roof Shingle Replacement - Architectural", trade:"Roofing", category:"Roofing", subcategory:"Shingles", description:"Replace Architectural Shingles", spec:"GAF / Owens Corning", unit:"SQ", baseColumbusPrice:325, volume:334.75, retail:451.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 33 */ { name:"Roof Repair - Minor", trade:"Roofing", category:"Roofing", subcategory:"Repair", description:"Minor Roof Repair", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 34 */ { name:"Roof Repair - Major", trade:"Roofing", category:"Roofing", subcategory:"Repair", description:"Major Roof Repair", spec:"N/A", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 35 */ { name:"Roof Leak Detection", trade:"Roofing", category:"Roofing", subcategory:"Inspection", description:"Locate Roof Leak Source", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // KITCHEN ADDITIONS
-  // ========================
-  {
-    name: "Install Backsplash",
-    category: "Carpentry",
-    description: "Install tile backsplash",
-    unit: "SF",
-    retail: 22.50,
-    volume: 17.00
-  },
-  {
-    name: "Install Range Hood",
-    category: "Appliances",
-    description: "Install range hood",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
-  {
-    name: "Install Sink",
-    category: "Plumbing",
-    description: "Install kitchen sink",
-    unit: "EA",
-    retail: 325,
-    volume: 250
-  },
-  {
-    name: "Replace Sink",
-    category: "Plumbing",
-    description: "Remove and replace sink",
-    unit: "EA",
-    retail: 375,
-    volume: 285
-  }
+/* 36 */ { name:"Flashing Replacement", trade:"Roofing", category:"Roofing", subcategory:"Flashing", description:"Replace Roof Flashing", spec:"Aluminum", unit:"LF", baseColumbusPrice:18, volume:18.54, retail:25.04, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 37 */ { name:"Chimney Flashing Repair", trade:"Roofing", category:"Roofing", subcategory:"Flashing", description:"Repair Chimney Flashing", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:257.5, retail:347.88, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 38 */ { name:"Vent Boot Replacement", trade:"Roofing", category:"Roofing", subcategory:"Vent", description:"Replace Roof Vent Boot", spec:"Rubber", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 39 */ { name:"Roof Vent Install", trade:"Roofing", category:"Roofing", subcategory:"Vent", description:"Install Roof Vent", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 40 */ { name:"Attic Vent Install", trade:"Roofing", category:"Roofing", subcategory:"Vent", description:"Install Attic Ventilation", spec:"N/A", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 41 */ { name:"Electrical Outlet Replace", trade:"Electrical", category:"Electrical", subcategory:"Outlet", description:"Replace Electrical Outlet", spec:"Standard", unit:"EA", baseColumbusPrice:65, volume:66.95, retail:90.44, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 42 */ { name:"GFCI Outlet Install", trade:"Electrical", category:"Electrical", subcategory:"Outlet", description:"Install GFCI Outlet", spec:"N/A", unit:"EA", baseColumbusPrice:95, volume:97.85, retail:132.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 43 */ { name:"Light Fixture Replace", trade:"Electrical", category:"Electrical", subcategory:"Lighting", description:"Replace Light Fixture", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 44 */ { name:"Ceiling Fan Install", trade:"Electrical", category:"Electrical", subcategory:"Fan", description:"Install Ceiling Fan", spec:"N/A", unit:"EA", baseColumbusPrice:185, volume:190.55, retail:257.24, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 45 */ { name:"Switch Replace", trade:"Electrical", category:"Electrical", subcategory:"Switch", description:"Replace Light Switch", spec:"Standard", unit:"EA", baseColumbusPrice:55, volume:56.65, retail:76.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 46 */ { name:"Breaker Replacement", trade:"Electrical", category:"Electrical", subcategory:"Panel", description:"Replace Circuit Breaker", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 47 */ { name:"Panel Upgrade - 100A to 200A", trade:"Electrical", category:"Electrical", subcategory:"Panel", description:"Upgrade Electrical Panel", spec:"N/A", unit:"EA", baseColumbusPrice:1850, volume:1905.5, retail:2572.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 48 */ { name:"Wire Repair", trade:"Electrical", category:"Electrical", subcategory:"Wiring", description:"Repair Electrical Wiring", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 49 */ { name:"New Circuit Install", trade:"Electrical", category:"Electrical", subcategory:"Wiring", description:"Install New Electrical Circuit", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 50 */ { name:"Exterior Light Install", trade:"Electrical", category:"Electrical", subcategory:"Lighting", description:"Install Exterior Light", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:154.5, retail:208.54, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 51 */ { name:"Interior Paint - Full Room", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint Walls, Trim, Ceiling", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"Adjusted", quoteRequired:false },
+/* 52 */ { name:"Interior Paint - Walls Only", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint Walls Only", spec:"2 Coat", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 53 */ { name:"Interior Paint - Ceiling Only", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint Ceiling", spec:"N/A", unit:"SF", baseColumbusPrice:1.50, volume:1.55, retail:2.09, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 54 */ { name:"Interior Paint - Trim Only", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint Trim", spec:"N/A", unit:"LF", baseColumbusPrice:1.50, volume:1.55, retail:2.09, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 55 */ { name:"Door Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint Interior Door", spec:"2 Coat", unit:"EA", baseColumbusPrice:65, volume:66.95, retail:90.44, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 56 */ { name:"Exterior Paint - Siding", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint Exterior Siding", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.50, volume:2.58, retail:3.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 57 */ { name:"Exterior Paint - Trim", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint Exterior Trim", spec:"N/A", unit:"LF", baseColumbusPrice:2.00, volume:2.06, retail:2.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 58 */ { name:"Deck Stain", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Stain Deck", spec:"N/A", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 59 */ { name:"Fence Stain", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Stain Fence", spec:"N/A", unit:"LF", baseColumbusPrice:2.00, volume:2.06, retail:2.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 60 */ { name:"Pressure Wash Exterior", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Pressure Wash Exterior Surfaces", spec:"N/A", unit:"SF", baseColumbusPrice:0.50, volume:0.52, retail:0.70, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 61 */ ,{ name:"Drywall Patch - Small", trade:"Drywall", category:"Drywall", subcategory:"Patch", description:"Patch Small Drywall Area", spec:"≤1 SF", unit:"EA", baseColumbusPrice:75, volume:77.25, retail:104.27, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 62 */ { name:"Drywall Patch - Medium", trade:"Drywall", category:"Drywall", subcategory:"Patch", description:"Patch Medium Drywall Area", spec:"≤4 SF", unit:"EA", baseColumbusPrice:140, volume:144.2, retail:194.67, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 63 */ { name:"Drywall Patch - Large", trade:"Drywall", category:"Drywall", subcategory:"Patch", description:"Patch Large Drywall Area", spec:"≤12 SF", unit:"EA", baseColumbusPrice:275, volume:283.25, retail:382.96, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 64 */ { name:"Drywall Replace - Wall Section", trade:"Drywall", category:"Drywall", subcategory:"Replace", description:"Replace Drywall Wall Section", spec:"N/A", unit:"SF", baseColumbusPrice:4.25, volume:4.38, retail:5.91, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 65 */ { name:"Drywall Replace - Ceiling Section", trade:"Drywall", category:"Drywall", subcategory:"Replace", description:"Replace Ceiling Drywall", spec:"N/A", unit:"SF", baseColumbusPrice:5.25, volume:5.41, retail:7.30, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 66 */ { name:"Texture Match - Orange Peel", trade:"Drywall", category:"Drywall", subcategory:"Finish", description:"Match Orange Peel Texture", spec:"N/A", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 67 */ { name:"Texture Match - Knockdown", trade:"Drywall", category:"Drywall", subcategory:"Finish", description:"Match Knockdown Texture", spec:"N/A", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 68 */ { name:"Skim Coat - Full Room", trade:"Drywall", category:"Drywall", subcategory:"Finish", description:"Skim Coat Full Room", spec:"N/A", unit:"SF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 69 */ { name:"Popcorn Ceiling Removal", trade:"Drywall", category:"Drywall", subcategory:"Finish", description:"Remove Popcorn Texture", spec:"N/A", unit:"SF", baseColumbusPrice:3.75, volume:3.86, retail:5.21, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 70 */ { name:"Drywall General Repair", trade:"Drywall", category:"Drywall", subcategory:"Repair", description:"General Drywall Repair", spec:"N/A", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true },
+
+/* 71 */ { name:"Tile Floor Install", trade:"Flooring", category:"Flooring", subcategory:"Tile", description:"Install Tile Flooring", spec:"Standard", unit:"SF", baseColumbusPrice:10.50, volume:10.82, retail:14.61, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 72 */ { name:"Tile Backsplash Install", trade:"Flooring", category:"Flooring", subcategory:"Tile", description:"Install Tile Backsplash", spec:"Standard", unit:"SF", baseColumbusPrice:12.50, volume:12.88, retail:17.39, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 73 */ { name:"Tile Shower Install", trade:"Flooring", category:"Flooring", subcategory:"Tile", description:"Install Tile Shower Walls", spec:"Standard", unit:"SF", baseColumbusPrice:18.00, volume:18.54, retail:25.04, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 74 */ { name:"Tile Grout Repair", trade:"Flooring", category:"Flooring", subcategory:"Tile", description:"Repair Tile Grout", spec:"N/A", unit:"SF", baseColumbusPrice:4.25, volume:4.38, retail:5.91, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 75 */ { name:"Tile Regrout - Full Area", trade:"Flooring", category:"Flooring", subcategory:"Tile", description:"Regrout Tile Area", spec:"N/A", unit:"SF", baseColumbusPrice:6.50, volume:6.70, retail:9.05, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 76 */ { name:"Laminate Flooring Install", trade:"Flooring", category:"Flooring", subcategory:"Laminate", description:"Install Laminate Flooring", spec:"Floating", unit:"SF", baseColumbusPrice:4.00, volume:4.12, retail:5.56, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 77 */ { name:"Vinyl Plank Install", trade:"Flooring", category:"Flooring", subcategory:"LVP", description:"Install Vinyl Plank Flooring", spec:"Floating", unit:"SF", baseColumbusPrice:4.50, volume:4.64, retail:6.26, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 78 */ { name:"Hardwood Install", trade:"Flooring", category:"Flooring", subcategory:"Hardwood", description:"Install Hardwood Flooring", spec:"Nail Down", unit:"SF", baseColumbusPrice:8.50, volume:8.76, retail:11.83, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 79 */ { name:"Carpet Install", trade:"Flooring", category:"Flooring", subcategory:"Carpet", description:"Install Carpet", spec:"Standard", unit:"SF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 80 */ { name:"Flooring Removal - All Types", trade:"Flooring", category:"Flooring", subcategory:"Demo", description:"Remove Existing Flooring", spec:"N/A", unit:"SF", baseColumbusPrice:2.00, volume:2.06, retail:2.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 81 */ { name:"Subfloor Repair - Minor", trade:"Flooring", category:"Flooring", subcategory:"Subfloor", description:"Repair Minor Subfloor Damage", spec:"N/A", unit:"SF", baseColumbusPrice:5.50, volume:5.67, retail:7.65, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 82 */ { name:"Subfloor Replacement", trade:"Flooring", category:"Flooring", subcategory:"Subfloor", description:"Replace Subfloor Section", spec:"N/A", unit:"SF", baseColumbusPrice:9.00, volume:9.27, retail:12.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 83 */ { name:"Floor Leveling", trade:"Flooring", category:"Flooring", subcategory:"Prep", description:"Level Floor Surface", spec:"Self-Leveler", unit:"SF", baseColumbusPrice:3.75, volume:3.86, retail:5.21, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 84 */ { name:"Moisture Barrier Install", trade:"Flooring", category:"Flooring", subcategory:"Prep", description:"Install Moisture Barrier", spec:"N/A", unit:"SF", baseColumbusPrice:1.25, volume:1.29, retail:1.74, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 85 */ { name:"Flooring Transition Install", trade:"Flooring", category:"Flooring", subcategory:"Trim", description:"Install Floor Transition", spec:"N/A", unit:"EA", baseColumbusPrice:35, volume:36.05, retail:48.67, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 86 */ { name:"Concrete Patch Repair", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Patch Concrete Surface", spec:"N/A", unit:"SF", baseColumbusPrice:4.50, volume:4.64, retail:6.26, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 87 */ { name:"Concrete Crack Repair", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Repair Concrete Crack", spec:"N/A", unit:"LF", baseColumbusPrice:6.00, volume:6.18, retail:8.35, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 88 */ { name:"Concrete Pour - Small Slab", trade:"Concrete", category:"Concrete", subcategory:"Install", description:"Pour Small Concrete Slab", spec:"N/A", unit:"SF", baseColumbusPrice:12.00, volume:12.36, retail:16.69, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 89 */ { name:"Driveway Repair Section", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"Repair Driveway Section", spec:"N/A", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 90 */ { name:"Concrete General Repair", trade:"Concrete", category:"Concrete", subcategory:"Repair", description:"General Concrete Repair", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
 
 ]);
