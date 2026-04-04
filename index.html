@@ -440,18 +440,33 @@ function refreshLocks(){
 }
 
 function handleBlockedAction(e){
-  if(headerComplete()) return true;
+  if (headerComplete()) return true;
 
   const nextEl = getNextStepElement();
-  if(e){
+  const billingStep = headerStep() === "billing";
+  const billingBox = $("billingSame");
+  const billingBoxWrap = $("billingSameBox");
+
+  if (e) {
     const target = e.target;
-    if(target === nextEl) return true;
+
+    const clickedBillingBox =
+      billingStep &&
+      (target === billingBox ||
+       target === billingBoxWrap ||
+       billingBoxWrap.contains(target));
+
+    const clickedNextField = target === nextEl;
+
+    if (clickedNextField || clickedBillingBox) return true;
+
     e.preventDefault();
     e.stopPropagation();
   }
 
-  if(nextEl) flashEl(nextEl);
-  if(headerStep() === "billing") flashEl($("billingSameBox"));
+  if (nextEl) flashEl(nextEl);
+  if (billingStep) flashEl(billingBoxWrap);
+
   return false;
 }
 
