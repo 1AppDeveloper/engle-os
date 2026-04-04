@@ -1,283 +1,108 @@
-window.ENGLE_PRICE_BOOK = window.ENGLE_PRICE_BOOK.concat([
+window.ENGLE_PRICE_BOOK = (window.ENGLE_PRICE_BOOK || []).concat([
+/* 1 */ { name:"Interior Door Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint interior door (2 coat)", spec:"Standard", unit:"EA", baseColumbusPrice:65, volume:66.95, retail:90.44, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 2 */ { name:"Exterior Door Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint exterior door", spec:"2 Coat", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 3 */ { name:"Garage Door Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint garage door", spec:"2 Coat", unit:"EA", baseColumbusPrice:175, volume:180.25, retail:243.34, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 4 */ { name:"Wall Paint - Touch Up", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Touch up wall paint", spec:"N/A", unit:"SF", baseColumbusPrice:0.85, volume:0.88, retail:1.19, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 5 */ { name:"Ceiling Paint - Touch Up", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Touch up ceiling paint", spec:"N/A", unit:"SF", baseColumbusPrice:0.85, volume:0.88, retail:1.19, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // WINDOWS / GLASS
-  // ========================
-  {
-    name: "Replace Window Glass",
-    category: "Windows",
-    description: "Remove and replace broken window glass",
-    unit: "EA",
-    retail: 225,
-    volume: 170
-  },
-  {
-    name: "Re-caulk Window",
-    category: "Windows",
-    description: "Remove and replace window caulk",
-    unit: "EA",
-    retail: 45,
-    volume: 32
-  },
-  {
-    name: "Replace Window Trim",
-    category: "Windows",
-    description: "Replace interior or exterior window trim",
-    unit: "LF",
-    retail: 11.5,
-    volume: 8.5
-  },
-  {
-    name: "Install Window Well Cover",
-    category: "Windows",
-    description: "Install window well cover",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
+/* 6 */ { name:"Trim Paint - Touch Up", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Touch up trim paint", spec:"N/A", unit:"LF", baseColumbusPrice:0.85, volume:0.88, retail:1.19, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 7 */ { name:"Primer Coat - Interior", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Apply primer coat", spec:"N/A", unit:"SF", baseColumbusPrice:1.00, volume:1.03, retail:1.39, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 8 */ { name:"Primer Coat - Exterior", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Apply exterior primer", spec:"N/A", unit:"SF", baseColumbusPrice:1.25, volume:1.29, retail:1.74, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 9 */ { name:"Stain Wood Trim - Interior", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Stain interior trim", spec:"N/A", unit:"LF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 10 */ { name:"Stain Wood Door", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Stain wood door", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // DOORS / WEATHER / LOCKS
-  // ========================
-  {
-    name: "Replace Interior Door Slab",
-    category: "Doors",
-    description: "Remove and replace interior door slab",
-    unit: "EA",
-    retail: 245,
-    volume: 185
-  },
-  {
-    name: "Replace Exterior Door Slab",
-    category: "Doors",
-    description: "Remove and replace exterior door slab",
-    unit: "EA",
-    retail: 395,
-    volume: 295
-  },
-  {
-    name: "Replace Lockset",
-    category: "Doors",
-    description: "Remove and replace lockset",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
-  {
-    name: "Install Smart Lock",
-    category: "Doors",
-    description: "Install smart lock",
-    unit: "EA",
-    retail: 165,
-    volume: 125
-  },
-  {
-    name: "Adjust Exterior Door",
-    category: "Doors",
-    description: "Adjust exterior door for proper fit",
-    unit: "EA",
-    retail: 95,
-    volume: 70
-  },
+/* 11 */ { name:"Deck Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint deck surface", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.75, volume:2.83, retail:3.82, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 12 */ { name:"Fence Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint fence", spec:"2 Coat", unit:"LF", baseColumbusPrice:2.50, volume:2.58, retail:3.48, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 13 */ { name:"Garage Interior Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint garage interior", spec:"2 Coat", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 14 */ { name:"Basement Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint basement walls/ceilings", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.00, volume:2.06, retail:2.78, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 15 */ { name:"Concrete Floor Paint", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Paint concrete floor", spec:"Epoxy/Standard", unit:"SF", baseColumbusPrice:3.50, volume:3.61, retail:4.87, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // APPLIANCES / HOOD / VENT
-  // ========================
-  {
-    name: "Install Over-the-Range Microwave",
-    category: "Appliances",
-    description: "Install over-the-range microwave",
-    unit: "EA",
-    retail: 285,
-    volume: 215
-  },
-  {
-    name: "Replace Over-the-Range Microwave",
-    category: "Appliances",
-    description: "Remove and replace over-the-range microwave",
-    unit: "EA",
-    retail: 325,
-    volume: 245
-  },
-  {
-    name: "Install Vent Hood",
-    category: "Appliances",
-    description: "Install vent hood",
-    unit: "EA",
-    retail: 295,
-    volume: 225
-  },
-  {
-    name: "Replace Vent Hood",
-    category: "Appliances",
-    description: "Remove and replace vent hood",
-    unit: "EA",
-    retail: 335,
-    volume: 255
-  },
+/* 16 */ { name:"Drywall Prime & Paint Combo", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Prime and paint drywall", spec:"2 Coat", unit:"SF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 17 */ { name:"Cabinet Paint - Single Door", trade:"Painting", category:"Painting", subcategory:"Cabinet", description:"Paint cabinet door", spec:"N/A", unit:"EA", baseColumbusPrice:45, volume:46.35, retail:62.57, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 18 */ { name:"Cabinet Paint - Full Set", trade:"Painting", category:"Painting", subcategory:"Cabinet", description:"Paint full cabinet set", spec:"Standard Kitchen", unit:"EA", baseColumbusPrice:1200, volume:1236, retail:1668.6, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 19 */ { name:"Accent Wall Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint accent wall", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.75, volume:2.83, retail:3.82, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 20 */ { name:"High Ceiling Paint", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint high ceilings", spec:"2 Coat", unit:"SF", baseColumbusPrice:3.50, volume:3.61, retail:4.87, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // DRYWALL / PATCH / WATER DAMAGE
-  // ========================
-  {
-    name: "Water Damage Repair - Small",
-    category: "General",
-    description: "Small water damage repair area",
-    unit: "EA",
-    retail: 225,
-    volume: 170
-  },
-  {
-    name: "Water Damage Repair - Medium",
-    category: "General",
-    description: "Medium water damage repair area",
-    unit: "EA",
-    retail: 425,
-    volume: 320
-  },
-  {
-    name: "Water Damage Repair - Large",
-    category: "General",
-    description: "Large water damage repair area",
-    unit: "EA",
-    retail: 775,
-    volume: 585
-  },
-  {
-    name: "Patch Wall Opening",
-    category: "General",
-    description: "Patch wall opening after repair",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
+/* 21 */ { name:"Paint Staircase", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint staircase and railing", spec:"2 Coat", unit:"EA", baseColumbusPrice:450, volume:463.5, retail:626.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 22 */ { name:"Paint Closet Interior", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint closet interior", spec:"2 Coat", unit:"EA", baseColumbusPrice:125, volume:128.75, retail:173.94, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 23 */ { name:"Paint Laundry Room", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint laundry room", spec:"2 Coat", unit:"EA", baseColumbusPrice:175, volume:180.25, retail:243.34, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 24 */ { name:"Paint Bathroom Full", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint bathroom walls/ceilings/trim", spec:"2 Coat", unit:"EA", baseColumbusPrice:225, volume:231.75, retail:312.86, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 25 */ { name:"Paint Kitchen Full", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint kitchen full", spec:"2 Coat", unit:"EA", baseColumbusPrice:350, volume:360.5, retail:486.14, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // EXTERIOR / DRAINAGE
-  // ========================
-  {
-    name: "Install French Drain",
-    category: "Exterior",
-    description: "Install French drain system",
-    unit: "LF",
-    retail: 42,
-    volume: 32
-  },
-  {
-    name: "Install Downspout Extension",
-    category: "Exterior",
-    description: "Install downspout extension",
-    unit: "EA",
-    retail: 38,
-    volume: 28
-  },
-  {
-    name: "Regrade Soil",
-    category: "Exterior",
-    description: "Regrade soil for drainage",
-    unit: "SF",
-    retail: 2.25,
-    volume: 1.7
-  },
+/* 26 */ { name:"Paint Living Room Full", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint living room", spec:"2 Coat", unit:"EA", baseColumbusPrice:375, volume:386.25, retail:521.44, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 27 */ { name:"Paint Bedroom Full", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint bedroom", spec:"2 Coat", unit:"EA", baseColumbusPrice:300, volume:309, retail:417.15, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 28 */ { name:"Paint Hallway", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint hallway", spec:"2 Coat", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 29 */ { name:"Paint Whole House Interior", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint entire interior", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.25, volume:2.35, retail:3.10, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 30 */ { name:"Painting General Repair", trade:"Painting", category:"Painting", subcategory:"Service", description:"General painting repair/service", spec:"", unit:"EA", baseColumbusPrice:null, volume:null, retail:null, source:"Columbus Master", reviewFlag:"", quoteRequired:true }
+/* 31 */ ,{ name:"Exterior Paint - Full House", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint full exterior siding", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.75, volume:2.85, retail:3.85, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 32 */ { name:"Exterior Paint - Partial Elevation", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint one side of house", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.85, volume:2.95, retail:3.98, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 33 */ { name:"Exterior Trim Paint - Full House", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint all exterior trim", spec:"2 Coat", unit:"LF", baseColumbusPrice:2.25, volume:2.35, retail:3.17, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 34 */ { name:"Exterior Fascia Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint fascia boards", spec:"2 Coat", unit:"LF", baseColumbusPrice:2.50, volume:2.60, retail:3.51, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 35 */ { name:"Exterior Soffit Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint soffits", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.25, volume:2.35, retail:3.17, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
 
-  // ========================
-  // FENCE / GATE
-  // ========================
-  {
-    name: "Install Gate Hardware",
-    category: "Fence",
-    description: "Install gate hardware",
-    unit: "EA",
-    retail: 85,
-    volume: 62
-  },
-  {
-    name: "Replace Gate Latch",
-    category: "Fence",
-    description: "Replace gate latch",
-    unit: "EA",
-    retail: 42,
-    volume: 30
-  },
-  {
-    name: "Adjust Gate",
-    category: "Fence",
-    description: "Adjust gate for proper operation",
-    unit: "EA",
-    retail: 75,
-    volume: 55
-  },
+/* 36 */ { name:"Garage Exterior Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint detached garage exterior", spec:"2 Coat", unit:"EA", baseColumbusPrice:450, volume:465, retail:627.75, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 37 */ { name:"Shed Paint", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Paint shed structure", spec:"2 Coat", unit:"EA", baseColumbusPrice:250, volume:258, retail:348.3, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 38 */ { name:"Front Door Stain & Seal", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Stain and seal wood front door", spec:"Premium Finish", unit:"EA", baseColumbusPrice:175, volume:180, retail:243, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 39 */ { name:"Exterior Wood Repair & Paint Combo", trade:"Painting", category:"Painting", subcategory:"Exterior", description:"Repair and paint wood siding", spec:"Minor Repair", unit:"SF", baseColumbusPrice:3.50, volume:3.60, retail:4.86, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 40 */ { name:"Caulking - Exterior Full House", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Exterior caulking all joints", spec:"Premium Sealant", unit:"LF", baseColumbusPrice:1.50, volume:1.55, retail:2.09, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // CLEANING / TURN ITEMS
-  // ========================
-  {
-    name: "Trash Out - Small",
-    category: "Cleaning",
-    description: "Small trash out",
-    unit: "EA",
-    retail: 185,
-    volume: 140
-  },
-  {
-    name: "Trash Out - Medium",
-    category: "Cleaning",
-    description: "Medium trash out",
-    unit: "EA",
-    retail: 385,
-    volume: 290
-  },
-  {
-    name: "Trash Out - Large",
-    category: "Cleaning",
-    description: "Large trash out",
-    unit: "EA",
-    retail: 685,
-    volume: 520
-  },
-  {
-    name: "Odor Treatment",
-    category: "Cleaning",
-    description: "Odor treatment service",
-    unit: "EA",
-    retail: 225,
-    volume: 170
-  },
+/* 41 */ { name:"Caulking - Windows & Doors", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Seal windows and doors", spec:"N/A", unit:"EA", baseColumbusPrice:15, volume:15.5, retail:20.93, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 42 */ { name:"Scrape & Prep Peeling Paint", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Scrape loose/peeling paint", spec:"N/A", unit:"SF", baseColumbusPrice:1.25, volume:1.29, retail:1.74, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 43 */ { name:"Power Sand Surface Prep", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Sand surfaces for paint prep", spec:"N/A", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 44 */ { name:"Masking & Protection Setup", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Mask floors and fixtures", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:155, retail:209.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 45 */ { name:"Lead Paint Safety Prep", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Lead-safe prep procedures", spec:"EPA RRP", unit:"EA", baseColumbusPrice:300, volume:310, retail:418.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
 
-  // ========================
-  // MISC FIELD ITEMS
-  // ========================
-  {
-    name: "Board Up Window",
-    category: "General",
-    description: "Temporary board-up for window",
-    unit: "EA",
-    retail: 145,
-    volume: 110
-  },
-  {
-    name: "Board Up Door",
-    category: "General",
-    description: "Temporary board-up for door",
-    unit: "EA",
-    retail: 165,
-    volume: 125
-  },
-  {
-    name: "Temporary Tarp",
-    category: "Roofing",
-    description: "Install temporary roof tarp",
-    unit: "EA",
-    retail: 285,
-    volume: 215
-  },
-  {
-    name: "Emergency Service Call",
-    category: "General",
-    description: "After-hours or emergency service call",
-    unit: "EA",
-    retail: 225,
-    volume: 170
-  }
+/* 46 */ { name:"Epoxy Garage Floor Coating", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Apply epoxy coating", spec:"2-Part System", unit:"SF", baseColumbusPrice:5.50, volume:5.65, retail:7.63, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 47 */ { name:"Concrete Sealer Application", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Apply concrete sealer", spec:"N/A", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 48 */ { name:"Brick Paint / Limewash", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Paint or limewash brick", spec:"Premium", unit:"SF", baseColumbusPrice:4.50, volume:4.65, retail:6.28, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 49 */ { name:"Deck Waterproof Coating", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Apply waterproof deck coating", spec:"N/A", unit:"SF", baseColumbusPrice:3.75, volume:3.88, retail:5.24, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 50 */ { name:"Rust Treatment & Paint Metal", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Treat rust and paint metal surfaces", spec:"N/A", unit:"SF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 51 */ { name:"Paint Accent Ceiling", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint ceiling accent color", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.75, volume:2.83, retail:3.82, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 52 */ { name:"Paint Garage Ceiling", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint garage ceiling", spec:"2 Coat", unit:"SF", baseColumbusPrice:1.75, volume:1.80, retail:2.43, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 53 */ { name:"Paint Basement Ceiling Exposed", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint exposed basement ceiling", spec:"Open Joist", unit:"SF", baseColumbusPrice:2.25, volume:2.32, retail:3.13, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 54 */ { name:"Paint Utility Room", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint utility room", spec:"2 Coat", unit:"EA", baseColumbusPrice:175, volume:180, retail:243, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 55 */ { name:"Paint Mudroom", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint mudroom", spec:"2 Coat", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 56 */ { name:"Paint Stair Risers Only", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint stair risers", spec:"2 Coat", unit:"EA", baseColumbusPrice:150, volume:155, retail:209.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 57 */ { name:"Paint Stair Treads Only", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint stair treads", spec:"2 Coat", unit:"EA", baseColumbusPrice:175, volume:180, retail:243, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 58 */ { name:"Paint Built-In Shelving", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint built-in shelving", spec:"2 Coat", unit:"EA", baseColumbusPrice:250, volume:258, retail:348.3, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 59 */ { name:"Paint Fireplace Surround", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Paint fireplace surround", spec:"2 Coat", unit:"EA", baseColumbusPrice:225, volume:232, retail:313.2, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 60 */ { name:"Painting Inspection Service", trade:"Painting", category:"Painting", subcategory:"Service", description:"Inspect paint condition", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:130, retail:175.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
+/* 61 */ ,{ name:"Wallpaper Removal - Standard", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Remove standard wallpaper", spec:"Single Layer", unit:"SF", baseColumbusPrice:1.85, volume:1.90, retail:2.57, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 62 */ { name:"Wallpaper Removal - Multiple Layers", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Remove multiple wallpaper layers", spec:"Heavy Removal", unit:"SF", baseColumbusPrice:2.75, volume:2.85, retail:3.85, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 63 */ { name:"Wallpaper Install", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Install wallpaper", spec:"Standard Install", unit:"SF", baseColumbusPrice:4.25, volume:4.40, retail:5.94, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 64 */ { name:"Wallpaper Accent Wall Install", trade:"Painting", category:"Painting", subcategory:"Interior", description:"Install wallpaper accent wall", spec:"Premium", unit:"EA", baseColumbusPrice:450, volume:465, retail:627.75, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 65 */ { name:"Texture Ceiling Repair", trade:"Painting", category:"Painting", subcategory:"Repair", description:"Repair ceiling texture", spec:"Knockdown/Orange Peel", unit:"SF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 66 */ { name:"Popcorn Ceiling Removal", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Remove popcorn ceiling texture", spec:"Includes disposal", unit:"SF", baseColumbusPrice:3.75, volume:3.88, retail:5.24, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 67 */ { name:"Popcorn Ceiling Removal w/ Asbestos Prep", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Remove popcorn ceiling with asbestos protocol", spec:"EPA Safe", unit:"SF", baseColumbusPrice:6.50, volume:6.70, retail:9.05, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:true },
+/* 68 */ { name:"Drywall Repair - Small Patch", trade:"Painting", category:"Painting", subcategory:"Repair", description:"Repair small drywall hole", spec:"Under 1 SF", unit:"EA", baseColumbusPrice:85, volume:88, retail:118.8, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 69 */ { name:"Drywall Repair - Medium Patch", trade:"Painting", category:"Painting", subcategory:"Repair", description:"Repair medium drywall damage", spec:"1–4 SF", unit:"EA", baseColumbusPrice:150, volume:155, retail:209.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 70 */ { name:"Drywall Repair - Large Section", trade:"Painting", category:"Painting", subcategory:"Repair", description:"Repair large drywall section", spec:"4+ SF", unit:"EA", baseColumbusPrice:300, volume:310, retail:418.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 71 */ { name:"Skim Coat Walls", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Apply skim coat for smooth finish", spec:"Level 5", unit:"SF", baseColumbusPrice:3.50, volume:3.60, retail:4.86, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 72 */ { name:"Prime Walls Only", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Prime walls before painting", spec:"1 Coat", unit:"SF", baseColumbusPrice:1.25, volume:1.30, retail:1.76, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 73 */ { name:"Prime Ceiling Only", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Prime ceiling surface", spec:"1 Coat", unit:"SF", baseColumbusPrice:1.15, volume:1.20, retail:1.62, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 74 */ { name:"Prime Trim Only", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Prime trim surfaces", spec:"1 Coat", unit:"LF", baseColumbusPrice:1.35, volume:1.40, retail:1.89, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 75 */ { name:"Odor Blocking Primer Application", trade:"Painting", category:"Painting", subcategory:"Specialty", description:"Apply odor blocking primer", spec:"Kilz/Zinsser", unit:"SF", baseColumbusPrice:2.50, volume:2.60, retail:3.51, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+
+/* 76 */ { name:"Cabinet Paint - Full Kitchen", trade:"Painting", category:"Painting", subcategory:"Cabinets", description:"Paint full kitchen cabinets", spec:"Spray Finish", unit:"EA", baseColumbusPrice:3200, volume:3300, retail:4455, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:true },
+/* 77 */ { name:"Cabinet Paint - Bathroom Vanity", trade:"Painting", category:"Painting", subcategory:"Cabinets", description:"Paint bathroom vanity", spec:"Spray Finish", unit:"EA", baseColumbusPrice:650, volume:670, retail:904.5, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 78 */ { name:"Cabinet Door Only Paint", trade:"Painting", category:"Painting", subcategory:"Cabinets", description:"Paint cabinet doors only", spec:"Spray Finish", unit:"EA", baseColumbusPrice:55, volume:57, retail:77, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 79 */ { name:"Cabinet Box Paint Only", trade:"Painting", category:"Painting", subcategory:"Cabinets", description:"Paint cabinet frames only", spec:"Brush/Roll", unit:"EA", baseColumbusPrice:750, volume:775, retail:1046.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 80 */ { name:"Cabinet Prep & Degrease", trade:"Painting", category:"Painting", subcategory:"Cabinets", description:"Clean and prep cabinets", spec:"N/A", unit:"EA", baseColumbusPrice:250, volume:258, retail:348.3, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+
+/* 81 */ { name:"Stain Interior Trim", trade:"Painting", category:"Painting", subcategory:"Stain", description:"Stain interior trim", spec:"2 Coat", unit:"LF", baseColumbusPrice:3.25, volume:3.35, retail:4.52, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 82 */ { name:"Stain Interior Doors", trade:"Painting", category:"Painting", subcategory:"Stain", description:"Stain wood doors", spec:"2 Coat", unit:"EA", baseColumbusPrice:125, volume:130, retail:175.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 83 */ { name:"Stain Deck Boards", trade:"Painting", category:"Painting", subcategory:"Stain", description:"Stain deck boards", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.50, volume:2.60, retail:3.51, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 84 */ { name:"Stain Fence", trade:"Painting", category:"Painting", subcategory:"Stain", description:"Stain wood fence", spec:"2 Coat", unit:"SF", baseColumbusPrice:2.75, volume:2.85, retail:3.85, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+/* 85 */ { name:"Stain Pergola", trade:"Painting", category:"Painting", subcategory:"Stain", description:"Stain pergola structure", spec:"2 Coat", unit:"EA", baseColumbusPrice:450, volume:465, retail:627.75, source:"Adjusted Columbus", reviewFlag:"Adjusted", quoteRequired:false },
+
+/* 86 */ { name:"Touch-Up Paint Service", trade:"Painting", category:"Painting", subcategory:"Service", description:"Minor touch-ups", spec:"N/A", unit:"EA", baseColumbusPrice:125, volume:130, retail:175.5, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 87 */ { name:"Color Consultation", trade:"Painting", category:"Painting", subcategory:"Service", description:"Assist with color selection", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:155, retail:209.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 88 */ { name:"Paint Warranty Service Call", trade:"Painting", category:"Painting", subcategory:"Service", description:"Warranty inspection/service", spec:"N/A", unit:"EA", baseColumbusPrice:0, volume:0, retail:0, source:"Internal", reviewFlag:"", quoteRequired:false },
+/* 89 */ { name:"Jobsite Protection Setup", trade:"Painting", category:"Painting", subcategory:"Prep", description:"Protect floors/furniture", spec:"Full Coverage", unit:"EA", baseColumbusPrice:200, volume:206, retail:278.1, source:"Columbus Master", reviewFlag:"", quoteRequired:false },
+/* 90 */ { name:"Cleanup & Disposal - Painting", trade:"Painting", category:"Painting", subcategory:"Service", description:"Cleanup and disposal of materials", spec:"N/A", unit:"EA", baseColumbusPrice:150, volume:155, retail:209.25, source:"Columbus Master", reviewFlag:"", quoteRequired:false }
 
 ]);
